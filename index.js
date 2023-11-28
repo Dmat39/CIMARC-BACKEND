@@ -1,8 +1,11 @@
 const express = require('express');
+const routes= require('./router')
 
 // crear el servidor
 const app = express();
-//carpeta publica
+
+// Rutas de la app
+app.use('/', routes());
 
 //Puerto
 app.listen(5000);
