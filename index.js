@@ -1,12 +1,11 @@
 const express = require('express');
+const routes= require('./router')
 
 // crear el servidor
 const app = express();
 
-// Add commit test
-
-//carpeta publica
-
+// Rutas de la app
+app.use('/', routes());
 
 //Puerto
 app.listen(5000);
