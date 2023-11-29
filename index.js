@@ -1,5 +1,6 @@
 const express = require('express');
 const routes = require('./router');
+const docClienteController = require('./router/DocClienteRoutes.js');
 const db = require('./config/db.js');
 
 // crear el servidor
@@ -19,7 +20,9 @@ const conectarBD = async () => {
 conectarBD();
 
 // Rutas de la app
-app.use('/', routes());
+app.use('/auth', routes());
+app.use('/subir-documetos', docClienteController);
+app.use('/documetos', docClienteController);
 
 // Puerto
 const puerto = 3000;
