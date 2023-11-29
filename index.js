@@ -1,15 +1,28 @@
 const express = require('express');
-const routes= require('./router');
-
-// Conexion a la base de datos
+const routes = require('./router');
 const db = require('./config/db.js');
-      db.sync().then(() => console.log('DB Conectada')).catch((error) => console.log(error)); 
 
 // crear el servidor
 const app = express();
 
+// Definir una función asincrónica para la conexión a la base de datos
+const conectarBD = async () => {
+  try {
+    await db.authenticate();
+    console.log('Conexión Correcta a la BD');
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Llamar a la función asincrónica para conectar a la base de datos
+conectarBD();
+
 // Rutas de la app
 app.use('/', routes());
 
-//Puerto
-app.listen(5000);
+// Puerto
+const puerto = 3000;
+app.listen(puerto, () => {
+  console.log(`Servidor escuchando en el puerto ${puerto}`);
+});
