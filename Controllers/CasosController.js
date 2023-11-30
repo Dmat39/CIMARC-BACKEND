@@ -1,6 +1,9 @@
 const Casos = require('../Models/Casos');
 const multer = require('multer');
 const shortid = require('shortid');
+const fs = require('fs').promises;
+const path = require('path'); // Importar el módulo path
+
 
 const configuracionMulter = {
     limits: { fileSize: 100000 },  // límite de tamaño en bytes
@@ -106,6 +109,16 @@ exports.mostrarCasos = async(req,res,next) =>{
         // Verificar si hay un archivo nuevo
         if (req.file && req.file.filename) {
             nuevoCaso.documentos = req.file.filename;
+
+            // Obtener el caso anterior para borrar el archivo antiguo
+            let casoAnterior = await Casos.findByPk(req.params.idCasos);
+            if (casoAnterior.documentos) {
+                // Construir la ruta completa al archivo antiguo
+                const rutaArchivoAntiguo = path.join(__dirname, `../uploads/casos/${casoAnterior.documentos}`);
+
+                // Borrar el archivo antiguo
+                await fs.unlink(rutaArchivoAntiguo);
+            }
         } else {
             // Obtener el caso anterior para mantener el nombre del documento
             let casoAnterior = await Casos.findByPk(req.params.idCasos);
@@ -129,6 +142,31 @@ exports.mostrarCasos = async(req,res,next) =>{
             console.log('No se actualizaron filas.');
             return res.status(404).json({ mensaje: 'Caso no encontrado' });
         }
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+};
+
+exports.eliminarCasos = async (req, res, next) => {
+    try {
+        const casoAEliminar = await Casos.findByPk(req.params.idCasos);
+
+        if (!casoAEliminar) {
+            return res.status(404).json({ mensaje: 'Caso no encontrado' });
+        }
+
+        // Borrar el archivo asociado al caso si existe
+        if (casoAEliminar.documentos) {
+             const rutaArchivo = path.join(__dirname, `../uploads/casos/${casoAEliminar.documentos}` );
+            await fs.unlink(rutaArchivo);
+         }
+
+         // Eliminar el caso de la base de datos
+         await casoAEliminar.destroy();
+  
+        //console.log('Ruta del archivo a eliminar:', rutaArchivo); verificar la ruta
+        res.json({ mensaje: 'Caso eliminado exitosamente' });
     } catch (error) {
         console.log(error);
         next(error);

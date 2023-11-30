@@ -32,7 +32,11 @@ module.exports = function () {
         CasosController.actualizarCaso
     )
     
-
+    // Eliminar Casos
+    router.delete('/trabajador-casos/:idCasos',
+    
+        CasosController.eliminarCasos
+    )
         
     
 
