@@ -41,4 +41,8 @@ const Casos =  db.define('casos',{
 
 })
 
+// // Definir la relación entre Usuario y Casos
+// Usuario.hasMany(Casos, { foreignKey: 'userId' });
+// Casos.belongsTo(Usuario, { foreignKey: 'userId' });
+
 module.exports = Casos;
