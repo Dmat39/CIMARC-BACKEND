@@ -1,9 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const CasosController = require('../Controllers/CasosController.js');
-
+const UsuarioController = require('../Controllers/UsuarioController.js');
 module.exports = function () {
 
+    /** USUARIO*/
+    router.get('/user-roles',
+
+        UsuarioController.obtenerUsuarios
+    );
+    router.post('/user-roles',
+
+        UsuarioController.crearUsuario
+    )
+    router.get('/user-roles/:idUsu',
+    
+        UsuarioController.mostrarUsuarioID
+    )
     /** CASOS */
 
     //Metodo par Mostrar Casos
