@@ -1,12 +1,17 @@
 const express = require('express');
 const routes = require('./router');
+//<<<<<<< HEAD
+
+//const db = require('./config/db.js');
+//=======
 const bodyParser = require('body-parser');
+//>>>>>>> main
 
 // crear el servidor
 const app = express();
 
 // Configuracion y Modelos BD
-const db = require('./config/db');
+const db = require('./config/db.js');
       require('./Models/Casos.js');
       require('./Models/Usuario.js');
       db.sync().then(() => console.log('DB Conectada')).catch((error) => console.log(error)); 
@@ -16,6 +21,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));      
 // Rutas de la app
 app.use('/', routes());
+
 
 // Puerto
 const puerto = 3000;

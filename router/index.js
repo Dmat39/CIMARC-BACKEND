@@ -1,6 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const CasosController = require('../Controllers/CasosController.js');
+//<<<<<<< HEAD
+const DocClienteController = require('../Controllers/DocClienteController.js');
+//module.exports = function () {}
+
+    
+//=======
 const UsuarioController = require('../Controllers/UsuarioController.js');
 module.exports = function () {
 
@@ -18,6 +24,7 @@ module.exports = function () {
         UsuarioController.mostrarUsuarioID
     )
     /** CASOS */
+//>>>>>>> main
 
     //Metodo par Mostrar Casos
     router.get('/trabajador-casos',
@@ -45,11 +52,24 @@ module.exports = function () {
         CasosController.actualizarCaso
     )
     
+//<<<<<<< HEAD
+
+
+
+
+    /** DOCUMENTO CLIENTE  */
+
+    //agregar 
+    router.post('/subir-documentos', 
+    DocClienteController.agregardoccliente
+    );
+//=======
     // Eliminar Casos
     router.delete('/trabajador-casos/:idCasos',
     
         CasosController.eliminarCasos
     )
+//>>>>>>> main
         
     
 
