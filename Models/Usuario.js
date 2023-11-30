@@ -1,45 +1,35 @@
-const {DataTypes} = require('sequelize');
+const { DataTypes } = require('sequelize');
 const db = require('../config/db.js');
 const bcrypt = require('bcrypt');
 
-const Usuario = db.define('user',{  
-    id:{
+const Usuario = db.define('user', {  
+    id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
         primaryKey: true,
     },
-    username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-            isAlphanumeric: {
-                msg: 'El nombre de usuario solo puede contener letras y números'
-            }
-        }
-    },
-    email:{
+    email: {
         type: DataTypes.STRING(30),
         allowNull: false,
-        validate:{
-            isEmail:{msg: 'Agrega un correo valido'},
-            isUnique: function(value,next){
+         validate:{
+             isEmail:{msg: 'Agrega un correo valido'},
+             isUnique: function(value,next){
                 var self = this;
                 Usuario.findOne({where: {email: value}})
-                    .then(function(usuario){
+                     .then(function(usuario){
                         if(usuario && self.id !== usuario.id){
-                            return next('El Email esta repetido!!!');
-                        }
-                        return next();
-                    })
-                    .catch(function(err){
-                        return next(err);
+                           return next('El Email esta repetido!!!');
+                       }
+                    return next();
+                 })
+                   .catch(function(err){
+                         return next(err);
                     });
-            }
-        }
+             }
+         }
     },
-    password:{
+    password: {
         type: DataTypes.STRING(60),
         allowNull: false,
         validate: {
@@ -63,25 +53,27 @@ const Usuario = db.define('user',{
             }
         }
     },
-    activo:{
+    activo: {
         type: DataTypes.INTEGER,
         defaultValue: 0
     },
-    tokenPassword : DataTypes.STRING,
-    expiraToken : DataTypes.DATE
-},{
-    hooks:{
-        //Metodo para ocultar los password
-        beforeCreate(usuario){
+    tokenPassword: DataTypes.STRING,
+    expiraToken: DataTypes.DATE
+},
+{
+    hooks: {
+        // Método para ocultar los password
+        beforeCreate(usuario) {
             usuario.password = Usuario.prototype.hashPassword(usuario.password);
         }
     }
 });
 
-// Metodo para comprar los password
+// Método para comparar los password
 Usuario.prototype.hashPassword = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 }
+
 Usuario.prototype.validarPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
 }
