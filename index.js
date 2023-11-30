@@ -13,6 +13,7 @@ const app = express();
 // Configuracion y Modelos BD
 const db = require('./config/db.js');
       require('./Models/Casos.js');
+      require('./Models/Usuario.js');
       db.sync().then(() => console.log('DB Conectada')).catch((error) => console.log(error)); 
 
 // habilitar bodyparser
