@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const CasosController = require('../Controllers/CasosController.js');
-
+const DocClienteController = require('../Controllers/DocClienteController.js');
 module.exports = function () {
 
-    /** CASOS */
+    
 
     //Metodo par Mostrar Casos
     router.get('/trabajador-casos',
@@ -33,6 +33,15 @@ module.exports = function () {
     )
     
 
+
+
+
+    /** DOCUMENTO CLIENTE  */
+
+    //agregar 
+    router.post('/subir-documentos', 
+    DocClienteController.agregardoccliente
+    );
         
     
 

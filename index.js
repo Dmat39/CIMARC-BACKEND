@@ -1,7 +1,7 @@
 const express = require('express');
 const routes = require('./router');
 //<<<<<<< HEAD
-const docClienteController = require('./router/DocClienteRoutes.js');
+
 //const db = require('./config/db.js');
 //=======
 const bodyParser = require('body-parser');
@@ -19,9 +19,8 @@ const db = require('./config/db.js');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));      
 // Rutas de la app
-app.use('/auth', routes());
-app.use('/subir-documetos', docClienteController);
-app.use('/documetos', docClienteController);
+app.use('/', routes());
+
 
 // Puerto
 const puerto = 3000;

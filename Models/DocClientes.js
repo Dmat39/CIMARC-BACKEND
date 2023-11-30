@@ -1,10 +1,14 @@
-//import { DataTypes } from "sequelize";
-//import db from '../config/db.js'
-
 const { DataTypes } = require("sequelize");
 const db = require('../config/db.js');
 
 const DocClientes= db.define('docclientes',{
+
+    id:{
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+        primaryKey: true
+    },
     titulodocumento: {
         type: DataTypes.STRING,
         allowNull: false
