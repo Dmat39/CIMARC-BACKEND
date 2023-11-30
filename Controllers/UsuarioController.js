@@ -13,6 +13,7 @@ exports.crearUsuario = async (req, res, next) => {
     }
 };
 
+
 exports.obtenerUsuarios = async (req, res) => {
     try {
         const usuarios = await Usuario.findAll();

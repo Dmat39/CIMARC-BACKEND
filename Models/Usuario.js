@@ -25,7 +25,7 @@ const Usuario = db.define('user', {
                  })
                    .catch(function(err){
                          return next(err);
-                    });
+                    }); 
              }
          }
     },

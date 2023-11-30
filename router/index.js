@@ -4,11 +4,24 @@ const CasosController = require('../Controllers/CasosController.js');
 //<<<<<<< HEAD
 const DocClienteController = require('../Controllers/DocClienteController.js');
 //module.exports = function () {}
-
-    
+const PagosController = require('../Controllers/PagosController.js');
 //=======
 const UsuarioController = require('../Controllers/UsuarioController.js');
 module.exports = function () {
+const NoticiasController = require('../Controllers/NoticiasController.js');
+
+    /** PAGOS */
+    router.post('/pagos',
+        PagosController.CrearPagos
+    );
+    router.get('/pagos',
+        PagosController.obtenerPagos
+    );
+    /**Noticias */
+    router.post('/noticias',
+        NoticiasController.crearNoticias
+    );
+ 
 
     /** USUARIO*/
     router.get('/user-roles',
