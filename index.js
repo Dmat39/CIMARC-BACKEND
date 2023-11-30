@@ -2,7 +2,7 @@ const express = require('express');
 const routes = require('./router');
 //<<<<<<< HEAD
 const docClienteController = require('./router/DocClienteRoutes.js');
-const db = require('./config/db.js');
+//const db = require('./config/db.js');
 //=======
 const bodyParser = require('body-parser');
 //>>>>>>> main
@@ -11,7 +11,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 // Configuracion y Modelos BD
-const db = require('./config/db');
+const db = require('./config/db.js');
       require('./Models/Casos.js');
       db.sync().then(() => console.log('DB Conectada')).catch((error) => console.log(error)); 
 
