@@ -1,5 +1,6 @@
 const {DataTypes} = require('sequelize');
 const db = require('../config/db.js');
+const Usuario = require('./Usuario.js');
 
 const Casos =  db.define('casos',{
     id:{
@@ -42,7 +43,7 @@ const Casos =  db.define('casos',{
 })
 
 // // Definir la relación entre Usuario y Casos
-// Usuario.hasMany(Casos, { foreignKey: 'userId' });
-// Casos.belongsTo(Usuario, { foreignKey: 'userId' });
+ Usuario.hasMany(Casos, { foreignKey: 'userid' });
+ Casos.belongsTo(Usuario, { foreignKey: 'userid' });
 
 module.exports = Casos;
