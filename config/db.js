@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 require('dotenv').config({path:'.env'});
 // CONEXION DE BD
-const db = new Sequelize('cimarc_node','root','123456', {
-    host: 'localhost',  // Cambia esto según la ubicación de tu servidor MySQL
+const db = new Sequelize(process.env.BD_NOMBRE,process.env.DB_USER,process.env.DB_PASS ?? '', {
+    host: process.env.DB_HOST,  // Cambia esto según la ubicación de tu servidor MySQL
     dialect: 'mysql',
     port: 3306,  // Puerto de MySQL
     define:{
