@@ -43,7 +43,32 @@ router.delete('/pagos/eliminar/:idPagos',
   router.post('/noticias',
   NoticiasController.crearNoticias
 );
- 
+//Obtener noticias
+    router.get('/noticias',
+    NoticiasController.obtenerNoticias)
+//Mostrar Noticias
+router.get('/noticias/:idNoticias',
+NoticiasController.mostrarNoticiasID)
+//Actualizar Noticias
+router.put('/noticias/:idNoticias',
+NoticiasController.actualizarNoticias)
+//Eliminar Noticias
+router.delete('/noticias/:idNoticias',
+NoticiasController.eliminarNoticias)
+
+    //Mostrar Noticias por Userid
+    router.get('/noticias/user/:userid',
+    
+    NoticiasController.encontrarNoticiasByUser
+    );
+
+    // Mostrar Noticias en especifico
+    router.get('/noticias/:idNoticias/user/:userid',
+    
+    NoticiasController.buscarNoticiaByIdByUser
+    );
+
+
 
     /** USUARIO*/
 

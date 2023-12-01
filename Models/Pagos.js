@@ -1,7 +1,8 @@
 const { DataTypes } = require("sequelize");
 const db = require('../config/db.js');
+const Usuario = require('./Usuario.js');
 
-const DocClientes= db.define('Pagos',{
+const Pagos= db.define('Pagos',{
 
     id:{
         type: DataTypes.UUID,
@@ -31,5 +32,8 @@ const DocClientes= db.define('Pagos',{
     }
     
 });
+// // Definir la relación entre Usuario y Casos
+Usuario.hasMany(Pagos, { foreignKey: 'userid' });
+Pagos.belongsTo(Usuario, { foreignKey: 'userid' });
 
-module.exports = DocClientes;
+module.exports = Pagos;
