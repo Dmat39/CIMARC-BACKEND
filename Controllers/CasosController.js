@@ -148,6 +148,7 @@ exports.mostrarCasos = async(req,res,next) =>{
         next(error);
     }
 };
+
 //mostrar  todo los casos por usuario
 exports.encontrarCasosByUser = async (req, res, next) => {
     try {
@@ -166,6 +167,32 @@ exports.encontrarCasosByUser = async (req, res, next) => {
     }
 }
 
+//mostrar casos por userid y casosid
+exports.buscarCasosByUser = async (req,res,next) =>{
+    try {
+        // Verificar si el usuario existe
+        const usuario = await Usuario.findByPk(req.params.userid);
+        if (!usuario) {
+            return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+        }
+        // Verificar si el caso existe para este usuario
+        const caso = await Casos.findOne({
+            where: {
+                id: req.params.idCasos,
+                userid: req.params.userid,
+            },
+        });
+        if (!caso) {
+            return res.status(404).json({ mensaje: 'Caso no encontrado para este usuario' });
+        }
+        
+        res.json(caso);
+
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+}
 
 //actualizar casos por userid y casosid
 exports.actualizarCasoIdByUser = async (req, res, next) => {
@@ -231,12 +258,48 @@ exports.actualizarCasoIdByUser = async (req, res, next) => {
     }
 };
 
+//eliminar casos por userid y casosid
+exports.eliminarCasoIdByUser = async(req,res,next) => {
+    try {
+        // Verificar si el usuario existe
+        const usuario = await Usuario.findByPk(req.params.userid);
+        if (!usuario) {
+            return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+        }
 
+        // Verificar si el caso existe para este usuario
+        const caso = await Casos.findOne({
+            where: {
+                id: req.params.idCasos,
+                userid: req.params.userid,
+            },
+        });
 
+        if (!caso) {
+            return res.status(404).json({ mensaje: 'Caso no encontrado para este usuario' });
+        }
 
+        // Verificar y eliminar el archivo asociado al caso (si existe)
+        if (caso.documentos) {
+            const rutaArchivo = path.join(__dirname, `../uploads/casos/${caso.documentos}`);
+            await fs.unlink(rutaArchivo);
+        }
 
+        // Eliminar el caso de la base de datos
+        await Casos.destroy({
+            where: {
+                id: req.params.idCasos,
+                userid: req.params.userid,
+            },
+        });
 
-
+        // Enviar respuesta JSON indicando que el caso ha sido eliminado correctamente
+        res.json({ mensaje: 'Caso eliminado correctamente' });
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+}
 
 //Eliminar casos por Id
 exports.eliminarCasos = async (req, res, next) => {
