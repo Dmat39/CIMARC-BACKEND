@@ -9,18 +9,40 @@ const NoticiasController = require('../Controllers/NoticiasController.js');
 module.exports = function () {
 
 
-    /** PAGOS */
-    
+
     router.post('/pagos',
         PagosController.CrearPagos
     );
+    //Obtener pagos
     router.get('/pagos',
         PagosController.obtenerPagos
     );
-    /**Noticias */
-    router.post('/noticias',
-        NoticiasController.crearNoticias
+
+    //Metodo par Mostrar Pagos
+    router.get('/mostrar-pagos',
+    PagosController.mostrarPagos
     );
+
+// Actualizar Pagos
+router.put('/mostrar-pagos/:idPagos',
+    PagosController.actualizarPago,
+    PagosController.mostrarPagos
+
+    );
+// Mostrar Pagos por ID
+router.get('/pagos/:idPagos',
+    PagosController.mostrarPagosID
+);
+
+// Eliminar Pagos
+router.delete('/pagos/eliminar/:idPagos',
+    PagosController.eliminarPagos
+);
+
+  /**Noticias */
+  router.post('/noticias',
+  NoticiasController.crearNoticias
+);
  
 
     /** USUARIO*/
@@ -73,6 +95,12 @@ module.exports = function () {
     
         CasosController.encontrarCasosByUser
     );
+
+    //Actualizar Casos ByUserId and CasoId
+    router.put('/usuarios/:userid/casos/:idCasos',
+    CasosController.subirArchivo,
+    CasosController.actualizarCasoIdByUser);
+
     // Actualizar Casos
     router.put('/trabajador-casos/:idCasos',
 

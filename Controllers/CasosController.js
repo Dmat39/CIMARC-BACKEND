@@ -167,6 +167,95 @@ exports.encontrarCasosByUser = async (req, res, next) => {
 }
 
 
+//actualizar casos por userid y casosid
+exports.actualizarCasoIdByUser = async (req, res, next) => {
+    try {
+        const Userid = await Usuario.findByPk(req.params.userid);
+        if (!Userid) {
+            return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+        }
+
+        const caso = await Casos.findOne({
+            where: {
+                id: req.params.idCasos, // Suponiendo que tienes un parámetro para identificar el caso
+                userid: req.params.userid,
+            },
+        });
+
+        if (!caso) {
+            return res.status(404).json({ mensaje: 'Caso no encontrado para este usuario' });
+        }
+ // Construir un nuevo caso
+ let nuevoCaso = req.body;
+
+ // Verificar si hay un archivo nuevo
+ if (req.file && req.file.filename) {
+     nuevoCaso.documentos = req.file.filename;
+
+     // Obtener el caso anterior para borrar el archivo antiguo
+     let casoAnterior = await Casos.findByPk(req.params.idCasos);
+     if (casoAnterior.documentos) {
+         // Construir la ruta completa al archivo antiguo
+         const rutaArchivoAntiguo = path.join(__dirname, `../uploads/casos/${casoAnterior.documentos}`);
+
+         // Borrar el archivo antiguo
+         await fs.unlink(rutaArchivoAntiguo);
+     }
+ } else {
+     // Obtener el caso anterior para mantener el nombre del documento
+     let casoAnterior = await Casos.findByPk(req.params.idCasos);
+     nuevoCaso.documentos = casoAnterior.documentos;
+ }
+
+ // Actualizar el caso en la base de datos y obtener el número de filas afectadas
+ const [numFilasActualizadas] = await Casos.update(nuevoCaso, {
+     where: { id: req.params.idCasos, userid: req.params.userid },
+ });
+
+ // Verificar si se actualizó con éxito
+ if (numFilasActualizadas > 0) {
+     // Obtener el caso actualizado después de la actualización
+     const casoActualizado = await Casos.findByPk(req.params.idCasos);
+
+     // Enviar la respuesta JSON con el caso actualizado
+     res.json(casoActualizado);
+ } else {
+     // Si numFilasActualizadas es 0, significa que el caso no fue encontrado o no se actualizó correctamente
+     console.log('No se actualizaron filas.');
+     return res.status(404).json({ mensaje: 'Caso no encontrado' });
+ }
+
+
+
+
+     //  // Actualiza el caso con los datos proporcionados en req.body
+     //  await Casos.update(req.body, {
+     //      where: {
+     //          id: req.params.casoid,
+     //          userid: req.params.userid,
+     //      },
+     //  });
+
+     //  // Recupera el caso actualizado
+     //  const casoActualizado = await Casos.findByPk(req.params.casoid);
+
+     //  res.json({ mensaje: 'Caso actualizado correctamente', caso: casoActualizado });
+     //  console.log('caso:', req.body);
+
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+};
+
+
+
+
+
+
+
+
+//Eliminar casos por Id
 exports.eliminarCasos = async (req, res, next) => {
     try {
         const casoAEliminar = await Casos.findByPk(req.params.idCasos);
