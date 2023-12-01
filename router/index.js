@@ -97,9 +97,10 @@ router.delete('/pagos/eliminar/:idPagos',
     );
 
     //Actualizar Casos ByUserId and CasoId
-    router.put('/usuarios/:userid/casos/:idCasos',
-    CasosController.subirArchivo,
-    CasosController.actualizarCasoIdByUser);
+    router.put('/trabajador-casos/:userid/casos/:idCasos',
+        CasosController.subirArchivo,
+        CasosController.actualizarCasoIdByUser
+    );
 
     // Actualizar Casos
     router.put('/trabajador-casos/:idCasos',
