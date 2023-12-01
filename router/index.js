@@ -9,8 +9,7 @@ const NoticiasController = require('../Controllers/NoticiasController.js');
 module.exports = function () {
 
 
- /** PAGOS */
-    //Agregar pagos
+
     router.post('/pagos',
         PagosController.CrearPagos
     );
@@ -47,6 +46,7 @@ router.delete('/pagos/eliminar/:idPagos',
  
 
     /** USUARIO*/
+
     router.get('/user-roles',
 
         UsuarioController.obtenerUsuarios
@@ -122,8 +122,5 @@ router.delete('/pagos/eliminar/:idPagos',
     )
 
         
-    
-
-
     return router;
 }
