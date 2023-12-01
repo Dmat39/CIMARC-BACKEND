@@ -1,4 +1,5 @@
 const Usuario = require('../Models/Usuario');
+const bcrypt = require('bcrypt');
 
 exports.crearUsuario = async (req, res, next) => {
     const usuarios = new Usuario(req.body);
@@ -36,18 +37,37 @@ exports.mostrarUsuarioID = async(req,res,next)=>{
      res.json(usuarios);
  }
 
-exports.actualizarUsuario = async (req, res) => {
+ exports.actualizarUsuario = async (req, res) => {
     try {
         let usuario = await Usuario.findByPk(req.params.idUsu);
+
         if (!usuario) {
             res.status(404).send('Usuario no encontrado');
             return;
         }
-        usuario = await Usuario.update(req.body, {
+
+        // Construir un objeto con los campos a actualizar
+        const updateObj = {
+            email: req.body.email,
+        };
+
+        // Verificar si la contraseña se proporciona y cifrarla
+        if (req.body.password) {
+            const hashedPassword = await bcrypt.hash(req.body.password, 10);
+            updateObj.password = hashedPassword;
+        }
+
+        // Actualizar el usuario en la base de datos
+        await Usuario.update(updateObj, {
             where: { id: req.params.idUsu }
         });
+
+        // Recuperar el usuario actualizado
+        usuario = await Usuario.findByPk(req.params.idUsu);
+
         res.send(usuario);
     } catch (error) {
+        console.error(error);
         res.status(500).send('Hubo un error');
     }
 };
