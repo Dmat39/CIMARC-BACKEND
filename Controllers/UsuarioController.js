@@ -38,13 +38,13 @@ exports.mostrarUsuarioID = async(req,res,next)=>{
 
 exports.actualizarUsuario = async (req, res) => {
     try {
-        let usuario = await Usuario.findByPk(req.params.id);
+        let usuario = await Usuario.findByPk(req.params.idUsu);
         if (!usuario) {
             res.status(404).send('Usuario no encontrado');
             return;
         }
         usuario = await Usuario.update(req.body, {
-            where: { id: req.params.id }
+            where: { id: req.params.idUsu }
         });
         res.send(usuario);
     } catch (error) {
@@ -54,13 +54,13 @@ exports.actualizarUsuario = async (req, res) => {
 
 exports.eliminarUsuario = async (req, res) => {
     try {
-        let usuario = await Usuario.findByPk(req.params.id);
+        let usuario = await Usuario.findByPk(req.params.idUsu);
         if (!usuario) {
             res.status(404).send('Usuario no encontrado');
             return;
         }
         await Usuario.destroy({
-            where: { id: req.params.id }
+            where: { id: req.params.idUsu }
         });
         res.send({ message: 'Usuario eliminado' });
     } catch (error) {

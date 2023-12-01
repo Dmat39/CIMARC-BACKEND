@@ -36,6 +36,16 @@ const NoticiasController = require('../Controllers/NoticiasController.js');
     
         UsuarioController.mostrarUsuarioID
     )
+    router.put('/user-roles/:idUsu',
+    
+        UsuarioController.actualizarUsuario
+    )
+    router.delete('/user-roles/:idUsu',
+    
+        UsuarioController.eliminarUsuario
+    )
+
+
     /** CASOS */
 //>>>>>>> main
 
