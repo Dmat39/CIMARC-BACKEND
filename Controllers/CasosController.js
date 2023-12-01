@@ -1,4 +1,5 @@
 const Casos = require('../Models/Casos');
+const Usuario = require('../Models/Usuario');
 const multer = require('multer');
 const shortid = require('shortid');
 const fs = require('fs').promises;
@@ -147,6 +148,24 @@ exports.mostrarCasos = async(req,res,next) =>{
         next(error);
     }
 };
+//mostrar  todo los casos por usuario
+exports.encontrarCasosByUser = async (req, res, next) => {
+    try {
+        const Userid  = await Usuario.findByPk(req.params.userid);
+        if (!Userid) {
+            return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+            next();
+        }
+        const casos = await Casos.findAll({
+            where: { userid: req.params.userid },
+        });
+        res.json(casos);
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+}
+
 
 exports.eliminarCasos = async (req, res, next) => {
     try {

@@ -67,7 +67,11 @@ const NoticiasController = require('../Controllers/NoticiasController.js');
     
          CasosController.mostrarCasosID
     );
+    //Mostrar Casor por Userid
+    router.get('/trabajador-casos/user/:userid',
     
+        CasosController.encontrarCasosByUser
+    );
     // Actualizar Casos
     router.put('/trabajador-casos/:idCasos',
 
