@@ -1,14 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const CasosController = require('../Controllers/CasosController.js');
-//<<<<<<< HEAD
 const DocClienteController = require('../Controllers/DocClienteController.js');
-//module.exports = function () {}
 const PagosController = require('../Controllers/PagosController.js');
-//=======
 const UsuarioController = require('../Controllers/UsuarioController.js');
-module.exports = function () {
 const NoticiasController = require('../Controllers/NoticiasController.js');
+
+module.exports = function () {
+
 
     /** PAGOS */
     router.post('/pagos',
@@ -47,7 +46,7 @@ const NoticiasController = require('../Controllers/NoticiasController.js');
 
 
     /** CASOS */
-//>>>>>>> main
+
 
     //Metodo par Mostrar Casos
     router.get('/trabajador-casos',
@@ -78,11 +77,6 @@ const NoticiasController = require('../Controllers/NoticiasController.js');
         CasosController.subirArchivo,
         CasosController.actualizarCaso
     )
-    
-//<<<<<<< HEAD
-
-
-
 
     /** DOCUMENTO CLIENTE  */
 
@@ -90,13 +84,13 @@ const NoticiasController = require('../Controllers/NoticiasController.js');
     router.post('/subir-documentos', 
     DocClienteController.agregardoccliente
     );
-//=======
+
     // Eliminar Casos
     router.delete('/trabajador-casos/:idCasos',
     
         CasosController.eliminarCasos
     )
-//>>>>>>> main
+
         
     
 
