@@ -10,6 +10,7 @@ module.exports = function () {
 
 
     /** PAGOS */
+    
     router.post('/pagos',
         PagosController.CrearPagos
     );
@@ -23,6 +24,7 @@ module.exports = function () {
  
 
     /** USUARIO*/
+
     router.get('/user-roles',
 
         UsuarioController.obtenerUsuarios
@@ -92,8 +94,5 @@ module.exports = function () {
     )
 
         
-    
-
-
     return router;
 }
