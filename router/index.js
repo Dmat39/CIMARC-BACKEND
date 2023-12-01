@@ -96,10 +96,23 @@ router.delete('/pagos/eliminar/:idPagos',
         CasosController.encontrarCasosByUser
     );
 
+    // Mostrar Casos en especifico
+    router.get('/trabajador-casos/:userid/casos/:idCasos',
+    
+        CasosController.buscarCasosByUser
+    );
+
+
     //Actualizar Casos ByUserId and CasoId
     router.put('/trabajador-casos/:userid/casos/:idCasos',
         CasosController.subirArchivo,
         CasosController.actualizarCasoIdByUser
+    );
+
+    //Eliminar Casos ByUserId and CasoId
+    router.delete('/trabajador-casos/:userid/casos/:idCasos',
+        
+        CasosController.eliminarCasoIdByUser
     );
 
     // Actualizar Casos
@@ -108,6 +121,7 @@ router.delete('/pagos/eliminar/:idPagos',
         CasosController.subirArchivo,
         CasosController.actualizarCaso
     )
+    
 
     /** DOCUMENTO CLIENTE  */
 
