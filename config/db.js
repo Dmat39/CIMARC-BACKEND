@@ -15,6 +15,6 @@ const db = new Sequelize(process.env.BD_NOMBRE,process.env.DB_USER,process.env.D
         idle: 10000
     },
     operatorAliases: false
-  });
+    });
 
 module.exports = db;

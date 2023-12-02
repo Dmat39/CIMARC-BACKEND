@@ -1,3 +1,7 @@
+//<<<<<<< Updated upstream
+//=======
+
+//>>>>>>> Stashed changes
 const doccliente = require('../Models/DocClientes.js');
 const multer = require('multer');
 const shortid = require('shortid');
@@ -63,4 +67,7 @@ exports.agregardoccliente = async (req, res,next) => {
         next()
     }
 };
+//<<<<<<< Updated upstream
   
+//=======
+//>>>>>>> Stashed changes
