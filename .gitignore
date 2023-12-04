@@ -6,3 +6,4 @@
 .env
 *.pdf
 config/db.js
+*.png

@@ -60,7 +60,7 @@ module.exports = function () {
 
     /**Noticias */
     router.post('/noticias',
-
+        NoticiasController.subirImagen,
         NoticiasController.crearNoticias
     );
     //Obtener noticias
@@ -68,14 +68,14 @@ module.exports = function () {
 
         NoticiasController.obtenerNoticias
     );
-    //Mostrar Noticias
+    //Mostrar Noticias ID
     router.get('/noticias/:idNoticias',
 
         NoticiasController.mostrarNoticiasID
     );
     //Actualizar Noticias
     router.put('/noticias/:idNoticias',
-
+        NoticiasController.subirImagen,
         NoticiasController.actualizarNoticias
     );
     //Eliminar Noticias
@@ -90,7 +90,7 @@ module.exports = function () {
         NoticiasController.encontrarNoticiasByUser
     );
 
-    // Mostrar Noticias en especifico
+    // Mostrar Noticias en especifico por UserID
     router.get('/noticias/:idNoticias/user/:userid',
     
         NoticiasController.buscarNoticiaByIdByUser
@@ -175,19 +175,12 @@ module.exports = function () {
         CasosController.actualizarCaso
     )
     
-//<<<<<<< Updated upstream
-//=======
-
-
-
-
-//>>>>>>> Stashed changes
-
     /** DOCUMENTO CLIENTE  */
 
     //agregar 
     router.post('/subir-documentos', 
-    DocClienteController.agregardoccliente
+
+        DocClienteController.agregardoccliente
     );
 
     // Eliminar Casos

@@ -154,8 +154,8 @@ exports.encontrarCasosByUser = async (req, res, next) => {
     try {
         const Userid  = await Usuario.findByPk(req.params.userid);
         if (!Userid) {
-            return res.status(404).json({ mensaje: 'Usuario no encontrado' });
-            next();
+            res.status(404).json({ mensaje: 'Usuario no encontrado' });
+            return next();
         }
         const casos = await Casos.findAll({
             where: { userid: req.params.userid },
