@@ -11,13 +11,15 @@ const DocClienteController = require('../Controllers/DocClienteController.js');
 const PagosController = require('../Controllers/PagosController.js');
 const UsuarioController = require('../Controllers/UsuarioController.js');
 const NoticiasController = require('../Controllers/NoticiasController.js');
+
 //<<<<<<< Updated upstream
 //=======
-const EventosController=require('../Controllers/EventosController.js')
-const BlogsController=require('../Controllers/BlogsController.js')
+// const EventosController=require('../Controllers/EventosController.js')
+// const BlogsController=require('../Controllers/BlogsController.js')
 
 //
 //>>>>>>> Stashed changes
+
 
 module.exports = function () {
 
@@ -28,57 +30,70 @@ module.exports = function () {
     );
     //Obtener pagos
     router.get('/pagos',
+
         PagosController.obtenerPagos
     );
 
     //Metodo par Mostrar Pagos
     router.get('/mostrar-pagos',
-    PagosController.mostrarPagos
+
+        PagosController.mostrarPagos
     );
 
-// Actualizar Pagos
-router.put('/mostrar-pagos/:idPagos',
-    PagosController.actualizarPago,
-    PagosController.mostrarPagos
+    // Actualizar Pagos
+    router.put('/mostrar-pagos/:idPagos',
 
+        PagosController.actualizarPago,
+        PagosController.mostrarPagos
     );
-// Mostrar Pagos por ID
-router.get('/pagos/:idPagos',
-    PagosController.mostrarPagosID
-);
+    // Mostrar Pagos por ID
+    router.get('/pagos/:idPagos',
 
-// Eliminar Pagos
-router.delete('/pagos/eliminar/:idPagos',
-    PagosController.eliminarPagos
-);
+        PagosController.mostrarPagosID
+    );
 
-  /**Noticias */
-router.post('/noticias',
-NoticiasController.crearNoticias
-);
-//Obtener noticias
+    // Eliminar Pagos
+    router.delete('/pagos/eliminar/:idPagos',
+
+        PagosController.eliminarPagos
+    );
+
+    /**Noticias */
+    router.post('/noticias',
+
+        NoticiasController.crearNoticias
+    );
+    //Obtener noticias
     router.get('/noticias',
-    NoticiasController.obtenerNoticias)
-//Mostrar Noticias
-router.get('/noticias/:idNoticias',
-NoticiasController.mostrarNoticiasID)
-//Actualizar Noticias
-router.put('/noticias/:idNoticias',
-NoticiasController.actualizarNoticias)
-//Eliminar Noticias
-router.delete('/noticias/:idNoticias',
-NoticiasController.eliminarNoticias)
+
+        NoticiasController.obtenerNoticias
+    );
+    //Mostrar Noticias
+    router.get('/noticias/:idNoticias',
+
+        NoticiasController.mostrarNoticiasID
+    );
+    //Actualizar Noticias
+    router.put('/noticias/:idNoticias',
+
+        NoticiasController.actualizarNoticias
+    );
+    //Eliminar Noticias
+    router.delete('/noticias/:idNoticias',
+
+        NoticiasController.eliminarNoticias
+    )
 
     //Mostrar Noticias por Userid
     router.get('/noticias/user/:userid',
     
-    NoticiasController.encontrarNoticiasByUser
+        NoticiasController.encontrarNoticiasByUser
     );
 
     // Mostrar Noticias en especifico
     router.get('/noticias/:idNoticias/user/:userid',
     
-    NoticiasController.buscarNoticiaByIdByUser
+        NoticiasController.buscarNoticiaByIdByUser
     );
 
 
@@ -185,107 +200,100 @@ NoticiasController.eliminarNoticias)
 //<<<<<<< Updated upstream
 //=======
 
+    //  //Eventos//
+
+    // //Metodo par Mostrar Eventos
+    // router.get('/mostrar-eventos',
+    // EventosController.mostrarEventos
+    // );
+
+    // //Agregar Eventos
+    // router.post('/eventos',
+    // EventosController.subirArchivoEvento,
+    // EventosController.nuevoEvento
+    // )
+    // // Mostrar Eventos por ID
+    // router.get('/eventos/:idEventos',
+    // EventosController.mostrarEventosID
+    // );
+
+    // //Obtener Eventos
+    // router.get('/eventos',
+    // EventosController.obtenerEventos
+    // );
 
 
-    router.get('/',(req,res) =>{
-        res.send('inicio');
-    });
+    // // Actualizar Eventos
+    // router.put('/mostrar-eventos/:idEventos',
+    // EventosController.subirArchivoEvento,
+    // EventosController.actualizarEventos
+    // );
 
-
-     //Eventos//
-
-    //Metodo par Mostrar Eventos
-    router.get('/mostrar-eventos',
-    EventosController.mostrarEventos
-    );
-
-    //Agregar Eventos
-    router.post('/eventos',
-    EventosController.subirArchivoEvento,
-    EventosController.nuevoEvento
-    )
-    // Mostrar Eventos por ID
-    router.get('/eventos/:idEventos',
-    EventosController.mostrarEventosID
-    );
-
-    //Obtener Eventos
-    router.get('/eventos',
-    EventosController.obtenerEventos
-    );
-
-
-    // Actualizar Eventos
-    router.put('/mostrar-eventos/:idEventos',
-    EventosController.subirArchivoEvento,
-    EventosController.actualizarEventos
-    );
-
-    //Mostrar Eventos por Userid
-    router.get('/trabajador-eventos/user/:userid',
+    // //Mostrar Eventos por Userid
+    // router.get('/trabajador-eventos/user/:userid',
     
-    EventosController.encontrarEventosByUser
-    )
-    // Mostrar Eventos en especifico
-    router.get('/trabajador-eventos/:userid/eventos/:idEventos',
-    EventosController.buscarEventosByUser
-    );
+    // EventosController.encontrarEventosByUser
+    // )
+    // // Mostrar Eventos en especifico
+    // router.get('/trabajador-eventos/:userid/eventos/:idEventos',
+    // EventosController.buscarEventosByUser
+    // );
 
 
-    //Actualizar Eventos ByUserId and EventosId
-    router.put('/trabajador-eventos/:userid/eventos/:idEventos',
-        EventosController.subirArchivoEvento,
-        EventosController.actualizarEventoIdByUser
-    );
+    // //Actualizar Eventos ByUserId and EventosId
+    // router.put('/trabajador-eventos/:userid/eventos/:idEventos',
+    //     EventosController.subirArchivoEvento,
+    //     EventosController.actualizarEventoIdByUser
+    // );
 
-    //Eliminar Eventos ByUserId and EventosId
-    router.delete('/trabajador-eventos/:userid/eventos/:idEventos',
-        EventosController.eliminarEventoIdByUser
-    );
+    // //Eliminar Eventos ByUserId and EventosId
+    // router.delete('/trabajador-eventos/:userid/eventos/:idEventos',
+    //     EventosController.eliminarEventoIdByUser
+    // );
 
-    // Actualizar Eventos
-    router.put('/trabajador-eventos/:idEventos',
-        EventosController.subirArchivoEvento,
-        EventosController.actualizarEventos
+    // // Actualizar Eventos
+    // router.put('/trabajador-eventos/:idEventos',
+    //     EventosController.subirArchivoEvento,
+    //     EventosController.actualizarEventos
 
-    )
+    // )
 
 
-    // Eliminar Eventos
-    router.delete('/eventos/eliminar/:idEventos',
-    EventosController.eliminarEventos
-    );
+    // // Eliminar Eventos
+    // router.delete('/eventos/eliminar/:idEventos',
+    // EventosController.eliminarEventos
+    // );
     
 
 
-    //Blogs//
+    // //Blogs//
 
-    //Agregar Blogs
-    router.post('/blogs',
-    BlogsController.crearBlogs
-    )
-    //Obtener Blogs
-    router.get('/blogs',
-    BlogsController.obtenerBlogs
-    );
-    // Mostrar Blogs por ID
-    router.get('/blogs/:idBlogs',
-    BlogsController.mostrarBlogsID
-    );
-    //Metodo par Mostrar Pagos
-    router.get('/mostrar-blogs',
-    BlogsController.mostrarBlogs
-    );
+    // //Agregar Blogs
+    // router.post('/blogs',
+    // BlogsController.crearBlogs
+    // )
+    // //Obtener Blogs
+    // router.get('/blogs',
+    // BlogsController.obtenerBlogs
+    // );
+    // // Mostrar Blogs por ID
+    // router.get('/blogs/:idBlogs',
+    // BlogsController.mostrarBlogsID
+    // );
+    // //Metodo par Mostrar Pagos
+    // router.get('/mostrar-blogs',
+    // BlogsController.mostrarBlogs
+    // );
     
-    // Actualizar Blogs
-    router.put('/mostrar-blogs/:idBlogs',
-    BlogsController.actualizarBlogs,
+    // // Actualizar Blogs
+    // router.put('/mostrar-blogs/:idBlogs',
+    // BlogsController.actualizarBlogs,
     
-    );
-    // Eliminar Blogs
-    router.delete('/blogs/eliminar/:idBlogs',
-    BlogsController.eliminarBlogs
-    );
+    // );
+    // // Eliminar Blogs
+    // router.delete('/blogs/eliminar/:idBlogs',
+    // BlogsController.eliminarBlogs
+    // );
 
 
 
