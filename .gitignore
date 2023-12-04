@@ -4,9 +4,6 @@
 # Editor-based HTTP Client requests
 /httpRequests/
 .env
-uploads
-uploads/casos/1zvP-QeYF.pdf
-uploads/casos/uxeRWqXVS.pdf
-uploads/casos/xfW-jIBYA.pdf
-uploads/casos/CvUqS6xuk.pdf
+
+
 *.pdf
