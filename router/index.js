@@ -96,9 +96,15 @@ module.exports = function () {
         NoticiasController.buscarNoticiaByIdByUser
     );
     // Actualizar Noticas en especifico por UserID
+    router.put('/noticias/:idNoticias/user/:userid',
+        NoticiasController.subirImagen,
+        NoticiasController.actualizarNoticiaIdByUser
+    );
 
     // Eliminar Noticias en especifico por UserID
-    
+    router.delete('/noticias/:idNoticias/user/:userid',
+        NoticiasController.eliminarNoticiaIdByUser
+    );
 
     /** USUARIO*/
 

@@ -205,3 +205,89 @@ exports.buscarNoticiaByIdByUser = async (req,res,next) =>{
         next(error);
     }
 }
+exports.actualizarNoticiaIdByUser = async (req, res, next) => {
+    try {
+        const Userid = await Usuario.findByPk(req.params.userid);
+        if (!Userid) {
+            return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+        }
+
+        const noticia = await Noticias.findOne({
+            where: {
+                id: req.params.idNoticias,
+                userid: req.params.userid,
+            },
+        });
+
+        if (!noticia) {
+            return res.status(404).json({ mensaje: 'Noticia no encontrada para este usuario' });
+        }
+
+        let nuevaNoticia = req.body;
+
+        if (req.file && req.file.filename) {
+            nuevaNoticia.imagen = req.file.filename;
+
+            let noticiaAnterior = await Noticias.findByPk(req.params.idNoticias);
+            if (noticiaAnterior.imagen) {
+                const rutaArchivoAntiguo = path.join(__dirname, `../uploads/imagenes/${noticiaAnterior.imagen}`);
+                await fs.unlink(rutaArchivoAntiguo);
+            }
+        } else {
+            let noticiaAnterior = await Noticias.findByPk(req.params.idNoticias);
+            nuevaNoticia.imagen = noticiaAnterior.imagen;
+        }
+
+        const [numFilasActualizadas] = await Noticias.update(nuevaNoticia, {
+            where: { id: req.params.idNoticias, userid: req.params.userid },
+        });
+
+        if (numFilasActualizadas > 0) {
+            const noticiaActualizada = await Noticias.findByPk(req.params.idNoticias);
+            res.json(noticiaActualizada);
+        } else {
+            console.log('No se actualizaron filas.');
+            return res.status(404).json({ mensaje: 'Noticia no encontrada' });
+        }
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+};
+
+exports.eliminarNoticiaIdByUser = async(req,res,next) => {
+    try {
+        const usuario = await Usuario.findByPk(req.params.userid);
+        if (!usuario) {
+            return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+        }
+
+        const noticia = await Noticias.findOne({
+            where: {
+                id: req.params.idNoticias,
+                userid: req.params.userid,
+            },
+        });
+
+        if (!noticia) {
+            return res.status(404).json({ mensaje: 'Noticia no encontrada para este usuario' });
+        }
+
+        if (noticia.imagen) {
+            const rutaArchivo = path.join(__dirname, `../uploads/imagenes/${noticia.imagen}`);
+            await fs.unlink(rutaArchivo);
+        }
+
+        await Noticias.destroy({
+            where: {
+                id: req.params.idNoticias,
+                userid: req.params.userid,
+            },
+        });
+
+        res.json({ mensaje: 'Noticia eliminada correctamente' });
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+}
