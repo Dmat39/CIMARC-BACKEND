@@ -1,17 +1,38 @@
 const express = require('express');
-const routes = require('./router');
+//<<<<<<< Updated upstream
+
 //<<<<<<< HEAD
 
 //const db = require('./config/db.js');
 //=======
 const bodyParser = require('body-parser');
 //>>>>>>> main
+//=======
+const routes= require('./router');
+const flash = require('connect-flash');
+const session = require('express-session');
+// Conexion a la base de datos
+const db = require('./config/db.js');
+
+      db.sync().then(() => console.log('DB Conectada')).catch((error) => console.log(error)); 
+//>>>>>>> Stashed changes
 
 // crear el servidor
 const app = express();
 
+//<<<<<<< Updated upstream
+//=======
+app.use(flash());
+
+app.use(session({
+secret: 'tu_secreto',
+resave: true,
+saveUninitialized: true
+}));
+
+//>>>>>>> Stashed changes
 // Configuracion y Modelos BD
-const db = require('./config/db.js');
+
       require('./Models/Casos.js');
       require('./Models/Usuario.js');
       db.sync().then(() => console.log('DB Conectada')).catch((error) => console.log(error)); 

@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const db = require('../config/db.js');
+const Usuario = require('./Usuario.js');
 
 const Noticias =  db.define('Noticias',{
     id:{
@@ -40,5 +41,6 @@ const Noticias =  db.define('Noticias',{
 
 
 });
-
+Usuario.hasMany(Noticias, { foreignKey: 'userid' });
+Noticias.belongsTo(Usuario, { foreignKey: 'userid' });
 module.exports = Noticias;
