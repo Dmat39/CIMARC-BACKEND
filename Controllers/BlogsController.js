@@ -152,6 +152,31 @@ exports.actualizarBlog = async (req, res, next) => {
     }
 };
 
+exports.eliminarBlog = async (req, res, next) => {
+    try {
+        const blogAEliminar = await Blogs.findByPk(req.params.idBlogs);
+
+        if (!blogAEliminar) {
+            return res.status(404).json({ mensaje: 'Caso no encontrado' });
+        }
+
+        // Borrar el archivo asociado al caso si existe
+        if (blogAEliminar.imagen) {
+            const rutaArchivo = path.join(__dirname, `../uploads/blogs/${blogAEliminar.imagen}` );
+            await fs.unlink(rutaArchivo);
+        }
+
+         // Eliminar el caso de la base de datos
+        await blogAEliminar.destroy();
+
+        //console.log('Ruta del archivo a eliminar:', rutaArchivo); verificar la ruta
+        res.json({ mensaje: 'blog eliminado exitosamente' });
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+};
+
 exports.encontrarBlogByUser = async (req, res, next) => {
     try {
         const Userid  = await Usuario.findByPk(req.params.userid);
@@ -300,27 +325,3 @@ exports.eliminarBlogIdByUser = async(req,res,next) => {
     }
 }
 
-exports.eliminarBlog = async (req, res, next) => {
-    try {
-        const blogAEliminar = await Blogs.findByPk(req.params.idBlogs);
-
-        if (!blogAEliminar) {
-            return res.status(404).json({ mensaje: 'Caso no encontrado' });
-        }
-
-        // Borrar el archivo asociado al caso si existe
-        if (blogAEliminar.imagen) {
-            const rutaArchivo = path.join(__dirname, `../uploads/blogs/${blogAEliminar.imagen}` );
-            await fs.unlink(rutaArchivo);
-        }
-
-         // Eliminar el caso de la base de datos
-        await blogAEliminar.destroy();
-
-        //console.log('Ruta del archivo a eliminar:', rutaArchivo); verificar la ruta
-        res.json({ mensaje: 'blog eliminado exitosamente' });
-    } catch (error) {
-        console.log(error);
-        next(error);
-    }
-};
