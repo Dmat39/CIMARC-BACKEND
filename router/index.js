@@ -24,7 +24,7 @@ const NoticiasController = require('../Controllers/NoticiasController.js');
 module.exports = function () {
 
 
-
+    /** METODOS DE PAGOS */
     router.post('/pagos',
         PagosController.CrearPagos
     );
@@ -95,8 +95,10 @@ module.exports = function () {
     
         NoticiasController.buscarNoticiaByIdByUser
     );
+    // Actualizar Noticas en especifico por UserID
 
-
+    // Eliminar Noticias en especifico por UserID
+    
 
     /** USUARIO*/
 
