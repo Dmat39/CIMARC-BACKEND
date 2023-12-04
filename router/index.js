@@ -15,7 +15,8 @@ const NoticiasController = require('../Controllers/NoticiasController.js');
 //<<<<<<< Updated upstream
 //=======
 // const EventosController=require('../Controllers/EventosController.js')
-// const BlogsController=require('../Controllers/BlogsController.js')
+const BlogsController=require('../Controllers/BlogsController.js');
+const Blogs = require('../Models/Blogs.js');
 
 //
 //>>>>>>> Stashed changes
@@ -267,37 +268,52 @@ module.exports = function () {
     
 
 
-    // //Blogs//
+    /**Blogs*/
 
-    // //Agregar Blogs
-    // router.post('/blogs',
-    // BlogsController.crearBlogs
-    // )
-    // //Obtener Blogs
-    // router.get('/blogs',
-    // BlogsController.obtenerBlogs
-    // );
-    // // Mostrar Blogs por ID
-    // router.get('/blogs/:idBlogs',
-    // BlogsController.mostrarBlogsID
-    // );
-    // //Metodo par Mostrar Pagos
-    // router.get('/mostrar-blogs',
-    // BlogsController.mostrarBlogs
-    // );
-    
-    // // Actualizar Blogs
-    // router.put('/mostrar-blogs/:idBlogs',
-    // BlogsController.actualizarBlogs,
-    
-    // );
-    // // Eliminar Blogs
-    // router.delete('/blogs/eliminar/:idBlogs',
-    // BlogsController.eliminarBlogs
-    // );
+     //Agregar Blogs
+     router.post('/blogs',
+        BlogsController.subirArchivoBlog,
+        BlogsController.nuevoBlog
+     );
+     //Obtener Blogs
+      router.get('/blogs',
 
+        BlogsController.mostrarBlog
+     );
+     // Mostrar Blogs por ID
+      router.get('/blogs/:idBlogs',
 
+        BlogsController.mostrarBlogID
+     );   
+     // Actualizar Blogs
+      router.put('/blogs/:idBlogs',
+        BlogsController.subirArchivoBlog,
+        BlogsController.actualizarBlog,
+     );
+     // Eliminar Blogs
+      router.delete('/blogs/:idBlogs',
+        BlogsController.eliminarBlog
+    );
+     // Mostrar Blogs por ByUserId
+      router.get('/blogs/user/:userid',
+        
+        BlogsController.encontrarBlogByUser
+    );
+     // Mostrar Blogs por idBlogs y ByUserID
+      router.get('/blogs/:idBlogs/user/:userid',
 
-//>>>>>>> Stashed changes
+        BlogsController.buscarBlogByUser
+    );
+     // Actualizar Blogs en especifico por ByUserID
+       router.put('/blogs/:idBlogs/user/:userid',
+        BlogsController.subirArchivoBlog,
+        BlogsController.actualizarBlogIdByUser
+    ); 
+     // Eliminar Blogs en especifico por ByUserID
+        router.delete('/blogs/:idBlogs/user/:userid',
+        
+        BlogsController.eliminarBlogIdByUser
+    );
+
     return router;
 }
