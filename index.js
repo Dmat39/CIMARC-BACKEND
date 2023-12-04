@@ -35,6 +35,8 @@ saveUninitialized: true
       require('./Models/DocClientes.js');
       require('./Models/Casos.js');
       require('./Models/Usuario.js');
+      require('./Models/Eventos.js');
+      require('./Models/Blogs.js');
       require('./Models/Noticias.js');
       require('./Models/Pagos.js');
       db.sync().then(() => console.log('DB Conectada')).catch((error) => console.log(error)); 
