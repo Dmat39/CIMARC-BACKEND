@@ -10,7 +10,7 @@ const configuracionMulter = {
     limits: { fileSize: 100000 },  // límite de tamaño en bytes
     storage: multer.diskStorage({
         destination: (req, file, next) => {
-            next(null, __dirname + '../../uploads/imagenes'); // Change the destination folder to 'uploads/imagenes'
+            next(null, __dirname + '../../uploads/noticias'); // Change the destination folder to 'uploads/noticias'
         },
         filename: (req, file, next) => {
             const extension = file.originalname.split('.').pop();  // obtener la extensión del archivo original
@@ -106,7 +106,7 @@ exports.actualizarNoticias = async (req, res, next) => {
             let noticiaAnterior = await Noticias.findByPk(req.params.idNoticias);
             if(noticiaAnterior.imagen){
                 // Construir la ruta completa al imagen antigua
-                const rutaImagenAntiguo = path.join(__dirname,`../uploads/imagenes/${noticiaAnterior.imagen}`);
+                const rutaImagenAntiguo = path.join(__dirname,`../uploads/noticias/${noticiaAnterior.imagen}`);
                 
                 // Borrar el imagen antiguo
                 await fs.unlink(rutaImagenAntiguo);
@@ -150,7 +150,7 @@ exports.eliminarNoticias = async (req, res, next) => {
 
         // Borrar el archivo asociado al caso si existe
         if (noticias.imagen) {
-            const rutaArchivo = path.join(__dirname, `../uploads/imagenes/${noticias.imagen}` );
+            const rutaArchivo = path.join(__dirname, `../uploads/noticias/${noticias.imagen}` );
            await fs.unlink(rutaArchivo);
         }
         // Eliminar el pago de la base de datos
@@ -230,7 +230,7 @@ exports.actualizarNoticiaIdByUser = async (req, res, next) => {
 
             let noticiaAnterior = await Noticias.findByPk(req.params.idNoticias);
             if (noticiaAnterior.imagen) {
-                const rutaArchivoAntiguo = path.join(__dirname, `../uploads/imagenes/${noticiaAnterior.imagen}`);
+                const rutaArchivoAntiguo = path.join(__dirname, `../uploads/noticias/${noticiaAnterior.imagen}`);
                 await fs.unlink(rutaArchivoAntiguo);
             }
         } else {
@@ -274,7 +274,7 @@ exports.eliminarNoticiaIdByUser = async(req,res,next) => {
         }
 
         if (noticia.imagen) {
-            const rutaArchivo = path.join(__dirname, `../uploads/imagenes/${noticia.imagen}`);
+            const rutaArchivo = path.join(__dirname, `../uploads/noticias/${noticia.imagen}`);
             await fs.unlink(rutaArchivo);
         }
 
