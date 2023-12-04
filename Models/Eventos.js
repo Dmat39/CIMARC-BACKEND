@@ -55,3 +55,4 @@ Usuario.hasMany(Eventos, { foreignKey: 'userid' });
 Eventos.belongsTo(Usuario, { foreignKey: 'userid' });
 
 module.exports = Eventos;
+
