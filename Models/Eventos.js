@@ -41,7 +41,7 @@ const Eventos =  db.define('Eventos',{
         allowNull : false,
     },
     documentos:{
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
         allowNull : true,
     },
     ubicacion:{
