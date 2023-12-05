@@ -1,4 +1,4 @@
-const Casos = require('../Models/Casos');
+const Eventos = require('../Models/Eventos');
 const Usuario = require('../Models/Usuario');
 const multer = require('multer');
 const shortid = require('shortid');
@@ -10,7 +10,7 @@ const configuracionMulter = {
     limits: { fileSize: 100000 },  // límite de tamaño en bytes
     storage: multer.diskStorage({
         destination: (req, file, next) => {
-            next(null, __dirname + '../../uploads/casos');
+            next(null, __dirname + '../../uploads/eventos');
         },
         filename: (req, file, next) => {
             const extension = file.originalname.split('.').pop();  // obtener la extensión del archivo original
@@ -33,7 +33,7 @@ const configuracionMulter = {
 const upload = multer(configuracionMulter).single('documentos');  // Cambiado a 'documentos' en lugar de 'imagen'
 
 // sube archivo en el servidor
-exports.subirArchivo = (req, res, next) => {
+exports.subirArchivoEvento = (req, res, next) => {
     upload(req, res, function (error) {
         if (error) {
             if (error instanceof multer.MulterError) {
@@ -54,18 +54,19 @@ exports.subirArchivo = (req, res, next) => {
     });
 };
 
+
 // Agregar Casos
-exports.nuevoCaso = async(req,res,next) =>{
-    const casos = new Casos(req.body);
+exports.nuevoEvento = async(req,res,next) =>{
+    const evento = new Eventos(req.body);
 
     try{
          // Verificar si se ha subido un documento
         if( req.file && req.file.filename){
-            casos.documentos = req.file.filename;
+            evento.documentos = req.file.filename;
         }
         //almacenar un registro
-        await casos.save();
-        res.json({mensaje: 'Se agrego un nuevo caso'});
+        await evento.save();
+        res.json({mensaje: 'Se agrego un nuevo evento'});
     }catch(error){
         //si hay un error
         res.send(error);
@@ -73,71 +74,74 @@ exports.nuevoCaso = async(req,res,next) =>{
     }
 
 }
-
-// Mostrar casos
-exports.mostrarCasos = async(req,res,next) =>{
+// Mostrar Eventos
+exports.mostrarEventos = async(req,res,next) =>{
     
     try {
         // obtener todos los casos
-        const casos = await Casos.findAll({});
-        res.json(casos);
+        const evento = await Eventos.findAll({});
+        res.json(evento);
     } catch (error) {
         console.log(error);
         next();
     }
 
 }
+    // Mostrar Evento por ID
+exports.mostrarEventosID = async (req, res, next) => {
+    try {
+        const eventos = await Eventos.findByPk(req.params.idEventos);
 
-// Mostrar Casos por ID
- exports.mostrarCasosID = async(req,res,next)=>{
-    const casos = await Casos.findByPk(req.params.idCasos);
+        if (!eventos) {
+            res.json({ mensaje: 'El evento no existe' });
+            return next();
+        }
 
-     if(!casos) {
-         res.json({mensaje : 'Ese Caso no existe'});
-         return next();
-     }
+        // Mostrar el Evento
+        res.json(eventos);
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+};
 
-     // Mostrar  el caso
-     res.json(casos);
- }
-
- // Actualizar un Caso via id 
- exports.actualizarCaso = async (req, res, next) => {
+ // Actualizar un Evento via id 
+exports.actualizarEventos = async (req, res, next) => {
     try {
         // Construir un nuevo caso
-        let nuevoCaso = req.body;
+        let nuevoEvento = req.body;
 
         // Verificar si hay un archivo nuevo
         if (req.file && req.file.filename) {
-            nuevoCaso.documentos = req.file.filename;
+            nuevoEvento.documentos = req.file.filename;
 
             // Obtener el caso anterior para borrar el archivo antiguo
-            let casoAnterior = await Casos.findByPk(req.params.idCasos);
-            if (casoAnterior.documentos) {
+            let eventonterior = await Eventos.findByPk(req.params.idEventos);
+            if ( eventonterior.documentos) {
                 // Construir la ruta completa al archivo antiguo
-                const rutaArchivoAntiguo = path.join(__dirname, `../uploads/casos/${casoAnterior.documentos}`);
+                const rutaArchivoAntiguo = path.join(__dirname, `../uploads/eventos/${eventonterior.documentos}`);
 
                 // Borrar el archivo antiguo
                 await fs.unlink(rutaArchivoAntiguo);
             }
         } else {
             // Obtener el caso anterior para mantener el nombre del documento
-            let casoAnterior = await Casos.findByPk(req.params.idCasos);
-            nuevoCaso.documentos = casoAnterior.documentos;
+            let eventonterior = await Eventos.findByPk(req.params.idEventos);
+            nuevoEvento.documentos = eventonterior.documentos;
         }
 
         // Actualizar el caso en la base de datos y obtener el número de filas afectadas
-        const [numFilasActualizadas] = await Casos.update(nuevoCaso, {
-            where: { id: req.params.idCasos },
+        const [numFilasActualizadas] = await Eventos.update(nuevoEvento, {
+            where: { id: req.params.idEventos },
         });
 
         // Verificar si se actualizó con éxito
         if (numFilasActualizadas > 0) {
             // Obtener el caso actualizado después de la actualización
-            const casoActualizado = await Casos.findByPk(req.params.idCasos);
+            const eventoActualizado = await Eventos.findByPk(req.params.idEventos);
 
             // Enviar la respuesta JSON con el caso actualizado
-            res.json(casoActualizado);
+            res.json(eventoActualizado);
         } else {
             // Si numFilasActualizadas es 0, significa que el caso no fue encontrado o no se actualizó correctamente
             console.log('No se actualizaron filas.');
@@ -149,18 +153,17 @@ exports.mostrarCasos = async(req,res,next) =>{
     }
 };
 
-//mostrar  todo los casos por usuario
-exports.encontrarCasosByUser = async (req, res, next) => {
+exports.encontrarEventosByUser = async (req, res, next) => {
     try {
         const Userid  = await Usuario.findByPk(req.params.userid);
         if (!Userid) {
-            res.status(404).json({ mensaje: 'Usuario no encontrado' });
-            return next();
+            return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+            next();
         }
-        const casos = await Casos.findAll({
+        const eventos = await Eventos.findAll({
             where: { userid: req.params.userid },
         });
-        res.json(casos);
+        res.json(eventos);
     } catch (error) {
         console.log(error);
         next(error);
@@ -168,25 +171,25 @@ exports.encontrarCasosByUser = async (req, res, next) => {
 }
 
 //mostrar casos por userid y casosid
-exports.buscarCasosByUser = async (req,res,next) =>{
+exports.buscarEventosByUser = async (req,res,next) =>{
     try {
         // Verificar si el usuario existe
         const usuario = await Usuario.findByPk(req.params.userid);
         if (!usuario) {
-            return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+            return res.status(404).json({ mensaje: 'Evento  no encontrado' });
         }
         // Verificar si el caso existe para este usuario
-        const caso = await Casos.findOne({
+        const evento = await Eventos.findOne({
             where: {
-                id: req.params.idCasos,
+                id: req.params.idEventos,
                 userid: req.params.userid,
             },
         });
-        if (!caso) {
-            return res.status(404).json({ mensaje: 'Caso no encontrado para este usuario' });
+        if (!evento) {
+            return res.status(404).json({ mensaje: 'Evento  no encontrado para este usuario' });
         }
         
-        res.json(caso);
+        res.json(evento);
 
     } catch (error) {
         console.error(error);
@@ -195,61 +198,61 @@ exports.buscarCasosByUser = async (req,res,next) =>{
 }
 
 //actualizar casos por userid y casosid
-exports.actualizarCasoIdByUser = async (req, res, next) => {
+exports.actualizarEventoIdByUser = async (req, res, next) => {
     try {
         const Userid = await Usuario.findByPk(req.params.userid);
         if (!Userid) {
             return res.status(404).json({ mensaje: 'Usuario no encontrado' });
         }
 
-        const caso = await Casos.findOne({
+        const evento = await Eventos.findOne({
             where: {
-                id: req.params.idCasos, // Suponiendo que tienes un parámetro para identificar el caso
+                id: req.params.idEventos, // Suponiendo que tienes un parámetro para identificar el caso
                 userid: req.params.userid,
             },
         });
 
-        if (!caso) {
-            return res.status(404).json({ mensaje: 'Caso no encontrado para este usuario' });
+        if (!evento) {
+            return res.status(404).json({ mensaje: 'Evento no encontrado para este usuario' });
         }
     // Construir un nuevo caso
-    let nuevoCaso = req.body;
+    let nuevoEvento = req.body;
 
     // Verificar si hay un archivo nuevo
     if (req.file && req.file.filename) {
-        nuevoCaso.documentos = req.file.filename;
+        nuevoEvento.documentos = req.file.filename;
 
         // Obtener el caso anterior para borrar el archivo antiguo
-        let casoAnterior = await Casos.findByPk(req.params.idCasos);
-        if (casoAnterior.documentos) {
+        let eventoAnterior = await Eventos.findByPk(req.params.idEventos);
+        if (eventoAnterior.documentos) {
             // Construir la ruta completa al archivo antiguo
-            const rutaArchivoAntiguo = path.join(__dirname, `../uploads/casos/${casoAnterior.documentos}`);
+            const rutaArchivoAntiguo = path.join(__dirname, `../uploads/casos/${eventoAnterior.documentos}`);
 
             // Borrar el archivo antiguo
             await fs.unlink(rutaArchivoAntiguo);
         }
     } else {
         // Obtener el caso anterior para mantener el nombre del documento
-        let casoAnterior = await Casos.findByPk(req.params.idCasos);
-        nuevoCaso.documentos = casoAnterior.documentos;
+        let eventoAnterior = await Eventos.findByPk(req.params.idEventos);
+        nuevoEvento.documentos = eventoAnterior.documentos;
     }
 
     // Actualizar el caso en la base de datos y obtener el número de filas afectadas
-    const [numFilasActualizadas] = await Casos.update(nuevoCaso, {
-        where: { id: req.params.idCasos, userid: req.params.userid },
+    const [numFilasActualizadas] = await Eventos.update(nuevoEvento, {
+        where: { id: req.params.idEventos, userid: req.params.userid },
     });
 
     // Verificar si se actualizó con éxito
     if (numFilasActualizadas > 0) {
         // Obtener el caso actualizado después de la actualización
-        const casoActualizado = await Casos.findByPk(req.params.idCasos);
+        const eventoActualizado = await Eventos.findByPk(req.params.idEventos);
 
         // Enviar la respuesta JSON con el caso actualizado
-        res.json(casoActualizado);
+        res.json(eventoActualizado);
     } else {
         // Si numFilasActualizadas es 0, significa que el caso no fue encontrado o no se actualizó correctamente
         console.log('No se actualizaron filas.');
-        return res.status(404).json({ mensaje: 'Caso no encontrado' });
+        return res.status(404).json({ mensaje: 'Evento no encontrado' });
     }
     
     } catch (error) {
@@ -259,7 +262,7 @@ exports.actualizarCasoIdByUser = async (req, res, next) => {
 };
 
 //eliminar casos por userid y casosid
-exports.eliminarCasoIdByUser = async(req,res,next) => {
+exports.eliminarEventoIdByUser = async(req,res,next) => {
     try {
         // Verificar si el usuario existe
         const usuario = await Usuario.findByPk(req.params.userid);
@@ -268,61 +271,72 @@ exports.eliminarCasoIdByUser = async(req,res,next) => {
         }
 
         // Verificar si el caso existe para este usuario
-        const caso = await Casos.findOne({
+        const evento = await Eventos.findOne({
             where: {
-                id: req.params.idCasos,
+                id: req.params.idEventos,
                 userid: req.params.userid,
             },
         });
 
-        if (!caso) {
-            return res.status(404).json({ mensaje: 'Caso no encontrado para este usuario' });
+        if (!evento) {
+            return res.status(404).json({ mensaje: 'Evento no encontrado para este usuario' });
         }
 
         // Verificar y eliminar el archivo asociado al caso (si existe)
-        if (caso.documentos) {
-            const rutaArchivo = path.join(__dirname, `../uploads/casos/${caso.documentos}`);
+        if (evento.documentos) {
+            const rutaArchivo = path.join(__dirname, `../uploads/eventos/${evento.documentos}`);
             await fs.unlink(rutaArchivo);
         }
 
         // Eliminar el caso de la base de datos
-        await Casos.destroy({
+        await Eventos.destroy({
             where: {
-                id: req.params.idCasos,
+                id: req.params.idEventos,
                 userid: req.params.userid,
             },
         });
 
         // Enviar respuesta JSON indicando que el caso ha sido eliminado correctamente
-        res.json({ mensaje: 'Caso eliminado correctamente' });
+        res.json({ mensaje: 'Evento eliminado correctamente' });
     } catch (error) {
         console.error(error);
         next(error);
     }
 }
 
-//Eliminar casos por Id
-exports.eliminarCasos = async (req, res, next) => {
+exports.eliminarEventos = async (req, res, next) => {
     try {
-        const casoAEliminar = await Casos.findByPk(req.params.idCasos);
+        const eventoAEliminar = await Eventos.findByPk(req.params.idEventos);
 
-        if (!casoAEliminar) {
-            return res.status(404).json({ mensaje: 'Caso no encontrado' });
+        if (!eventoAEliminar) {
+            return res.status(404).json({ mensaje: 'Evento no encontrado' });
         }
 
         // Borrar el archivo asociado al caso si existe
-        if (casoAEliminar.documentos) {
-             const rutaArchivo = path.join(__dirname, `../uploads/casos/${casoAEliminar.documentos}` );
+        if (eventoAEliminar.documentos) {
+            const rutaArchivo = path.join(__dirname, `../uploads/eventos/${eventoAEliminar.documentos}` );
             await fs.unlink(rutaArchivo);
-         }
+        }
 
          // Eliminar el caso de la base de datos
-         await casoAEliminar.destroy();
-  
+        await eventoAEliminar.destroy();
+
         //console.log('Ruta del archivo a eliminar:', rutaArchivo); verificar la ruta
         res.json({ mensaje: 'Caso eliminado exitosamente' });
     } catch (error) {
         console.log(error);
         next(error);
     }
+};
+exports.obtenerEventos = async (req, res) => {
+    try {
+        const eventos = await Eventos.findAll();
+        if (eventos.length === 0) {
+            res.status(404).send('No hay  eventos disponibles');
+        } else {
+            res.send(eventos);
+        }    } catch (error) {
+        res.status(500).send('Hubo un error');
+    }
+
 };
