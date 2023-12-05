@@ -1,5 +1,6 @@
 const Usuario = require('../Models/Usuario');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
 
 exports.crearUsuario = async (req, res, next) => {
     const usuarios = new Usuario(req.body);
@@ -87,3 +88,24 @@ exports.eliminarUsuario = async (req, res) => {
         res.status(500).send('Hubo un error');
     }
 };
+
+exports.autenticarUsuario = async(req,res,next) =>{
+    // Buscar el usuario 
+    const {email,password} = req.body;
+    const usuario = await Usuario.findByPk({email});
+
+    if(!usuario){
+        //Si el usuario no existe
+        await res.status(401).json({mensaje: 'Ese usuario no existe'})
+        next();
+    }else{
+        // El usuario existe, verificar si el password es correcto o incorrecto
+        if(!bcrypt.compareSync(password,usuario.password)){
+            //Si el password es incorrecto
+            await res.status(401).json({mensaje:'Password Incorrecto'})
+            next();
+        }
+            
+    }
+
+}
