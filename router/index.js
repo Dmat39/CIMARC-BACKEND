@@ -1,30 +1,22 @@
 const express = require('express');
 const router = express.Router();
-//<<<<<<< Updated upstream
-//=======
-const db = require('../config/db.js');
-
-
-//>>>>>>> Stashed changes
 const CasosController = require('../Controllers/CasosController.js');
 const DocClienteController = require('../Controllers/DocClienteController.js');
 const PagosController = require('../Controllers/PagosController.js');
 const UsuarioController = require('../Controllers/UsuarioController.js');
 const NoticiasController = require('../Controllers/NoticiasController.js');
-
-//<<<<<<< Updated upstream
-//=======
-// const EventosController=require('../Controllers/EventosController.js')
+const EventosController=require('../Controllers/EventoController.js')
 const BlogsController=require('../Controllers/BlogsController.js');
-const Blogs = require('../Models/Blogs.js');
 
-//
-//>>>>>>> Stashed changes
 
 
 module.exports = function () {
 
 
+    /**INICIO DE SESION */
+    router.post('/iniciar-sesion',
+        UsuarioController.autenticarUsuario
+    );
     /** METODOS DE PAGOS */
     router.post('/pagos',
         PagosController.CrearPagos
@@ -238,104 +230,71 @@ module.exports = function () {
         DocClienteController.actualizardoc
     )
 
+        
 
+    //Eventos//
 
+    //Metodo par Mostrar Eventos
+    router.get('/eventos',
 
-
-
-
-//=======
-//>>>>>>> main
-
-    //agregar 
-    router.post('/subir-documentos', 
-
-        DocClienteController.agregardoccliente
+        EventosController.mostrarEventos
     );
 
-    // Eliminar Casos
-    router.delete('/trabajador-casos/:idCasos',
-    
-        CasosController.eliminarCasos
-    )
+     //Agregar Eventos
+     router.post('/eventos',
 
-        
-//<<<<<<< Updated upstream
-//=======
+        EventosController.subirArchivoEvento,
+        EventosController.nuevoEvento
+     )
+     // Mostrar Eventos por ID
+     router.get('/eventos/:idEventos',
+        EventosController.mostrarEventosID
+     );
 
-    //  //Eventos//
+     // Actualizar Eventos
+     router.put('/eventos/:idEventos',
+        EventosController.subirArchivoEvento,
+        EventosController.actualizarEventos
+    );
 
-    // //Metodo par Mostrar Eventos
-    // router.get('/mostrar-eventos',
-    // EventosController.mostrarEventos
-    // );
-
-    // //Agregar Eventos
-    // router.post('/eventos',
-    // EventosController.subirArchivoEvento,
-    // EventosController.nuevoEvento
-    // )
-    // // Mostrar Eventos por ID
-    // router.get('/eventos/:idEventos',
-    // EventosController.mostrarEventosID
-    // );
-
-    // //Obtener Eventos
-    // router.get('/eventos',
-    // EventosController.obtenerEventos
-    // );
+     //Mostrar Eventos por Userid
+     router.get('/trabajador-eventos/user/:userid',
+        EventosController.encontrarEventosByUser
+    );
+     // Mostrar Eventos en especifico
+     router.get('/trabajador-eventos/:userid/eventos/:idEventos',
+        EventosController.buscarEventosByUser
+    );
 
 
-    // // Actualizar Eventos
-    // router.put('/mostrar-eventos/:idEventos',
-    // EventosController.subirArchivoEvento,
-    // EventosController.actualizarEventos
-    // );
+    //Actualizar Eventos ByUserId and EventosId
+     router.put('/trabajador-eventos/:userid/eventos/:idEventos',
+        EventosController.subirArchivoEvento,
+        EventosController.actualizarEventoIdByUser
+    );
 
-    // //Mostrar Eventos por Userid
-    // router.get('/trabajador-eventos/user/:userid',
-    
-    // EventosController.encontrarEventosByUser
-    // )
-    // // Mostrar Eventos en especifico
-    // router.get('/trabajador-eventos/:userid/eventos/:idEventos',
-    // EventosController.buscarEventosByUser
-    // );
+     //Eliminar Eventos ByUserId and EventosId
+     router.delete('/trabajador-eventos/:userid/eventos/:idEventos',
+        EventosController.eliminarEventoIdByUser
+    );
 
-
-    // //Actualizar Eventos ByUserId and EventosId
-    // router.put('/trabajador-eventos/:userid/eventos/:idEventos',
-    //     EventosController.subirArchivoEvento,
-    //     EventosController.actualizarEventoIdByUser
-    // );
-
-    // //Eliminar Eventos ByUserId and EventosId
-    // router.delete('/trabajador-eventos/:userid/eventos/:idEventos',
-    //     EventosController.eliminarEventoIdByUser
-    // );
-
-    // // Actualizar Eventos
-    // router.put('/trabajador-eventos/:idEventos',
-    //     EventosController.subirArchivoEvento,
-    //     EventosController.actualizarEventos
-
-    // )
+     // Actualizar Eventos
+     router.put('/trabajador-eventos/:idEventos',
+        EventosController.subirArchivoEvento,
+        EventosController.actualizarEventos
+    );
 
 
-    // // Eliminar Eventos
-    // router.delete('/eventos/eliminar/:idEventos',
-    // EventosController.eliminarEventos
-    // );
-    
+     // Eliminar Eventos
+    router.delete('/eventos/eliminar/:idEventos',
+        EventosController.eliminarEventos
+    );
+
 
 
     /**Blogs*/
 
      //Agregar Blogs
-//<<<<<<< Diego
-     /*
-//=======
-//>>>>>>> main
      router.post('/blogs',
         BlogsController.subirArchivoBlog,
         BlogsController.nuevoBlog
@@ -378,11 +337,15 @@ module.exports = function () {
         router.delete('/blogs/:idBlogs/user/:userid',
         
         BlogsController.eliminarBlogIdByUser
+
 //<<<<<<< Diego
-    );*/
+    );
 //=======
    // );
 //>>>>>>> main
+
+    
+//>>>>>>> ad1e997cecc4350135a6b13dfe3a79f80b3ad182
 
     return router;
 }
