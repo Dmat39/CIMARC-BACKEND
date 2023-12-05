@@ -238,27 +238,6 @@ module.exports = function () {
         DocClienteController.actualizardoc
     )
 
-
-
-
-
-
-
-//=======
-//>>>>>>> main
-
-    //agregar 
-    router.post('/subir-documentos', 
-
-        DocClienteController.agregardoccliente
-    );
-
-    // Eliminar Casos
-    router.delete('/trabajador-casos/:idCasos',
-    
-        CasosController.eliminarCasos
-    )
-
         
 //<<<<<<< Updated upstream
 //=======
@@ -381,7 +360,7 @@ module.exports = function () {
 //<<<<<<< Diego
     );*/
 //=======
-    );
+    //);
 //>>>>>>> main
 
     return router;
