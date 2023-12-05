@@ -194,7 +194,7 @@ module.exports = function () {
     );
 
     // Agregar Documento
-    router.post('/agregar-documento',
+    router.post('/documento',
 
         DocClienteController.subirArchivo,
         DocClienteController.agregardoccliente
