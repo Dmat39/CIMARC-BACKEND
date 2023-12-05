@@ -186,7 +186,7 @@ module.exports = function () {
     );
 
     // Agregar Documento
-    router.post('/agregar-documento',
+    router.post('/documento',
 
         DocClienteController.subirArchivo,
         DocClienteController.agregardoccliente
@@ -338,11 +338,8 @@ module.exports = function () {
         
         BlogsController.eliminarBlogIdByUser
 
-//<<<<<<< Diego
+
     );
-//=======
-   // );
-//>>>>>>> main
 
     
 //>>>>>>> ad1e997cecc4350135a6b13dfe3a79f80b3ad182
