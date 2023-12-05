@@ -104,6 +104,18 @@ exports.autenticarUsuario = async(req,res,next) =>{
             //Si el password es incorrecto
             await res.status(401).json({mensaje:'Password Incorrecto'})
             next();
+        }else{
+            // password correcto, firma el token
+            const token = jwt.sign({
+                email: usuario.email,
+                usuario: usuario.nombre,
+                _id: usuario._id
+            },
+            'LLAVESECRETA',
+            {
+                expiresIn : '1h'
+            }
+            )
         }
             
     }
