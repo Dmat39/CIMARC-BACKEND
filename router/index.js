@@ -15,7 +15,8 @@ const NoticiasController = require('../Controllers/NoticiasController.js');
 //<<<<<<< Updated upstream
 //=======
 // const EventosController=require('../Controllers/EventosController.js')
-// const BlogsController=require('../Controllers/BlogsController.js')
+const BlogsController=require('../Controllers/BlogsController.js');
+const Blogs = require('../Models/Blogs.js');
 
 //
 //>>>>>>> Stashed changes
@@ -24,7 +25,7 @@ const NoticiasController = require('../Controllers/NoticiasController.js');
 module.exports = function () {
 
 
-
+    /** METODOS DE PAGOS */
     router.post('/pagos',
         PagosController.CrearPagos
     );
@@ -60,7 +61,7 @@ module.exports = function () {
 
     /**Noticias */
     router.post('/noticias',
-
+        NoticiasController.subirImagen,
         NoticiasController.crearNoticias
     );
     //Obtener noticias
@@ -68,14 +69,14 @@ module.exports = function () {
 
         NoticiasController.obtenerNoticias
     );
-    //Mostrar Noticias
+    //Mostrar Noticias ID
     router.get('/noticias/:idNoticias',
 
         NoticiasController.mostrarNoticiasID
     );
     //Actualizar Noticias
     router.put('/noticias/:idNoticias',
-
+        NoticiasController.subirImagen,
         NoticiasController.actualizarNoticias
     );
     //Eliminar Noticias
@@ -90,13 +91,21 @@ module.exports = function () {
         NoticiasController.encontrarNoticiasByUser
     );
 
-    // Mostrar Noticias en especifico
+    // Mostrar Noticias en especifico por UserID
     router.get('/noticias/:idNoticias/user/:userid',
     
         NoticiasController.buscarNoticiaByIdByUser
     );
+    // Actualizar Noticas en especifico por UserID
+    router.put('/noticias/:idNoticias/user/:userid',
+        NoticiasController.subirImagen,
+        NoticiasController.actualizarNoticiaIdByUser
+    );
 
-
+    // Eliminar Noticias en especifico por UserID
+    router.delete('/noticias/:idNoticias/user/:userid',
+        NoticiasController.eliminarNoticiaIdByUser
+    );
 
     /** USUARIO*/
 
@@ -175,19 +184,70 @@ module.exports = function () {
         CasosController.actualizarCaso
     )
     
-//<<<<<<< Updated upstream
-//=======
-
-
-
-
-//>>>>>>> Stashed changes
-
     /** DOCUMENTO CLIENTE  */
+
+    // Mostrar Documento
+    router.get('/documento',
+
+        DocClienteController.mostrardoccliente
+    );
+
+    // Agregar Documento
+    router.post('/agregar-documento',
+
+        DocClienteController.subirArchivo,
+        DocClienteController.agregardoccliente
+    );
+
+    //Mostrar Docmuento por Id
+    router.get('/documento/:idDocCliente',
+
+        DocClienteController.mostrardocclienteID
+    );
+
+    //Mostrar Documento por UsserId
+    router.get('/documento/user/:userid',
+
+        DocClienteController.encontrarDocByUser
+    );
+
+    //Mostrar Documento en especifico 
+    router.get('/documento/user/:userid/doccliente/:idDocCliente',
+
+        DocClienteController.buscarDocByUser
+    );
+
+    //actualizar Documento ByUserId y DocumentoId
+    router.put('/documento/user/:userid',
+
+        DocClienteController.subirArchivo,
+        DocClienteController.actualizarDocIdByUser
+    );
+
+    //Eliminar Documentos ByUserId y DocumentoId
+    router.delete('/documento/user/:userid/doccliente/:idDocCliente',
+
+        DocClienteController.eliminarDocIdByUser
+    );
+
+    //Actualizar Documento
+    router.put('/documento/:idDocCliente',
+
+        DocClienteController.subirArchivo,
+        DocClienteController.actualizardoc
+    )
+
+
+
+
+
+
+
 
     //agregar 
     router.post('/subir-documentos', 
-    DocClienteController.agregardoccliente
+
+        DocClienteController.agregardoccliente
     );
 
     // Eliminar Casos
@@ -266,37 +326,53 @@ module.exports = function () {
     
 
 
-    // //Blogs//
+    /**Blogs*/
 
-    // //Agregar Blogs
-    // router.post('/blogs',
-    // BlogsController.crearBlogs
-    // )
-    // //Obtener Blogs
-    // router.get('/blogs',
-    // BlogsController.obtenerBlogs
-    // );
-    // // Mostrar Blogs por ID
-    // router.get('/blogs/:idBlogs',
-    // BlogsController.mostrarBlogsID
-    // );
-    // //Metodo par Mostrar Pagos
-    // router.get('/mostrar-blogs',
-    // BlogsController.mostrarBlogs
-    // );
-    
-    // // Actualizar Blogs
-    // router.put('/mostrar-blogs/:idBlogs',
-    // BlogsController.actualizarBlogs,
-    
-    // );
-    // // Eliminar Blogs
-    // router.delete('/blogs/eliminar/:idBlogs',
-    // BlogsController.eliminarBlogs
-    // );
+     //Agregar Blogs
+     /*
+     router.post('/blogs',
+        BlogsController.subirArchivoBlog,
+        BlogsController.nuevoBlog
+     );
+     //Obtener Blogs
+      router.get('/blogs',
 
+        BlogsController.mostrarBlog
+     );
+     // Mostrar Blogs por ID
+      router.get('/blogs/:idBlogs',
 
+        BlogsController.mostrarBlogID
+     );   
+     // Actualizar Blogs
+      router.put('/blogs/:idBlogs',
+        BlogsController.subirArchivoBlog,
+        BlogsController.actualizarBlog,
+     );
+     // Eliminar Blogs
+      router.delete('/blogs/:idBlogs',
+        BlogsController.eliminarBlog
+    );
+     // Mostrar Blogs por ByUserId
+      router.get('/blogs/user/:userid',
+        
+        BlogsController.encontrarBlogByUser
+    );
+     // Mostrar Blogs por idBlogs y ByUserID
+      router.get('/blogs/:idBlogs/user/:userid',
 
-//>>>>>>> Stashed changes
+        BlogsController.buscarBlogByUser
+    );
+     // Actualizar Blogs en especifico por ByUserID
+       router.put('/blogs/:idBlogs/user/:userid',
+        BlogsController.subirArchivoBlog,
+        BlogsController.actualizarBlogIdByUser
+    ); 
+     // Eliminar Blogs en especifico por ByUserID
+        router.delete('/blogs/:idBlogs/user/:userid',
+        
+        BlogsController.eliminarBlogIdByUser
+    );*/
+
     return router;
 }
