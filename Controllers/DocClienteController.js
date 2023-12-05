@@ -30,7 +30,7 @@ const configuracionMulter = {
     }
 };
 
-const upload = multer(configuracionMulter).single('documentos');  // Cambiado a 'documentos' en lugar de 'imagen'
+const upload = multer(configuracionMulter).single('formato');  // Cambiado a 'formato' en lugar de 'documentos'
 
 // sube archivo en el servidor
 exports.subirArchivo = (req, res, next) => {
@@ -128,7 +128,7 @@ exports.actualizardoc=async (req,res,next)=> {
 
              // Obtener el documento anterior para mantener el nombre del documento
              let casoAnterior = await doccliente.findByPk(req.params.idDocCliente);
-             nuevodoc.documentos = casoAnterior.documentos;
+             nuevodoc.formato = casoAnterior.formato;
 
         }
 
@@ -160,8 +160,8 @@ exports.encontrarDocByUser = async (req, res, next) => {
     try {
         const Userid  = await Usuario.findByPk(req.params.userid);
         if (!Userid) {
-            return res.status(404).json({ mensaje: 'Usuario no encontrado' });
-            next();
+           res.status(404).json({ mensaje: 'Usuario no encontrado' });
+           return next();
         }
         const docCliente = await doccliente.findAll({
             where: { userid: req.params.userid },
