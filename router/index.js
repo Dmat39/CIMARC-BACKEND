@@ -291,10 +291,6 @@ module.exports = function () {
     /**Blogs*/
 
      //Agregar Blogs
-//<<<<<<< Diego
-     /*
-//=======
-//>>>>>>> main
      router.post('/blogs',
         BlogsController.subirArchivoBlog,
         BlogsController.nuevoBlog
@@ -337,11 +333,8 @@ module.exports = function () {
         router.delete('/blogs/:idBlogs/user/:userid',
         
         BlogsController.eliminarBlogIdByUser
-//<<<<<<< Diego
-    );*/
-//=======
-    //);
-//>>>>>>> main
+
+    );
 
     return router;
 }
