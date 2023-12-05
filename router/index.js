@@ -381,7 +381,7 @@ module.exports = function () {
 //<<<<<<< Diego
     );*/
 //=======
-    );
+   // );
 //>>>>>>> main
 
     return router;
