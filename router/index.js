@@ -185,6 +185,67 @@ module.exports = function () {
     )
     
     /** DOCUMENTO CLIENTE  */
+//<<<<<<< Diego
+
+    // Mostrar Documento
+    router.get('/documento',
+
+        DocClienteController.mostrardoccliente
+    );
+
+    // Agregar Documento
+    router.post('/agregar-documento',
+
+        DocClienteController.subirArchivo,
+        DocClienteController.agregardoccliente
+    );
+
+    //Mostrar Docmuento por Id
+    router.get('/documento/:idDocCliente',
+
+        DocClienteController.mostrardocclienteID
+    );
+
+    //Mostrar Documento por UsserId
+    router.get('/documento/user/:userid',
+
+        DocClienteController.encontrarDocByUser
+    );
+
+    //Mostrar Documento en especifico 
+    router.get('/documento/user/:userid/doccliente/:idDocCliente',
+
+        DocClienteController.buscarDocByUser
+    );
+
+    //actualizar Documento ByUserId y DocumentoId
+    router.put('/documento/user/:userid',
+
+        DocClienteController.subirArchivo,
+        DocClienteController.actualizarDocIdByUser
+    );
+
+    //Eliminar Documentos ByUserId y DocumentoId
+    router.delete('/documento/user/:userid/doccliente/:idDocCliente',
+
+        DocClienteController.eliminarDocIdByUser
+    );
+
+    //Actualizar Documento
+    router.put('/documento/:idDocCliente',
+
+        DocClienteController.subirArchivo,
+        DocClienteController.actualizardoc
+    )
+
+
+
+
+
+
+
+//=======
+//>>>>>>> main
 
     //agregar 
     router.post('/subir-documentos', 
@@ -271,6 +332,10 @@ module.exports = function () {
     /**Blogs*/
 
      //Agregar Blogs
+//<<<<<<< Diego
+     /*
+//=======
+//>>>>>>> main
      router.post('/blogs',
         BlogsController.subirArchivoBlog,
         BlogsController.nuevoBlog
@@ -313,7 +378,11 @@ module.exports = function () {
         router.delete('/blogs/:idBlogs/user/:userid',
         
         BlogsController.eliminarBlogIdByUser
+//<<<<<<< Diego
+    );*/
+//=======
     );
+//>>>>>>> main
 
     return router;
 }
