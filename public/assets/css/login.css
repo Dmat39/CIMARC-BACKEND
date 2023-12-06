@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Raleway:wght@400;700;900&family=Staatliches&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+}
+
+section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    background-image: url(../images/fondo\ nuevo.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    flex-wrap: wrap;
+}
+.contenedor{
+    display: flex;
+    border-radius: 20px;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, 1);
+    height: 800px;
+    width: 1300px;
+    transition: all 1s ease;
+    margin: 10px;
+}
+.imagenCimarc{
+    background: url(../images/imCimarc2.png);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    justify-content: center;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.formulario{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    text-align: center;
+    background-color: transparent;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    -webkit-backdrop-filter: blur(85px);
+    backdrop-filter: blur(85px);
+    text-align: center;
+    background:rgba(243, 243, 243,1);
+}
+.formulario h2{
+    color: #03a7ff;
+    font-size: 2.3rem;
+    text-align: center;
+}
+.formulario h3{
+    color: #03a7ff;
+    font-size: 2rem;
+    text-align: center;
+}
+.input-contenedor{
+    position: relative;
+    margin: 30px 0;
+    width: 300px;
+    border-bottom: 2px solid #8e8588;
+    margin-left: 25px;
+}
+.input-contenedor label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    color: #8e8588;
+    font-size: 1rem;
+    pointer-events: none;
+    transition: .6s;
+    font-weight: bold;
+}
+
+input:focus ~ label,
+input:valid ~ label{
+    top: -5px;
+}
+.input-contenedor input{
+    width: 100%;
+    height: 50px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    padding: -35px 0 5px;
+    color: #8e8588;
+}
+.input-contenedor i{
+    position: absolute;
+    color: #03a7ff;
+    font-size: 1.6rem;
+    top: 19px;
+    right: 8px;
+}
+.recordar{
+    display: flex;
+    justify-content: center;
+    color: #8e8588;
+    font-size: .8em;
+    margin: -15px 0 15px;
+
+}
+.recordar label input{
+    margin-right: 3px;
+}
+.recordar a{
+    color: #8e8588;
+    text-decoration: none;
+    transition: .3s;
+    margin-left: 20px;
+}
+.recordar a:hover{
+    text-decoration: underline;
+}
+.button{
+    width: 80%;
+    display: flex;
+    margin-left: 40px;
+    font-size: 16px;
+    text-align: center;
+    
+
+}
+.button a{
+    width: 100%;
+    height: 45px;
+    border-radius: 40px;
+    background: #03a7ff;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    color: white;
+    font-size: 16px;
+    padding: 10px 15px;
+    text-decoration: none;
+}
+.button a:hover{
+    opacity: .9;
+}
+@media only screen and (max-width: 1330px) {
+    .contenedor{
+        width: 90%;
+        margin-top: 1rem;
+    }
+    
+  }
+
+@media only screen and (max-width: 700px) {
+    .imagenCimarc{
+        display: none;
+    }
+    .contenedor{
+        width: 80%;
+        margin-top: 1rem;
+    }
+    .formulario{
+        width: 100%;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+  }
+
+  @media only screen and (max-width: 510px) {
+    .contenedor{
+        width: 80%;
+        margin-top: 1rem;
+    }
+    .formulario{
+        width: 100%;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+
+  }
+  @media only screen and (max-width: 440px) {
+    .contenedor{
+        width: 85%;
+        margin-top: 1rem;
+    }
+    .formulario{
+        width: 100%;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+
+}
+@media only screen and (max-width: 410px) {
+    .contenedor{
+        width: 85%;
+        margin-top: 2rem;
+    }
+    .formulario{
+        width: 100%;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+
+}
+@media only screen and (max-width: 385px) {
+    .contenedor{
+        width: 95%;
+        margin-top: 2rem;
+    }
+    .formulario{
+        width: 100%;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+
+}
