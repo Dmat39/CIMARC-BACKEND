@@ -7,7 +7,7 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
-//const passport = require('./config/passport');
+const passport = require('./config/passport');
 
 // Configuracion y Modelos BD
 const db = require('./config/db.js');
@@ -49,6 +49,10 @@ app.use(express.static('public'));
 
 // habilitar cookie parser
 app.use(cookieParser());
+
+// inicializar passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Rutas de la app
 app.use('/', routes());

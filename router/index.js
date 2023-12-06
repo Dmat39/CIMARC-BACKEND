@@ -8,6 +8,7 @@ const NoticiasController = require('../Controllers/NoticiasController.js');
 const EventosController=require('../Controllers/EventoController.js')
 const BlogsController=require('../Controllers/BlogsController.js');
 const homeController =require('../Controllers/homeController.js');
+const authController = require('../Controllers/authController.js');
 
 module.exports = function () {
 
@@ -24,9 +25,7 @@ module.exports = function () {
 
     router.get('/iniciar-sesion',UsuarioController.formIniciarSesion);
     
-    router.post('/iniciar-sesion',
-        UsuarioController.autenticarUsuario
-    );
+    router.post('/iniciar-sesion', authController.autenticarUsuario);
 
     /** METODOS DE PAGOS */
     router.post('/pagos',
