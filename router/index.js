@@ -17,10 +17,12 @@ module.exports = function () {
     router.post('/iniciar-sesion',
         UsuarioController.autenticarUsuario
     );
+
     /** METODOS DE PAGOS */
     router.post('/pagos',
         PagosController.CrearPagos
     );
+
     //Obtener pagos
     router.get('/pagos',
 
@@ -186,7 +188,7 @@ module.exports = function () {
     );
 
     // Agregar Documento
-    router.post('/agregar-documento',
+    router.post('/documento',
 
         DocClienteController.subirArchivo,
         DocClienteController.agregardoccliente
@@ -205,20 +207,20 @@ module.exports = function () {
     );
 
     //Mostrar Documento en especifico 
-    router.get('/documento/user/:userid/doccliente/:idDocCliente',
+    router.get('/documento/:idDocCliente/user/:userid',
 
         DocClienteController.buscarDocByUser
     );
 
     //actualizar Documento ByUserId y DocumentoId
-    router.put('/documento/user/:userid',
+    router.put('/documento/:idDocCliente/user/:userid',
 
         DocClienteController.subirArchivo,
         DocClienteController.actualizarDocIdByUser
     );
 
     //Eliminar Documentos ByUserId y DocumentoId
-    router.delete('/documento/user/:userid/doccliente/:idDocCliente',
+    router.delete('/documento/:idDocCliente/user/:userid',
 
         DocClienteController.eliminarDocIdByUser
     );
