@@ -13,6 +13,13 @@ module.exports = function () {
 
     /**HOME*/
     router.get('/',homeController.home);
+    
+    /**Olvide contraseña */
+    router.get('/contrasena',(req,res) => {
+        res.render('contrasena',{
+            isHome: false
+        });
+    })
     /**INICIO DE SESION */
 
     router.get('/iniciar-sesion',UsuarioController.formIniciarSesion);

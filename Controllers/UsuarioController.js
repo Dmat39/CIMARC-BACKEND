@@ -3,7 +3,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 
 exports.formIniciarSesion = (req,res) =>{
-    res.render('iniciar-sesion');
+    res.render('iniciar-sesion',{
+        isHome: false
+    });
 }
 exports.crearUsuario = async (req, res, next) => {
     const usuarios = new Usuario(req.body);
