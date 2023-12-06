@@ -8,18 +8,24 @@ const NoticiasController = require('../Controllers/NoticiasController.js');
 const EventosController=require('../Controllers/EventoController.js')
 const BlogsController=require('../Controllers/BlogsController.js');
 const homeController =require('../Controllers/homeController.js');
+const authController = require('../Controllers/authController.js');
 
 module.exports = function () {
 
     /**HOME*/
     router.get('/',homeController.home);
+    
+    /**Olvide contraseña */
+    router.get('/contrasena',(req,res) => {
+        res.render('contrasena',{
+            isHome: false
+        });
+    })
     /**INICIO DE SESION */
 
     router.get('/iniciar-sesion',UsuarioController.formIniciarSesion);
     
-    router.post('/iniciar-sesion',
-        UsuarioController.autenticarUsuario
-    );
+    router.post('/iniciar-sesion', authController.autenticarUsuario);
 
     /** METODOS DE PAGOS */
     router.post('/pagos',
