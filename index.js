@@ -1,37 +1,16 @@
 const express = require('express');
-//<<<<<<< Updated upstream
-
-//<<<<<<< HEAD
-
-//const db = require('./config/db.js');
-//=======
+const expressLayouts = require('express-ejs-layouts');
+const path = require('path');
 const bodyParser = require('body-parser');
-//>>>>>>> main
-//=======
 const routes= require('./router');
 const flash = require('connect-flash');
 const session = require('express-session');
-// Conexion a la base de datos
-const db = require('./config/db.js');
+const cookieParser = require('cookie-parser');
+const expressValidator = require('express-validator');
+//const passport = require('./config/passport');
 
-      db.sync().then(() => console.log('DB Conectada')).catch((error) => console.log(error)); 
-//>>>>>>> Stashed changes
-
-// crear el servidor
-const app = express();
-
-//<<<<<<< Updated upstream
-//=======
-app.use(flash());
-
-app.use(session({
-secret: 'tu_secreto',
-resave: true,
-saveUninitialized: true
-}));
-
-//>>>>>>> Stashed changes
 // Configuracion y Modelos BD
+const db = require('./config/db.js');
       require('./Models/DocClientes.js');
       require('./Models/Casos.js');
       require('./Models/Usuario.js');
@@ -41,12 +20,38 @@ saveUninitialized: true
       require('./Models/Pagos.js');
       db.sync().then(() => console.log('DB Conectada')).catch((error) => console.log(error)); 
 
+// crear el servidor
+const app = express();
+
+// Agrega flash messages
+app.use(flash());
+
+// crear la session
+app.use(session({
+secret: 'tu_secreto',
+resave: true,
+saveUninitialized: true
+}));
+
 // habilitar bodyparser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));      
+
+// Habilitar EJS como template  engine
+app.use(expressLayouts);
+app.set('view engine','ejs');
+
+// Ubicacion vistas
+app.set('views', path.join(__dirname,'./views'));
+
+// archivos staticos
+app.use(express.static('public'));
+
+// habilitar cookie parser
+app.use(cookieParser());
+
 // Rutas de la app
 app.use('/', routes());
-
 
 // Puerto
 const puerto = 5000;
@@ -61,18 +66,3 @@ app.listen(puerto, () => {
 
 
 
-
-//  OTRA OPCION 
-// // Definir una función asincrónica para la conexión a la base de datos
-// const conectarBD = async () => {
-//   try {
-//     await db.authenticate();
-//     db.sync()
-//     console.log('Conexión Correcta a la BD');
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-// // Llamar a la función asincrónica para conectar a la base de datos
-// conectarBD();
