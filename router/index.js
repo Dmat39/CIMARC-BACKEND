@@ -7,13 +7,16 @@ const UsuarioController = require('../Controllers/UsuarioController.js');
 const NoticiasController = require('../Controllers/NoticiasController.js');
 const EventosController=require('../Controllers/EventoController.js')
 const BlogsController=require('../Controllers/BlogsController.js');
-
+const homeController =require('../Controllers/homeController.js');
 
 module.exports = function () {
 
     /**HOME*/
-    
+    router.get('/',homeController.home);
     /**INICIO DE SESION */
+
+    router.get('/iniciar-sesion',UsuarioController.formIniciarSesion);
+    
     router.post('/iniciar-sesion',
         UsuarioController.autenticarUsuario
     );
