@@ -11,8 +11,8 @@ const BlogsController=require('../Controllers/BlogsController.js');
 
 module.exports = function () {
 
-    /**HOME */
-
+    /**HOME*/
+    
     /**INICIO DE SESION */
     router.post('/iniciar-sesion',
         UsuarioController.autenticarUsuario
