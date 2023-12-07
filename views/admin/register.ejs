@@ -1,14 +1,18 @@
 <div class="content">
     <div class="seccion-botones">
         <!-- Contenido principal de la página -->
-        <button class="boton-derecha">Botón a la derecha</button>
+        <a href="/admin/mantenimientoUsu" class="boton-derecha">Regresar</a>
     </div>
     <br> <br> <br>
     <div class="seccion-formulario">
         <h1>Registro de Usuario</h1>
-        <form action="/registro" method="POST">
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required>
+        <form action="/user-roles" method="POST">
+            <label for="rol">Rol:</label>
+            <select id="rol" name="rol" required>
+                <option value="cliente">Cliente</option>
+                <option value="trabajador">Trabajador</option>
+                <option value="admin">Admin</option>
+            </select>
 
             <label for="email">Correo electrónico:</label>
             <input type="email" id="email" name="email" required>

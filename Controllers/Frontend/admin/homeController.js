@@ -18,7 +18,10 @@ exports.register = (req,res) =>{
 
 exports.blogRegister = (req,res) =>{
     res.render('admin/blogRegister',{
-        isHome: false
+        isHome: false,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: true,
 });
 }
 
