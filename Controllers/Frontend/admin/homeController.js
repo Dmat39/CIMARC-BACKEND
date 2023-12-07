@@ -9,3 +9,9 @@ exports.register = (req,res) =>{
         isHome: false
 });
 }
+
+exports.blogRegister = (req,res) =>{
+    res.render('admin/blogRegister',{
+        isHome: false
+});
+}

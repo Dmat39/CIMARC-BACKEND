@@ -29,6 +29,8 @@ module.exports = function () {
     /** Register**/
     router.get('/admin/register',AdminHomeController.register);
 
+    router.get('/admin/blogRegister',AdminHomeController.blogRegister);
+
     router.get('/admin/home',AdminHomeController.homeAdmin);
     //**-----------------------Cliente------------------**/
     /**HOME*/

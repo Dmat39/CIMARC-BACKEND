@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de Blog</title>
+  <!-- Enlace a Bootstrap (o descárgalo e inclúyelo localmente) -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Estilos personalizados */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .sidebar {
+      height: 100vh;
+      background-color: #333;
+      color: white;
+      padding: 20px;
+    }
+    .form-container {
+      padding: 20px;
+    }
+    form {
+      background-color: #f9f9f9;
+      border-radius: 10px; /* Bordas redondeadas */
+      padding: 20px;
+      margin-top: 20px; /* Espaciado superior */
+    }
+    #preview-container {
+      margin-top: 10px;
+    }
+    #image-preview {
+      max-width: 100%;
+      max-height: 200px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-md-3 sidebar">
+        <h3>Sidebar</h3>
+        <p>Contenido del sidebar aquí...</p>
+      </div>
+
+      <!-- Formulario en el lado derecho -->
+      <div class="col-md-9 form-container">
+        <h1>Registro de Blog</h1>
+        <form method="POST" action="/blog-registrations" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="titulo">Título:</label>
+            <input type="text" class="form-control" id="titulo" name="titulo" required>
+          </div>
+          <div class="form-group">
+            <label for="fecha">Fecha:</label>
+            <input type="date" class="form-control" id="fecha" name="fecha" required>
+          </div>
+          <div class="form-group">
+            <label for="categoria">Categoría:</label>
+            <input type="text" class="form-control" id="categoria" name="categoria" required>
+          </div>
+          <div class="form-group">
+            <label for="descripcion">Descripción:</label>
+            <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="foto">Foto:</label>
+            <input type="file" class="form-control-file" id="foto" name="foto" accept="image/*" onchange="previewImage()">
+          </div>
+          <!-- Contenedor de previsualización de la imagen -->
+          <div id="preview-container">
+            <img id="image-preview" alt="Vista previa de la imagen">
+          </div>
+          <!-- Centrar el botón -->
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">Registrar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts de Bootstrap al final del cuerpo -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    function previewImage() {
+      const input = document.getElementById('foto');
+      const preview = document.getElementById('image-preview');
+
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+          preview.src = e.target.result;
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+  </script>
+</body>
+</html>
