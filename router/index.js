@@ -11,10 +11,13 @@ const authController = require('../Controllers/authController.js');
 const ClienteHomeController = require('../Controllers/Frontend/cliente/homeController.js'); 
 const AdminHomeController = require('../Controllers/Frontend/admin/homeController.js');
 const TrabajadorHomeController = require('../Controllers/Frontend/trabajador/homeController.js');
+const homeController = require('../Controllers/homeController.js')
 
 module.exports = function () {
 
-  
+    
+    /** HOME*/
+    router.get('/',homeController.home)
     /**Olvide contraseña */
     router.get('/contrasena',(req,res) => {
         res.render('contrasena',{
@@ -28,13 +31,13 @@ module.exports = function () {
 
     router.get('/admin/home',AdminHomeController.homeAdmin);
     //**-----------------------Cliente------------------**/
-   /**HOME*/
-  router.get('/cliente/home',ClienteHomeController.homeCliente);
+    /**HOME*/
+    router.get('/cliente/home',ClienteHomeController.homeCliente);
 
 
     //**-----------------------Trabajador------------------**/
-   /**HOME*/
-   router.get('/trabajador/home',TrabajadorHomeController.homeTrabajador);
+    /**HOME*/
+    router.get('/trabajador/home',TrabajadorHomeController.homeTrabajador);
 
 
 
