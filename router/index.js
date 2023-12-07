@@ -31,14 +31,10 @@ module.exports = function () {
         authController.usuarioAutenticado,
         AdminHomeController.homeAdmin
     );
+    /**Blog*/
+    router.get('/admin/blogRegister',authController.usuarioAutenticado,AdminHomeController.blogRegister);
+ 
     /** Register**/
-
-    router.get('/admin/register',AdminHomeController.register);
-
-    router.get('/admin/blogRegister',AdminHomeController.blogRegister);
-
-    router.get('/admin/home',AdminHomeController.homeAdmin);
-
     router.get('/admin/register',
         authController.usuarioAutenticado,
         AdminHomeController.register
