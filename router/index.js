@@ -7,20 +7,43 @@ const UsuarioController = require('../Controllers/UsuarioController.js');
 const NoticiasController = require('../Controllers/NoticiasController.js');
 const EventosController=require('../Controllers/EventoController.js')
 const BlogsController=require('../Controllers/BlogsController.js');
-const homeController =require('../Controllers/homeController.js');
 const authController = require('../Controllers/authController.js');
+const ClienteHomeController = require('../Controllers/Frontend/cliente/homeController.js'); 
+const AdminHomeController = require('../Controllers/Frontend/admin/homeController.js');
+const TrabajadorHomeController = require('../Controllers/Frontend/trabajador/homeController.js');
 
 module.exports = function () {
 
-    /**HOME*/
-    router.get('/',homeController.home);
-    
+  
     /**Olvide contraseña */
     router.get('/contrasena',(req,res) => {
         res.render('contrasena',{
             isHome: false
         });
     })
+
+    //**-----------------------ADMIN------------------**/
+    /** Register**/
+    router.get('/admin/register',AdminHomeController.register);
+
+    router.get('/admin/home',AdminHomeController.homeAdmin);
+    //**-----------------------Cliente------------------**/
+   /**HOME*/
+  router.get('/cliente/home',ClienteHomeController.homeCliente);
+
+
+    //**-----------------------Trabajador------------------**/
+   /**HOME*/
+   router.get('/trabajador/home',TrabajadorHomeController.homeTrabajador);
+
+
+
+
+
+
+
+
+
     /**INICIO DE SESION */
 
     router.get('/iniciar-sesion',UsuarioController.formIniciarSesion);
@@ -349,11 +372,7 @@ module.exports = function () {
         
         BlogsController.eliminarBlogIdByUser
 
-
     );
-
-    
-//>>>>>>> ad1e997cecc4350135a6b13dfe3a79f80b3ad182
 
     return router;
 }
