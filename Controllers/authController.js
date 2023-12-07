@@ -40,9 +40,9 @@ exports.usuarioAutenticado = async (req, res, next) => {
 
         // Definir las rutas permitidas para cada rol
         const rutasPermitidas = {
-            'admin': ['/admin/home', '/admin/register'],
-            'trabajador': ['/trabajador/home', ],
-            'cliente': ['/cliente/home', ]
+            'admin': ['/admin/home', '/admin/register','/cerrar-sesion'],
+            'trabajador': ['/trabajador/home', '/cerrar-sesion'],
+            'cliente': ['/cliente/home','/cerrar-sesion' ]
         };
 
         // Verificar si la ruta actual está permitida para el rol del usuario
