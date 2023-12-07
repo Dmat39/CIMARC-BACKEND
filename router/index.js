@@ -64,7 +64,11 @@ module.exports = function () {
     router.get('/iniciar-sesion',UsuarioController.formIniciarSesion);
     
     router.post('/iniciar-sesion', authController.autenticarUsuario);
-
+    // cerrar sesion
+    router.get('/cerrar-sesion',
+        authController.usuarioAutenticado,
+        authController.cerrarSesion
+    );
     /** METODOS DE PAGOS */
     router.post('/pagos',
         PagosController.CrearPagos
