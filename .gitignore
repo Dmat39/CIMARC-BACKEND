@@ -8,3 +8,4 @@ config/db.js
 *.png
 .env
 
+.env
