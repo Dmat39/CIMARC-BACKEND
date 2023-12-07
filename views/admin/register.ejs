@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title> Register User</title>
+  <!-- Enlace a Bootstrap (o descárgalo e inclúyelo localmente) -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Estilos personalizados */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .sidebar {
+      height: 100vh;
+      background-color: #333;
+      color: white;
+      padding: 20px;
+    }
+    .form-container {
+      padding: 20px;
+    }
+    form {
+      background-color: #f9f9f9;
+      border-radius: 5px;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-md-3 sidebar">
+        <h3>Sidebar</h3>
+        <p>Contenido del sidebar aquí...</p>
+      </div>
+
+      <!-- Formulario en el lado derecho -->
+      <div class="col-md-9 form-container">
+        <h1>Register User</h1>
+        <form method="POST" action="/user-roles">
+          <div class="form-group">
+            <label for="role">Rol:</label>
+            <input type="text" class="form-control" id="role" name="role" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Correo electrónico:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Contraseña:</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Registrar</button>
+        </form>
+      </div>
+    </div>
+  </div>
