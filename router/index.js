@@ -26,18 +26,30 @@ module.exports = function () {
     })
 
     //**-----------------------ADMIN------------------**/
+    /**HOME*/
+    router.get('/admin/home',
+        authController.usuarioAutenticado,
+        AdminHomeController.homeAdmin
+    );
     /** Register**/
-    router.get('/admin/register',AdminHomeController.register);
-
-    router.get('/admin/home',AdminHomeController.homeAdmin);
+    router.get('/admin/register',
+        authController.usuarioAutenticado,
+        AdminHomeController.register
+    );
     //**-----------------------Cliente------------------**/
     /**HOME*/
-    router.get('/cliente/home',ClienteHomeController.homeCliente);
+    router.get('/cliente/home',
+        authController.usuarioAutenticado,
+        ClienteHomeController.homeCliente
+    );
 
 
     //**-----------------------Trabajador------------------**/
     /**HOME*/
-    router.get('/trabajador/home',TrabajadorHomeController.homeTrabajador);
+    router.get('/trabajador/home',
+        authController.usuarioAutenticado,
+        TrabajadorHomeController.homeTrabajador
+    );
 
 
 
