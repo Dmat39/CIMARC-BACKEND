@@ -15,11 +15,19 @@ exports.autenticarUsuario = (req, res, next) => {
         // Define las rutas según el rol del usuario
         let redirectPath = '/';
         if (usuario.role === 'admin') {
+
             redirectPath = '/admin-interface';
         } else if (usuario.role === 'trabajador') {
             redirectPath = '/trabajador-interface';
         } else if (usuario.role === 'cliente') {
             redirectPath = '/cliente-interface';
+
+            redirectPath = '/admin/home';
+        } else if (usuario.role === 'trabajador') {
+            redirectPath = '/trabajador/home';
+        } else if (usuario.role === 'cliente') {
+            redirectPath = '/cliente/home';
+
         }
 
         req.logIn(usuario, (err) => {
@@ -29,4 +37,8 @@ exports.autenticarUsuario = (req, res, next) => {
             return res.redirect(redirectPath);
         });
     })(req, res, next);
+
 };
+
+};
+
