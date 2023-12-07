@@ -78,8 +78,43 @@
             </div>
           </header>
     <% }%>
-
-
+    <% if(isCliente) { %>
+      <div class="sidebar">
+        <header>Cliente CIMARC</header>
+        <ul>
+          <li><a href=""><i class="fa-solid fa-book"></i>Historial</a></li>
+        
+          <li><a href="/cerrar-sesion"><i class="fa-solid fa-right-from-bracket"></i>Cerrar Sesión</a></li>
+        </ul>
+      </div>
+    <% } %>
+    <% if(isJobs) { %>
+      <div class="sidebar">
+        <header>Trabajador CIMARC</header>
+        <ul>
+          <li><a href=""><i class="fa-solid fa-book"></i>Historial de Casos</a></li>
+          <li><a href=""><i class="fa-solid fa-dollar-sign"></i>Listado</a></li>
+          
+          <li><a href="/cerrar-sesion"><i class="fa-solid fa-right-from-bracket"></i>Cerrar Sesión</a></li>
+        </ul>
+      </div>
+    <% } %>
+    <% if(isAdmin) {%>
+      <div class="sidebar">
+        <header>Admin CIMARC</header>
+        <ul>
+          <li><a href=""><i class="fa-solid fa-book"></i>Lista de Casos</a></li>
+          <li><a href=""><i class="fa-solid fa-dollar-sign"></i>Lista de Pagos</a></li>
+          <li><a href=""><i class="fa-solid fa-user"></i>Mantenimiento Usuarios</a></li>
+          <li><a href=""><i class="fa-solid fa-chart-line"></i>Estadisticas</a></li>
+          <li><a href=""><i class="fa-solid fa-address-card"></i>Eventos</a></li>
+          <li><a href=""><i class="fa-solid fa-calendar-week"></i>Noticias</a></li>
+          <li><a href=""><i class="fa-solid fa-blog"></i>Blog</a></li>
+          
+          <li><a href="/cerrar-sesion"><i class="fa-solid fa-right-from-bracket"></i>Cerrar Sesión</a></li>
+        </ul>
+      </div>
+    <% } %>
     <!-- cuerpo -->
     <%- body %>
 

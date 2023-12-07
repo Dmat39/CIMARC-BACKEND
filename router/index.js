@@ -26,20 +26,38 @@ module.exports = function () {
     })
 
     //**-----------------------ADMIN------------------**/
+    /**HOME*/
+    router.get('/admin/home',
+        authController.usuarioAutenticado,
+        AdminHomeController.homeAdmin
+    );
     /** Register**/
+
     router.get('/admin/register',AdminHomeController.register);
 
     router.get('/admin/blogRegister',AdminHomeController.blogRegister);
 
     router.get('/admin/home',AdminHomeController.homeAdmin);
+
+    router.get('/admin/register',
+        authController.usuarioAutenticado,
+        AdminHomeController.register
+    );
+
     //**-----------------------Cliente------------------**/
     /**HOME*/
-    router.get('/cliente/home',ClienteHomeController.homeCliente);
+    router.get('/cliente/home',
+        authController.usuarioAutenticado,
+        ClienteHomeController.homeCliente
+    );
 
 
     //**-----------------------Trabajador------------------**/
     /**HOME*/
-    router.get('/trabajador/home',TrabajadorHomeController.homeTrabajador);
+    router.get('/trabajador/home',
+        authController.usuarioAutenticado,
+        TrabajadorHomeController.homeTrabajador
+    );
 
 
 
@@ -54,7 +72,11 @@ module.exports = function () {
     router.get('/iniciar-sesion',UsuarioController.formIniciarSesion);
     
     router.post('/iniciar-sesion', authController.autenticarUsuario);
-
+    // cerrar sesion
+    router.get('/cerrar-sesion',
+        authController.usuarioAutenticado,
+        authController.cerrarSesion
+    );
     /** METODOS DE PAGOS */
     router.post('/pagos',
         PagosController.CrearPagos

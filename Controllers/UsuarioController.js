@@ -4,7 +4,10 @@ const jwt = require('jsonwebtoken')
 
 exports.formIniciarSesion = (req,res) =>{
     res.render('iniciar-sesion',{
-        isHome: false
+        isHome: false,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: false,
     });
 }
 exports.crearUsuario = async (req, res, next) => {
