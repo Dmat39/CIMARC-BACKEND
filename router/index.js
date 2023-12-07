@@ -33,7 +33,12 @@ module.exports = function () {
     );
     /**Blog*/
     router.get('/admin/blogRegister',authController.usuarioAutenticado,AdminHomeController.blogRegister);
- 
+    
+    /**Mantenimiento Usuarios */
+    router.get('/admin/mantenimientoUsu',
+        authController.usuarioAutenticado,
+        AdminHomeController.formMantenimientoUsu
+    )
     /** Register**/
     router.get('/admin/register',
         authController.usuarioAutenticado,

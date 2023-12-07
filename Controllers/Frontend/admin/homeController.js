@@ -21,3 +21,12 @@ exports.blogRegister = (req,res) =>{
         isHome: false
 });
 }
+
+exports.formMantenimientoUsu = (req,res) =>{
+    res.render('admin/mantenimientoUsu',{
+        isHome: false,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: true,
+    })
+}
