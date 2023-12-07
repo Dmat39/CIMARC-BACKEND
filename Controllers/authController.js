@@ -15,7 +15,7 @@ exports.autenticarUsuario = (req, res, next) => {
         // Define las rutas según el rol del usuario
         let redirectPath = '/';
         if (usuario.role === 'admin') {
-            redirectPath = '/admin/home';
+           redirectPath = '/admin/home';
         } else if (usuario.role === 'trabajador') {
             redirectPath = '/trabajador/home';
         } else if (usuario.role === 'cliente') {
@@ -29,4 +29,8 @@ exports.autenticarUsuario = (req, res, next) => {
             return res.redirect(redirectPath);
         });
     })(req, res, next);
+
 };
+
+
+
