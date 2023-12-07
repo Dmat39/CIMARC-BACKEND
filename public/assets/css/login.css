@@ -166,6 +166,8 @@ input:valid ~ label{
 .button a:hover{
     opacity: .9;
 }
+
+
 @media only screen and (max-width: 1330px) {
     .contenedor{
         width: 90%;

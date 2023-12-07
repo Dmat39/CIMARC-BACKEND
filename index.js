@@ -23,8 +23,6 @@ const db = require('./config/db.js');
 // crear el servidor
 const app = express();
 
-// Agrega flash messages
-app.use(flash());
 
 // crear la session
 app.use(session({
@@ -32,6 +30,15 @@ secret: 'tu_secreto',
 resave: true,
 saveUninitialized: true
 }));
+// Agrega flash messages
+app.use(flash());
+app.use((req,res,next)=>{
+  res.locals.mensajes = req.flash();
+  const fecha = new Date();
+  res.locals.year = fecha.getFullYear();
+  next();
+})
+
 
 // habilitar bodyparser
 app.use(bodyParser.json());
