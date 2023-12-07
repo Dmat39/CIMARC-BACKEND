@@ -1,10 +1,10 @@
-# Default ignored files
+
 /shelf/
 /workspace.xml
-# Editor-based HTTP Client requests
 /httpRequests/
 .env
 *.pdf
 config/db.js
 *.png
 .env
+

@@ -15,3 +15,9 @@ exports.register = (req,res) =>{
         isAdmin: true,
 });
 }
+
+exports.blogRegister = (req,res) =>{
+    res.render('admin/blogRegister',{
+        isHome: false
+});
+}

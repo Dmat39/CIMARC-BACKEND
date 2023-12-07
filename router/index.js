@@ -32,10 +32,18 @@ module.exports = function () {
         AdminHomeController.homeAdmin
     );
     /** Register**/
+
+    router.get('/admin/register',AdminHomeController.register);
+
+    router.get('/admin/blogRegister',AdminHomeController.blogRegister);
+
+    router.get('/admin/home',AdminHomeController.homeAdmin);
+
     router.get('/admin/register',
         authController.usuarioAutenticado,
         AdminHomeController.register
     );
+
     //**-----------------------Cliente------------------**/
     /**HOME*/
     router.get('/cliente/home',
