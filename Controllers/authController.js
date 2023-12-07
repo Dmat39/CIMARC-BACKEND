@@ -40,5 +40,5 @@ exports.autenticarUsuario = (req, res, next) => {
 
 };
 
-};
+
 
