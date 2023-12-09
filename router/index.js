@@ -47,6 +47,12 @@ module.exports = function () {
         AdminHomeController.register
     );
 
+    /**NOTICIA**/
+     router.get('/admin/noticiaRegister',
+     authController.usuarioAutenticado,
+     AdminHomeController.noticiaRegister
+     );
+
     //**-----------------------Cliente------------------**/
     /**HOME*/
     router.get('/cliente/home',
@@ -65,6 +71,13 @@ module.exports = function () {
         authController.usuarioAutenticado,
         TrabajadorHomeController.homeTrabajador
     );
+
+    router.get('/trabajador/pagoRegister',
+        authController.usuarioAutenticado,
+        TrabajadorHomeController.pagoRegister
+    );
+
+
 
 
 
