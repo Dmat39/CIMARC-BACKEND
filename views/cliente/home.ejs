@@ -1,0 +1,40 @@
+
+<div class="content">
+
+<div>
+<a href="/cliente/AddDocument" class="boton-derecha">Subir Documentos</a>
+</div>
+<br>
+<br>
+<br>
+<div class="lista-usuarios">
+    <h1>Listado de Documentos</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Titulo de Documento</th>
+                <th>Descripcion</th>
+                <th>fecha</th>
+                <th>Documento</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% DocumentAll.forEach(documentCliente => { %>
+                <tr>
+                    <td><%= documentCliente.titulodocumento %></td>
+                    <td><%= documentCliente.descripcion %></td>
+                    <td><%= documentCliente.fecha %></td>
+                    <td>
+                        <% if (documentCliente.formato) { %>
+                            <a href="../../uploads/documentocliente/<%= documentCliente.formato %>" download><%= documentCliente.formato %></a>
+                        <% }
+                         else { %>
+                            Sin archivo
+                        <% } %>
+                    </td>
+                </tr>>
+            <% }); %>
+        </tbody>
+    </table>
+</div>
+</div>

@@ -56,7 +56,7 @@ exports.subirArchivo = (req, res, next) => {
 
 exports.agregardoccliente = async (req, res,next) => {
     const Doccliente = new doccliente(req.body);
-
+    Doccliente.userid=req.user.id;
     try{
         //verificar si se ha subido un docmuento 
         if( req.file && req.file.filename){
@@ -64,7 +64,8 @@ exports.agregardoccliente = async (req, res,next) => {
         }
         //almacenar registro
         await Doccliente.save();
-        res.json({ mensaje: 'Se agrego un nuevo documento'})
+
+        res.redirect('/cliente/home');
 
     }catch(error){
         console.log(error);

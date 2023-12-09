@@ -39,7 +39,7 @@ const DocClientes= db.define('docclientes',{
     },
     formato: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     }
     
 });

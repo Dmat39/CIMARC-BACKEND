@@ -1,4 +1,12 @@
+
 <div class="content">
+    <div class="d-flex justify-content-center mt-3">
+        <div class="alert alert-success text-center" role="alert">
+            <% if (successMessage) { %>
+                <%= successMessage %>
+            <% } %>
+        </div>
+    </div>
     <div class="seccion-botones">
         <!-- Contenido principal de la página -->
         <a href="/admin/mantenimientoUsu" class="boton-derecha">Regresar</a>
