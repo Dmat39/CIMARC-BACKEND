@@ -15,7 +15,9 @@ exports.crearUsuario = async (req, res, next) => {
     try {
         //almacenar un registro
         await usuarios.save();
-        res.json({mensaje: 'Se agrego un nuevo usuario'});
+        req.session.successMessage = 'El usuario se creó correctamente.';
+
+        res.redirect('/admin/mantenimientoUsu');
     } catch (error) {
         //si hay un error
         res.send(error);

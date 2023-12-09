@@ -1,0 +1,26 @@
+<div class="content">
+    <!-- Contenido principal -->
+    <div>
+        <a href="/cliente/home" class="boton-derecha">Retroceder</a>
+    </div>
+    <br>
+    <br>
+    <div class="seccion-formulario">
+        <h1>Subir Documentos</h1>
+        <form action="/documento" method="POST">
+            <label for="titulo">Título del documento:</label>
+            <input type="text" id="titulo" name="titulodocumento" required>
+
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion" required></textarea>
+
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" name="fecha" required>
+
+            <label for="formato">Formato:</label>
+            <input type="file" id="formato" name="formato">
+
+            <button type="submit">Crear documento</button>
+        </form>
+    </div>
+</div>

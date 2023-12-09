@@ -4795,3 +4795,22 @@ html {
     margin-left: auto !important;
   }
 }
+    /* Estilos para los botones en la columna */
+    .acciones {
+      text-align: right; /* Alinea los botones a la derecha */
+  }
+
+  .acciones button {
+      background-color: #333; /* Fondo gris oscuro */
+      color: white; /* Texto blanco para los botones */
+      border: none; /* Sin borde */
+      padding: 8px 16px; /* Espaciado interno */
+      margin-left: 5px; /* Espacio entre los botones */
+      border-radius: 4px; /* Bordes redondeados */
+      cursor: pointer; /* Cursor apuntador */
+      transition: background-color 0.3s ease; /* Transición suave al pasar el mouse */
+  }
+
+  .acciones button:hover {
+      background-color: #555; /* Cambio de color al pasar el mouse */
+  }

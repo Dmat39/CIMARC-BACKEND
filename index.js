@@ -27,7 +27,7 @@ const app = express();
 // crear la session
 app.use(session({
 secret: 'tu_secreto',
-resave: true,
+resave: false,
 saveUninitialized: true
 }));
 // Agrega flash messages

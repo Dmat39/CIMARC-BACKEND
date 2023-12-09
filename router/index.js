@@ -53,7 +53,11 @@ module.exports = function () {
         authController.usuarioAutenticado,
         ClienteHomeController.homeCliente
     );
-
+    /**Subir Documentos */
+    router.get('/cliente/AddDocument',
+        authController.usuarioAutenticado,
+        ClienteHomeController.SubirDocumentosCliente
+    );
 
     //**-----------------------Trabajador------------------**/
     /**HOME*/
