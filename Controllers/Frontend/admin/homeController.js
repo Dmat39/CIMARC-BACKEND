@@ -24,6 +24,19 @@ exports.register = (req,res) =>{
 });
 }
 
+exports.eventos = (req,res) =>{
+    const successMessage = req.session.successMessage;
+
+    // Limpiar el mensaje para que no se muestre más de una vez
+    delete req.session.successMessage;
+    res.render('admin/eventos',{
+        isHome: false,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: true,
+        successMessage
+});
+}
 exports.blogRegister = (req,res) =>{
     res.render('admin/blogRegister',{
         isHome: false,
