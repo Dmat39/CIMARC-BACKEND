@@ -23,6 +23,8 @@ const db = require('./config/db.js');
 // crear el servidor
 const app = express();
 
+// Configuración para servir archivos estáticos desde la carpeta 'uploads'
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // crear la session
 app.use(session({
