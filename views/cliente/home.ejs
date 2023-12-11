@@ -26,7 +26,7 @@
                     <td><%= documentCliente.fecha %></td>
                     <td>
                         <% if (documentCliente.formato) { %>
-                            <a href="/uploads/documentocliente/<%= documentCliente.formato %>" download="<%= documentCliente.formato %>"><%= documentCliente.formato %></a>
+                            <a href="/uploads/documentocliente/<%= documentCliente.formato %>" download="<%= documentCliente.formato %>"> Descargar</a>
                         <% } else { %>
                             Sin archivo
                         <% } %>
