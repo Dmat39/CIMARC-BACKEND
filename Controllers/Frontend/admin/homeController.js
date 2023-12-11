@@ -33,6 +33,15 @@ exports.blogRegister = (req,res) =>{
 });
 }
 
+exports.noticiaRegister = (req,res) =>{
+    res.render('admin/noticiaRegister',{
+        isHome: false,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: true,
+});
+}
+
 exports.formMantenimientoUsu = async (req,res) =>{
     try {
         // Obtener usuarios desde la base de datos
