@@ -21,7 +21,10 @@ module.exports = function () {
     /**Olvide contraseña */
     router.get('/contrasena',(req,res) => {
         res.render('contrasena',{
-            isHome: false
+            isHome: false,
+            isCliente: false,
+            isJobs: false,
+            isAdmin: false,
         });
     })
 
