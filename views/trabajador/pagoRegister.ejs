@@ -1,0 +1,33 @@
+<div class="content">
+    <div class="seccion-botones">
+      <a href="/admin/pagos" class="boton-derecha">Regresar</a>
+    </div>
+    <br> <br> <br>
+    <div class="seccion-formulario">
+      <h1>Registro de Pagos</h1>
+      <form action="/registro-pagos" method="POST">
+       
+        <label for="datosTrabajador">Datos del Trabajador:</label>
+        <input type="text" class="form-control" id="datosTrabajador" name="datosTrabajador" required>
+       
+        <label for="cargo">Cargo:</label>
+        <select class="form-control" id="cargo" name="cargo" required>
+          <option value="Opción 1">Opción 1</option>
+          <option value="Opción 2">Opción 2</option>
+          <option value="Opción 3">Opción 3</option>
+        </select>
+        
+        <label for="fecha">Fecha:</label>
+        <input type="date" class="form-control" id="fecha" name="fecha" required>
+      
+        <label for="descripcion">Descripción:</label>
+        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+        
+        <label for="monto">Monto (en Soles):</label>
+        <input type="number" class="form-control" id="monto" name="monto" required>
+        
+        <button type="submit" class="btn btn-primary">Registrar</button>
+        
+      </form>
+    </div>
+  </div>
