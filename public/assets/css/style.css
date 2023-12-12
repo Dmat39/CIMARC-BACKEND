@@ -126,7 +126,6 @@ title in the table of contents (Press Crtl + F to search).
 *
 */
 /* Main color */
-
 :root {
   --on-surface: #121212;
   --secondary: #64666C;
@@ -7233,7 +7232,6 @@ Reduce font and spacing: Start
     font-size: 36px;
   }
 }
-
 /*
 Reduce font and spacing: End
 */

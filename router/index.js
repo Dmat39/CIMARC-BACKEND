@@ -19,12 +19,20 @@ module.exports = function () {
     /** HOME*/
     router.get('/',homeController.home)
 
+    //** Contacto Us**/
+    router.get('/contactos',homeController.Contactos)
+
+
     /**Service*/
     router.get('/service',homeController.service);
     router.get('/service/conciliacion',homeController.serviceConciliacion);
 
+
     /**sobre nosotros */
     router.get('/about',homeController.about);
+
+    router.get('/service/arbitraje',homeController.ServiceArbitraje);
+
 
     /**Olvide contraseña */
     router.get('/contrasena',(req,res) => {
