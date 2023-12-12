@@ -22,6 +22,10 @@ module.exports = function () {
     /**Service*/
     router.get('/service',homeController.service);
     router.get('/service/conciliacion',homeController.serviceConciliacion);
+
+    /**sobre nosotros */
+    router.get('/about',homeController.about);
+
     /**Olvide contraseña */
     router.get('/contrasena',(req,res) => {
         res.render('contrasena',{
@@ -34,7 +38,7 @@ module.exports = function () {
     })
 
     
-    router.get('/about',homeController.about)
+   
 
 
 

@@ -25,3 +25,13 @@ exports.serviceConciliacion = (req,res) =>{
         isFooter: true
     })
 }
+
+exports.about = (req,res) =>{
+    res.render('about',{
+        isHome: true,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: false,
+        isFooter: true
+    })
+}
