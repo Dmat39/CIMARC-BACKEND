@@ -19,6 +19,10 @@ module.exports = function () {
     /** HOME*/
     router.get('/',homeController.home)
 
+    //** Contacto Us**/
+    router.get('/contactos',homeController.Contactos)
+
+
     /**Service*/
     router.get('/service',homeController.service);
     router.get('/service/conciliacion',homeController.serviceConciliacion);
