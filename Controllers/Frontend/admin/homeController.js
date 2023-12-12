@@ -7,6 +7,7 @@ exports.homeAdmin = (req,res) =>{
         isCliente: false,
         isJobs: false,
         isAdmin: true,
+        isFooter: false
 });
 }
 
@@ -20,6 +21,7 @@ exports.register = (req,res) =>{
         isCliente: false,
         isJobs: false,
         isAdmin: true,
+        isFooter: false,
         successMessage
 });
 }
@@ -30,6 +32,7 @@ exports.blogRegister = (req,res) =>{
         isCliente: false,
         isJobs: false,
         isAdmin: true,
+        isFooter: false,
 });
 }
 
@@ -44,7 +47,9 @@ exports.Noticias = (req,res) =>{
         isCliente: false,
         isJobs: false,
         isAdmin: true,
-        successMessage
+        successMessage,
+        isFooter: false
+
 });
 }
 
@@ -58,7 +63,9 @@ exports.noticiaRegister = (req,res) =>{
         isCliente: false,
         isJobs: false,
         isAdmin: true,
-        successMessage
+        successMessage,
+        isFooter: false
+
 });
 }
 
@@ -76,6 +83,7 @@ exports.formMantenimientoUsu = async (req,res) =>{
             isCliente: false,
             isJobs: false,
             isAdmin: true,
+            isFooter: false,
             usuarios: usuarios,
             successMessage// Pasar la lista de usuarios a la vista
         });

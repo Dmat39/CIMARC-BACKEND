@@ -18,6 +18,10 @@ module.exports = function () {
     
     /** HOME*/
     router.get('/',homeController.home)
+
+    /**Service*/
+    router.get('/service',homeController.service);
+    router.get('/service/conciliacion',homeController.serviceConciliacion);
     /**Olvide contraseña */
     router.get('/contrasena',(req,res) => {
         res.render('contrasena',{
@@ -25,6 +29,7 @@ module.exports = function () {
             isCliente: false,
             isJobs: false,
             isAdmin: false,
+            isFooter: false
         });
     })
 
