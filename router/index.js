@@ -33,6 +33,11 @@ module.exports = function () {
         });
     })
 
+    
+    router.get('/about',homeController.about)
+
+
+
     //**-----------------------ADMIN------------------**/
     /**HOME*/
     router.get('/admin/home',

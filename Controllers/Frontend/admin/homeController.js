@@ -39,6 +39,8 @@ exports.eventos = (req,res) =>{
         successMessage
 });
 }
+
+
 exports.blogRegister = (req,res) =>{
     res.render('admin/blogRegister',{
         isHome: false,
