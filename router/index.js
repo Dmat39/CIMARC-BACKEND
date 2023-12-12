@@ -22,6 +22,8 @@ module.exports = function () {
     /**Service*/
     router.get('/service',homeController.service);
     router.get('/service/conciliacion',homeController.serviceConciliacion);
+    router.get('/service/arbitraje',homeController.ServiceArbitraje);
+
     /**Olvide contraseña */
     router.get('/contrasena',(req,res) => {
         res.render('contrasena',{
