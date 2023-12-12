@@ -16,3 +16,12 @@ exports.service = (req,res) =>{
         isFooter: true
     })
 }
+exports.serviceConciliacion = (req,res) =>{
+    res.render('service-conciliacion',{
+        isHome: true,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: false,
+        isFooter: true
+    })
+}
