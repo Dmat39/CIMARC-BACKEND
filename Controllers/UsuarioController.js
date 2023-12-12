@@ -8,6 +8,7 @@ exports.formIniciarSesion = (req,res) =>{
         isCliente: false,
         isJobs: false,
         isAdmin: false,
+        isFooter: false
     });
 }
 exports.crearUsuario = async (req, res, next) => {

@@ -1,36 +1,47 @@
-<section>
-    <div class="contenedor">
-        <div class="imagenCimarc">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/login.css">
+    <title>Login</title>
+</head>
+<body>
+    <section>
+        <div class="contenedor">
+            <div class="imagenCimarc">
+            </div>
+            <div class="formulario">
+                <form action="/iniciar-sesion" method="POST">
+                    <div>
+                        <img src="assets/images/Cimarc.png" alt="" style="width: 60%;">
+                    </div>
+                    <br>
+                    <h2>Iniciar Sesión</h2>
+                    <div class="input-contenedor">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="email" name="email" required>
+                        <label >Email</label>
+                    </div>
+                    <div class="input-contenedor">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="password" name="password" required>
+                        <label >Contraseña</label>
+                    </div>
+                    <div class="recordar">
+                        <label for="#">
+                            <input type="checkbox">Recordar la Contraseña
+                        </label>
+                        <a href="/contrasena">Olvidaste tu contraseña?</a>
+                    </div>
+                    <br>
+                    <div class="button">
+                        <input type="submit" class="btn" value="Iniciar Sesion">
+                    </div>
+    
+                </form>
+            </div>
         </div>
-        <div class="formulario">
-            <form action="/iniciar-sesion" method="POST">
-                <div>
-                    <img src="assets/images/Cimarc.png" alt="" style="width: 60%;">
-                </div>
-                <br>
-                <h2>Iniciar Sesión</h2>
-                <div class="input-contenedor">
-                    <i class="fa-solid fa-user"></i>
-                    <input type="email" name="email" required>
-                    <label >Email</label>
-                </div>
-                <div class="input-contenedor">
-                    <i class="fa-solid fa-user"></i>
-                    <input type="password" name="password" required>
-                    <label >Contraseña</label>
-                </div>
-                <div class="recordar">
-                    <label for="#">
-                        <input type="checkbox">Recordar la Contraseña
-                    </label>
-                    <a href="/contrasena">Olvidaste tu contraseña?</a>
-                </div>
-                <br>
-                <div class="button">
-                    <input type="submit" class="btn" value="Iniciar Sesion">
-                </div>
-
-            </form>
-        </div>
-    </div>
-</section>
+    </section>
+</body>
+</html>

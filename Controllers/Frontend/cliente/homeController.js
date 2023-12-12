@@ -10,6 +10,7 @@ exports.homeCliente = async (req,res) =>{
         isCliente:true,
         isJobs: false,
         isAdmin: false,
+        isFooter: false,
         DocumentAll:DocumentAll
 });
 }
@@ -20,6 +21,7 @@ exports.SubirDocumentosCliente =async (req,res) =>{
         isCliente:true,
         isJobs: false,
         isAdmin: false,
+        isFooter: false,
         userid:userid
 });
 }
