@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<div class="content">
+
+            <% if (successMessage) { %>
+                <div class="d-flex justify-content-center mt-3">
+                    <div class="alert alert-success text-center" role="alert">
+                <%= successMessage %>
+            </div>
+        </div>
+            <% } %>
+ 
+
+    <div class="seccion-botones">
+        <br>
+        <a href="/admin/noticias/register" class="boton-derecha">Registrar Noticias</a>
+    </div>
+    <br>
+    <h1>Listado de Noticias</h1>
+        <div class="lista-usuarios">
+            <table>
+                <thead>
+                    <tr>
+                        <th>titulo</th>
+                        <th>descripcion</th>
+                        <th>fecha</th>
+                        <th>categoria</th>
+                        <th>imagen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                 
+                </tbody>
+            </table>
+        </div>
+</div>

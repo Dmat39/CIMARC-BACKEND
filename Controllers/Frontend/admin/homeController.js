@@ -33,12 +33,32 @@ exports.blogRegister = (req,res) =>{
 });
 }
 
-exports.noticiaRegister = (req,res) =>{
-    res.render('admin/noticiaRegister',{
+
+exports.Noticias = (req,res) =>{
+    const successMessage = req.session.successMessage;
+
+    // Limpiar el mensaje para que no se muestre más de una vez
+    delete req.session.successMessage;
+    res.render('admin/noticias/home',{
         isHome: false,
         isCliente: false,
         isJobs: false,
         isAdmin: true,
+        successMessage
+});
+}
+
+exports.noticiaRegister = (req,res) =>{
+    const successMessage = req.session.successMessage;
+
+    // Limpiar el mensaje para que no se muestre más de una vez
+    delete req.session.successMessage;
+    res.render('admin/noticias/noticiaRegister',{
+        isHome: false,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: true,
+        successMessage
 });
 }
 
