@@ -26,6 +26,17 @@ exports.serviceConciliacion = (req,res) =>{
     })
 }
 
+
+exports.ServiceArbitraje = (req,res) =>{
+    res.render('service-arbitraje',{
+        isHome: true,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: false,
+        isFooter: true
+    })
+}
+
 exports.about = (req,res) =>{
     res.render('about',{
         isHome: true,
@@ -35,3 +46,24 @@ exports.about = (req,res) =>{
         isFooter: true
     })
 }
+
+exports.Contactos = (req,res) =>{
+    res.render('contacto',{
+        isHome: true,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: false,
+        isFooter: true
+    })
+}
+
+exports.NoticiasVista= (req,res) =>{
+    res.render('noticias',{
+        isHome: true,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: false,
+        isFooter: true
+    })
+}
+

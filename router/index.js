@@ -26,12 +26,13 @@ module.exports = function () {
     /**Service*/
     router.get('/service',homeController.service);
     router.get('/service/conciliacion',homeController.serviceConciliacion);
+    router.get('/service/arbitraje',homeController.ServiceArbitraje);
 
 
     /**sobre nosotros */
     router.get('/about',homeController.about);
 
-    router.get('/service/arbitraje',homeController.ServiceArbitraje);
+   
 
 
     /**Olvide contraseña */
