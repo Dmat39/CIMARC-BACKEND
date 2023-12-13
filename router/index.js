@@ -11,17 +11,20 @@ const authController = require('../Controllers/authController.js');
 const ClienteHomeController = require('../Controllers/Frontend/cliente/homeController.js'); 
 const AdminHomeController = require('../Controllers/Frontend/admin/homeController.js');
 const TrabajadorHomeController = require('../Controllers/Frontend/trabajador/homeController.js');
-const homeController = require('../Controllers/homeController.js')
+const homeController = require('../Controllers/Frontend/public/homeController.js')
 
 module.exports = function () {
 
     
-    /** HOME*/
+    //**-----------------------Home------------------**/
     router.get('/',homeController.home)
 
     //** Contacto Us**/
     router.get('/contactos',homeController.Contactos)
-
+    //** About Us**/
+    router.get('/sobre-nosotros',homeController.About)
+    //**Noticias */
+    router.get('/noticias',homeController.NoticiasVista)
 
     /**Service*/
     router.get('/service',homeController.service);
@@ -115,6 +118,12 @@ module.exports = function () {
         authController.usuarioAutenticado,
         authController.cerrarSesion
     );
+
+
+
+
+
+
     /** METODOS DE PAGOS */
     router.post('/pagos',
         PagosController.CrearPagos
