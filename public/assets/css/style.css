@@ -3164,6 +3164,26 @@ Section Slider Subpage Main: End
   opacity: 1;
 }
 
+.bg-img {
+  flex: 1 0 7%; /* Ajusta este valor según sea necesario */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px; /* Ajusta este valor según sea necesario */
+}
+
+.bg-img p {
+  font-family: 'Open Sans';
+  font-weight: 800;
+  color: #8e8588;
+  text-transform: uppercase;
+  font-size: 35px;
+  line-height: 1.5;
+  padding: 15px;
+  text-align: center;
+}
+
+
 /*
 *** Service item main: End
 */
