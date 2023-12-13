@@ -22,21 +22,23 @@
 <div class="container"> 
   <div class="row">
 
-    <%- console.log(noticias.titulo) %>
+    
+    <% noticias.forEach(noticia => { %>
+      <div class="blog-item item-filter" data-name="tab-one"><a class="blog-item-main" href="blog-detail-one.html">
+        <div class="bg-img w-100 overflow-hidden mb-minus-1"><img class="w-100 h-100 display-block" src="assets/images/blog/408x338.png" alt="Starting your traveling blog with Vasco"/></div>
+        <div class="infor bg-white p-24">
+          <div class="caption2 pt-4 pb-4 pl-12 pr-12 bg-surface bora-40 display-inline-block">Makerting</div>
+          <div class="heading6 mt-8"><%- noticia.titulo -%>
+          </div>
+          <div class="date flex-item-center gap-16 mt-8">
+            <div class="author caption2 text-secondary">by <span class="text-on-surface">Bangta</span></div>
+            <div class="item-date flex-item-center"><i class="ph-bold ph-calendar-blank"></i><span class="ml-4 caption2">1 days ago</span></div>
+          </div>
+        </div></a>
+      </div>
+  <% }); %>
 
-
-                <div class="blog-item item-filter" data-name="tab-one"><a class="blog-item-main" href="blog-detail-one.html">
-                    <div class="bg-img w-100 overflow-hidden mb-minus-1"><img class="w-100 h-100 display-block" src="assets/images/blog/408x338.png" alt="Starting your traveling blog with Vasco"/></div>
-                    <div class="infor bg-white p-24">
-                      <div class="caption2 pt-4 pb-4 pl-12 pr-12 bg-surface bora-40 display-inline-block">Makerting</div>
-                      <div class="heading6 mt-8"><%- noticias.titulo -%>
-                      </div>
-                      <div class="date flex-item-center gap-16 mt-8">
-                        <div class="author caption2 text-secondary">by <span class="text-on-surface">Bangta</span></div>
-                        <div class="item-date flex-item-center"><i class="ph-bold ph-calendar-blank"></i><span class="ml-4 caption2">1 days ago</span></div>
-                      </div>
-                    </div></a>
-                  </div>
+              
                 
 
     <div class="list-nav flex-center gap-8 col-12">
