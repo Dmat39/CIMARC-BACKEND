@@ -70,3 +70,12 @@ exports.About = (req,res) =>{
         isFooter: true
     })
 }
+exports.home6 = (req,res) =>{
+    res.render('public/home6',{
+        isHome: true,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: false,
+        isFooter: true
+    })
+}
