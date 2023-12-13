@@ -1,5 +1,7 @@
+const Noticias = require('../../../Models/Noticias');
+
 exports.home = (req,res) =>{
-    res.render('home',{
+    res.render('public/home',{
         isHome: true,
         isCliente: false,
         isJobs: false,
@@ -8,7 +10,7 @@ exports.home = (req,res) =>{
 });
 }
 exports.service = (req,res) =>{
-    res.render('service',{
+    res.render('public/service',{
         isHome: true,
         isCliente: false,
         isJobs: false,
@@ -17,7 +19,7 @@ exports.service = (req,res) =>{
     })
 }
 exports.serviceConciliacion = (req,res) =>{
-    res.render('service-conciliacion',{
+    res.render('public/service-conciliacion',{
         isHome: true,
         isCliente: false,
         isJobs: false,
@@ -27,7 +29,7 @@ exports.serviceConciliacion = (req,res) =>{
 }
 
 exports.ServiceArbitraje = (req,res) =>{
-    res.render('service-arbitraje',{
+    res.render('public/service-arbitraje',{
         isHome: true,
         isCliente: false,
         isJobs: false,
@@ -37,7 +39,7 @@ exports.ServiceArbitraje = (req,res) =>{
 }
 
 exports.Contactos = (req,res) =>{
-    res.render('contacto',{
+    res.render('public/contacto',{
         isHome: true,
         isCliente: false,
         isJobs: false,
@@ -46,8 +48,21 @@ exports.Contactos = (req,res) =>{
     })
 }
 
-exports.NoticiasVista= (req,res) =>{
-    res.render('noticias',{
+exports.NoticiasVista= async (req,res) =>{
+    const noticias= await Noticias.findAll()
+    
+    res.render('public/noticias',{
+        isHome: true,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: false,
+        isFooter: true,
+        noticias: noticias,
+    })
+}
+
+exports.About = (req,res) =>{
+    res.render('public/about',{
         isHome: true,
         isCliente: false,
         isJobs: false,
@@ -55,4 +70,3 @@ exports.NoticiasVista= (req,res) =>{
         isFooter: true
     })
 }
-
