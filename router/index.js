@@ -67,7 +67,7 @@ module.exports = function () {
     /**NOTICIA Lista**/
     router.get('/admin/noticiaList',
     authController.usuarioAutenticado,
-    AdminHomeController.noticiaList
+    // AdminHomeController.noticiaList
     );
 
     /**NOTICIA**/
