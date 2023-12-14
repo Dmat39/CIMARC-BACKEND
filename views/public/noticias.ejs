@@ -25,7 +25,7 @@
     
     <% noticias.forEach(noticia => { %>
       <div class="blog-item item-filter" data-name="tab-one"><a class="blog-item-main" href="blog-detail-one.html">
-        <div class="bg-img w-100 overflow-hidden mb-minus-1"><img class="w-100 h-100 display-block" src="assets/images/blog/408x338.png" alt="Starting your traveling blog with Vasco"/></div>
+        <div class="bg-img w-100 overflow-hidden mb-minus-1"><img class="w-100 h-100 display-block" src= "../../uploads/noticias/<%= noticia.imagen %>" width="1000" height="200" alt="Starting your traveling blog with Vasco"/></div>
         <div class="infor bg-white p-24">
           <div class="caption2 pt-4 pb-4 pl-12 pr-12 bg-surface bora-40 display-inline-block">Makerting</div>
           <div class="heading6 mt-8"><%- noticia.titulo -%>
