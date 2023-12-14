@@ -2,7 +2,8 @@
 /**/
 /*
 The sections Header(Header menu, Top nav), Footer, Slider, Services,
-News(Blogs), Testimonials will be CSS in the same area. The individual 
+News(
+  logs), Testimonials will be CSS in the same area. The individual 
 sections will have separate CSS in each Home area. If you want to find 
 the CSS position of a certain section, look at its HTML file structure 
 first (look at their class, tag name, ...), then you can search by 
@@ -125,6 +126,7 @@ title in the table of contents (Press Crtl + F to search).
 
 *
 */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap');
 /* Main color */
 :root {
   --on-surface: #121212;
@@ -3164,12 +3166,14 @@ Section Slider Subpage Main: End
   opacity: 1;
 }
 
+
+
 .bg-img {
   flex: 1 0 7%; /* Ajusta este valor según sea necesario */
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px; /* Ajusta este valor según sea necesario */
+  margin: 15px; /* Ajusta este valor según sea necesario */
 }
 
 .bg-img p {
@@ -3177,7 +3181,7 @@ Section Slider Subpage Main: End
   font-weight: 800;
   color: #8e8588;
   text-transform: uppercase;
-  font-size: 35px;
+  font-size: 39px;
   line-height: 1.5;
   padding: 15px;
   text-align: center;
@@ -6466,15 +6470,17 @@ Shared section partners: Start
 */
 .partner-five-col {
   overflow: hidden;
+  margin-top: 1rem; /* Ajusta este valor según sea necesario */
+  margin-bottom: 1rem; /* Ajusta este valor según sea necesario */
 }
 .partner-five-col .list {
   display: flex;
   width: 3120px;
   overflow: hidden;
-  animation: scroll 30s linear infinite;
+  animation: scroll 15s linear infinite;
 }
 .partner-five-col .list .bg-img {
-  width: 140px !important;
+  width: 280px !important;
   margin: 0 60px;
 }
 
@@ -6904,6 +6910,7 @@ Footer: Start
 */
 #footer .footer-block .row {
   align-items: flex-start;
+  margin-top: 20px; /* Ajusta este valor según sea necesario */
 }
 #footer .footer-block .row .footer-logo {
   width: 145px;
@@ -7002,6 +7009,8 @@ Responsive Footer: Start
 @media (max-width: 1023.99px) {
   #footer .cta-block {
     height: 140px;
+    margin-top: 20px; /* Ajusta este valor según sea necesario */
+
   }
   #footer .cta-block .container {
     flex-direction: column;
