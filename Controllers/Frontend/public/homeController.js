@@ -1,5 +1,5 @@
 const Noticias = require('../../../Models/Noticias');
-
+const usuarios = require('../../../Models/Usuario');
 exports.home = (req,res) =>{
     res.render('public/home',{
         isHome: true,
@@ -49,8 +49,7 @@ exports.Contactos = (req,res) =>{
 }
 
 exports.NoticiasVista= async (req,res) =>{
-    const noticias= await Noticias.findAll()
-    
+    const noticias = await Noticias.findAll({ include: usuarios }); // Asegúrate de incluir la relación con la tabla de usuarios
     res.render('public/noticias',{
         isHome: true,
         isCliente: false,
@@ -78,4 +77,21 @@ exports.home6 = (req,res) =>{
         isAdmin: false,
         isFooter: true
     })
+}
+
+exports.noticiaDetail = async (req, res) => {
+    // Obtener el ID de la noticia desde los parámetros de la URL
+    const noticiaId = req.params.id;
+    const noticia = await Noticias.findByPk(noticiaId, {
+        include: usuarios,
+      });    // Lógica para obtener los detalles de la noticia con el ID proporcionado
+    // Esta lógica dependerá de cómo recuperas los datos de la noticia en tu aplicación
+
+    // Renderizar la vista de detalle de la noticia (por ejemplo, 'detalleNoticia.ejs')
+    res.render('public/noticia-detail', {     isHome: true,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: false,
+        isFooter: true,
+        noticia }); // Pasar el ID de la noticia a la vista
 }
