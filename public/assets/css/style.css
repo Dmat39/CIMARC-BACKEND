@@ -4711,7 +4711,7 @@ Section Benefit(Case Studies) Home1: Start
   right: 0;
   bottom: 0;
   height: 0;
-  background-color: var(--blue);
+  background-color: #03a7ff;
   opacity: 0.6;
   transition: all ease 0.5s;
 }
