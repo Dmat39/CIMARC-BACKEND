@@ -25,7 +25,7 @@ module.exports = function () {
     router.get('/sobre-nosotros',homeController.About)
     //**Noticias */
     router.get('/noticias',homeController.NoticiasVista)
-
+    router.get('/home6',homeController.home6)
     /**Service*/
     router.get('/service',homeController.service);
     router.get('/service/conciliacion',homeController.serviceConciliacion);
