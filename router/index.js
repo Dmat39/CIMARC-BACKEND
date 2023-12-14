@@ -25,6 +25,7 @@ module.exports = function () {
     router.get('/sobre-nosotros',homeController.About)
     //**Noticias */
     router.get('/noticias',homeController.NoticiasVista)
+    router.get('/noticias/:id',homeController.noticiaDetail)
     router.get('/home6',homeController.home6)
     /**Service*/
     router.get('/service',homeController.service);
@@ -67,7 +68,7 @@ module.exports = function () {
     /**NOTICIA Lista**/
     router.get('/admin/noticiaList',
     authController.usuarioAutenticado,
-    AdminHomeController.noticiaList
+    // AdminHomeController.noticiaList
     );
 
     /**NOTICIA**/
