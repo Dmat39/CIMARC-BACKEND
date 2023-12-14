@@ -65,6 +65,12 @@ module.exports = function () {
         AdminHomeController.register
     );
 
+    /**NOTICIA Lista**/
+    router.get('/admin/noticiaList',
+    authController.usuarioAutenticado,
+    // AdminHomeController.noticiaList
+    );
+
     /**NOTICIA**/
      router.get('/admin/noticias/register',
      authController.usuarioAutenticado,

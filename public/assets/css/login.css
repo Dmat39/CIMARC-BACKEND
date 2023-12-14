@@ -54,7 +54,7 @@ section{
     -webkit-backdrop-filter: blur(85px);
     backdrop-filter: blur(85px);
     text-align: center;
-    background:rgba(243, 243, 243,1);
+    background:rgb(255, 255, 255);
 }
 .formulario h2{
     color: #03a7ff;
@@ -149,7 +149,24 @@ input:valid ~ label{
     padding: 10px 15px;
     text-decoration: none;
 }
+.button input{
+    width: 100%;
+    height: 45px;
+    border-radius: 40px;
+    background: #03a7ff;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    color: white;
+    font-size: 16px;
+    padding: 10px 15px;
+    text-decoration: none;
+}
 .button a:hover{
+    opacity: .9;
+}
+button input:hover{
     opacity: .9;
 }
 @media only screen and (max-width: 1330px) {
