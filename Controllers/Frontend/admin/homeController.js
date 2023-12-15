@@ -1,5 +1,5 @@
 const Usuario = require('../../../Models/Usuario'); // Importa tu modelo de usuario si lo tienes
-
+const Modelo=require('../../../Models/Eventos'); 
 
 exports.homeAdmin = (req,res) =>{
     res.render('admin/home',{
@@ -10,6 +10,7 @@ exports.homeAdmin = (req,res) =>{
         isFooter: false
 });
 }
+
 
 exports.register = (req,res) =>{
     const successMessage = req.session.successMessage;
@@ -35,6 +36,7 @@ exports.blogRegister = (req,res) =>{
         isFooter: false,
 });
 }
+
 
 
 exports.Noticias = (req,res) =>{
