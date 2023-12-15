@@ -71,7 +71,7 @@ exports.About = (req,res) =>{
 }
 exports.home6 = (req,res) =>{
     res.render('public/home6',{
-        isHome: true,
+        isHome: false,
         isCliente: false,
         isJobs: false,
         isAdmin: false,
