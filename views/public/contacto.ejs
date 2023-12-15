@@ -41,26 +41,31 @@
               </div>
             </div>
             <div class="col-12 col-lg-5">
-              <div class="form-block flex-columns-between gap-20">
-                <div class="row row-gap-20">
-                  <div class="col-12 col-sm-6">
-                    <input class="w-100 bg-surface text-secondary caption1 pl-16 pr-16 pt-12 pb-12 bora-8" type="text" placeholder="Name"/>
+              <form action="/enviar" method="post">
+                <div class="form-block flex-columns-between gap-20">
+                  <div class="row row-gap-20">
+                    <div class="col-12 col-sm-6">
+                      <input class="w-100 bg-surface text-secondary caption1 pl-16 pr-16 pt-12 pb-12 bora-8" type="text" placeholder="Name" name="name"/>
+                    </div>
+                    <div class="col-12 col-sm-6">     
+                      <input class="w-100 bg-surface text-secondary caption1 pl-16 pr-16 pt-12 pb-12 bora-8" type="text" placeholder="Subject" name="subject"/>
+                    </div>
+                    <div class="col-12">
+                      <input class="w-100 bg-surface text-secondary caption1 pl-16 pr-16 pt-12 pb-12 bora-8" type="text" placeholder="Email" name="email"/>
+                    </div>
+                    
+                    <div class="col-12"> 
+                      <textarea class="w-100 bg-surface text-secondary caption1 pl-16 pr-16 pt-12 pb-12 bora-8" name="messsage" cols="10" rows="4" placeholder="Your Questions..."></textarea>
+                    </div>
                   </div>
-                  <div class="col-12 col-sm-6">     
-                    <input class="w-100 bg-surface text-secondary caption1 pl-16 pr-16 pt-12 pb-12 bora-8" type="text" placeholder="Subject"/>
-                  </div>
-                  <div class="col-12">
-                    <input class="w-100 bg-surface text-secondary caption1 pl-16 pr-16 pt-12 pb-12 bora-8" type="text" placeholder="Email"/>
-                  </div>
-                  
-                  <div class="col-12"> 
-                    <textarea class="w-100 bg-surface text-secondary caption1 pl-16 pr-16 pt-12 pb-12 bora-8" name="messsage" cols="10" rows="4" placeholder="Your Questions..."></textarea>
+                  <div class="button-block">
+                                    <button class="button-share bg-on-surface text-button text-white pl-36 pr-36 pt-12 pb-12 bora-48">Enviar mensaje</button>
                   </div>
                 </div>
-                <div class="button-block">
-                                  <button class="button-share bg-on-surface text-button text-white pl-36 pr-36 pt-12 pb-12 bora-48">Enviar mensaje</button>
-                </div>
-              </div>
+              </form>
+              <% if (mensajeEnviado) { %>
+                <p style="color: green;">¡Gracias por contactarnos! Te responderemos pronto.</p>
+              <% } %>
             </div>
           </div>
         </div>
