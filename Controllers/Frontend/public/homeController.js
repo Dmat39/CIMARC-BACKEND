@@ -44,7 +44,8 @@ exports.Contactos = (req,res) =>{
         isCliente: false,
         isJobs: false,
         isAdmin: false,
-        isFooter: true
+        isFooter: true,
+        mensajeEnviado: false 
     })
 }
 

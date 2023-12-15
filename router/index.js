@@ -12,7 +12,7 @@ const ClienteHomeController = require('../Controllers/Frontend/cliente/homeContr
 const AdminHomeController = require('../Controllers/Frontend/admin/homeController.js');
 const TrabajadorHomeController = require('../Controllers/Frontend/trabajador/homeController.js');
 const homeController = require('../Controllers/Frontend/public/homeController.js')
-
+const ControllerContacto = require('../handlers/emails.js');
 module.exports = function () {
 
     
@@ -21,6 +21,7 @@ module.exports = function () {
 
     //** Contacto Us**/
     router.get('/contactos',homeController.Contactos)
+    router.post('/enviar', ControllerContacto.emailContacto)
     //** About Us**/
     router.get('/sobre-nosotros',homeController.About)
     //**Noticias */
