@@ -69,6 +69,37 @@ exports.noticiaRegister = (req,res) =>{
 });
 }
 
+exports.Eventos = (req,res) =>{
+    const successMessage = req.session.successMessage;
+
+    // Limpiar el mensaje para que no se muestre más de una vez
+    delete req.session.successMessage;
+    res.render('admin/evento/home',{
+        isHome: false,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: true,
+        successMessage,
+        isFooter: false
+
+});
+}
+exports.eventoRegister = (req,res) =>{
+    const successMessage = req.session.successMessage;
+
+    // Limpiar el mensaje para que no se muestre más de una vez
+    delete req.session.successMessage;
+    res.render('admin/evento/eventoRegister',{
+        isHome: false,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: true,
+        successMessage,
+        isFooter: false
+
+});
+}
+
 exports.formMantenimientoUsu = async (req,res) =>{
     try {
         // Obtener usuarios desde la base de datos
