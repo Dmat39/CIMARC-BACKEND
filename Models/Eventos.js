@@ -44,10 +44,18 @@ const Eventos =  db.define('Eventos',{
         type: DataTypes.STRING,
         allowNull : true,
     },
-    ubicacion:{
-        type: DataTypes.TEXT,
-        allowNull : false,
+    calle: {
+        type: DataTypes.STRING(60),
+        allowNull: false
     },
+    lat: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    lng: {
+        type: DataTypes.STRING,
+        allowNull: false
+    }
 });
 
 // // Definir la relación entre Usuario y Eventos
