@@ -44,6 +44,11 @@ const Eventos =  db.define('Eventos',{
         type: DataTypes.STRING,
         allowNull : true,
     },
+    imagen:{
+        type: DataTypes.STRING,
+        allowNull : true,
+    },
+
     calle: {
         type: DataTypes.STRING(60),
         allowNull: false
