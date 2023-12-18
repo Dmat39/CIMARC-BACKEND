@@ -7,10 +7,10 @@ const path = require('path'); // Importar el módulo path
 
 
 const configuracionMulter = {
-    limits: { fileSize: 100000 },  // límite de tamaño en bytes
+    limits: { fileSize: 50000000 },  // límite de tamaño en bytes
     storage: multer.diskStorage({
         destination: (req, file, next) => {
-            next(null, __dirname + '../../uploads/eventos');
+            next(null, path.join(__dirname, '../../uploads/eventos'));
         },
         filename: (req, file, next) => {
             const extension = file.originalname.split('.').pop();  // obtener la extensión del archivo original
@@ -18,7 +18,7 @@ const configuracionMulter = {
         }
     }),
     fileFilter: (req, file, next) => {
-        const allowedFileTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+        const allowedFileTypes = ['application/pdf','application/msword','image/jpeg', 'image/png', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
 
         if (allowedFileTypes.includes(file.mimetype)) {
             // el formato es válido
@@ -57,7 +57,9 @@ exports.subirArchivoEvento = (req, res, next) => {
 
 // Agregar Casos
 exports.nuevoEvento = async(req,res,next) =>{
+
     const evento = new Eventos(req.body);
+    evento.userid=req.user.id;
 
     try{
          // Verificar si se ha subido un documento
@@ -66,7 +68,7 @@ exports.nuevoEvento = async(req,res,next) =>{
         }
         //almacenar un registro
         await evento.save();
-        res.json({mensaje: 'Se agrego un nuevo evento'});
+        res.redirect('/admin/eventos');
     }catch(error){
         //si hay un error
         res.send(error);

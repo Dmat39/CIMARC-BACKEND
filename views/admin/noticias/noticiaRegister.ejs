@@ -1,30 +1,53 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/assets/css/barra.css">
+</head>
+<body>
+    
 <div class="content">
-    <div class="seccion-botones">
-        <!-- Contenido principal de la página -->
-        <a href="/admin/noticiaRegister" class="boton-derecha">Regresar</a>
-    </div>
-    <br> <br> <br>
-    <div class="seccion-formulario">
-      <h1>Registro de Noticias</h1>
-      <form action="/noticias" method="POST">
-
-          <label for="titulo">Título:</label>
-          <input type="text" class="form-control" id="titulo" name="titulo" required>
-
-          <label for="fecha">Fecha:</label>
-          <input type="date" class="form-control" id="fecha" name="fecha" required>
-
-          <label for="categoria">Categoría:</label>
-          <input type="text" class="form-control" id="categoria" name="categoria" required>
-
-          <label for="descripcion">Descripción:</label>
-          <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
-
-          <label for="foto">Foto:</label>
-          <input type="file" class="form-control-file" id="foto" name="foto" accept="image/*" onchange="previewImage()">
-
-          <button type="submit" class="btn btn-primary">Registrar</button>
-
-        </form>
-    </div>
+  <div class="seccion-botones">
+      <!-- Contenido principal de la página -->
+      <a href="/admin/noticiaRegister" class="boton-derecha">Regresar</a>
   </div>
+  <br> <br> <br>
+  <div class="seccion-formulario">
+    <h1>Registro de Noticias</h1>
+    <form action="/noticias" method="POST">
+
+        <label for="titulo">Título:</label>
+        <input type="text" class="form-control" id="titulo" name="titulo" required>
+
+        <label for="fecha">Fecha:</label>
+        <input type="date" class="form-control" id="fecha" name="fecha" required>
+
+        <label for="categoria">Categoría:</label>
+        <input type="text" class="form-control" id="categoria" name="categoria" required>
+
+        <label for="descripcion">Descripción:</label>
+        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+
+        <label for="foto">Foto:</label>
+        <input type="file" class="form-control-file" id="foto" name="foto" accept="image/*" onchange="previewImage()">
+
+        <label for="skills">Skills:</label>
+
+        <ul class="lista-conociminetos">
+         
+        </ul>
+
+        <button type="submit" class="btn btn-primary">Registrar</button>
+
+      </form>
+  </div>
+</div>
+</body>
+</html>
+
+

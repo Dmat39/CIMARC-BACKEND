@@ -57,6 +57,7 @@ exports.subirImagen = (req, res, next) => {
 
 exports.crearNoticias = async (req, res, next) => {
     const noticias = new Noticias(req.body);
+    noticias.userid=req.user.id;
     try {
         // Verificar si se ha subido un documento
         if( req.file && req.file.filename){
@@ -64,7 +65,7 @@ exports.crearNoticias = async (req, res, next) => {
         }
         //almacenar un registro
         await noticias.save();
-        res.json({mensaje: 'Se agrego un nuevo Noticias'});
+        res.redirect('/admin/noticias');
     } catch (error) {
         //si hay un error
         res.send(error);

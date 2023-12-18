@@ -4715,7 +4715,7 @@ Section Benefit(Case Studies) Home1: Start
   right: 0;
   bottom: 0;
   height: 0;
-  background-color: var(--blue);
+  background-color: #03a7ff;
   opacity: 0.6;
   transition: all ease 0.5s;
 }
@@ -6722,6 +6722,71 @@ Scroll To Top Button: End
 /*
 Form contact main: Start
 */
+
+.tarjeta {
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  width: 650px;
+}
+
+/* Estilos de la imagen */
+.imagen {
+  width: 328px; /* Ajusta el ancho de la imagen según tus necesidades */
+    height: 350px; /* Ajusta el alto de la imagen según tus necesidades */
+    object-fit: cover;
+}
+
+/* Estilos del contenido de texto */
+.contenido {
+  padding: 15px;
+}
+
+/* Estilos del nombre Ana Rivasplata */
+.nombre {
+  font-size: 44px;
+  font-weight: bold;
+  color: #000;
+  display: block;
+  line-height: 1.2
+}
+.nombres {
+  font-size: 34px;
+  font-weight: bold;
+  color: #000;
+  display: block;
+}
+
+/* Estilos del cargo "Secretaria General" */
+.cargo {
+  font-size: 24px;
+  margin-top: 10px;
+  position: relative;
+  font-family: 'Bahnschrift Light', sans-serif;
+  text-align: center;
+}
+
+/* Rectángulo celeste alrededor de "Secretaria General" */
+.rectangulo {
+  background-color: #03A7FF;
+  color: #fff;
+  padding: 5px;
+  border-radius: 1px;
+  display: block; /* Cambiado de inline-block a block */
+    width: 100%; /* Ajusta para cubrir todo el ancho */
+    box-sizing: border-box; 
+}
+
+/* Descripción de la Secretaria General */
+
+.descripcion {
+  margin-top: 10px;
+  font-size: 14px;
+  font-family: Arial, sans-serif; /* Utiliza Arial como tipo de letra */
+  color: #808080; /* Gris claro */
+}
 .form-cta-block {
   position: relative;
   height: 514px;

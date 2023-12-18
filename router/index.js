@@ -12,7 +12,7 @@ const ClienteHomeController = require('../Controllers/Frontend/cliente/homeContr
 const AdminHomeController = require('../Controllers/Frontend/admin/homeController.js');
 const TrabajadorHomeController = require('../Controllers/Frontend/trabajador/homeController.js');
 const homeController = require('../Controllers/Frontend/public/homeController.js')
-
+const ControllerContacto = require('../handlers/emails.js');
 module.exports = function () {
 
     
@@ -21,11 +21,13 @@ module.exports = function () {
 
     //** Contacto Us**/
     router.get('/contactos',homeController.Contactos)
+    router.post('/enviar', ControllerContacto.emailContacto)
     //** About Us**/
     router.get('/sobre-nosotros',homeController.About)
     //**Noticias */
     router.get('/noticias',homeController.NoticiasVista)
-
+    router.get('/noticias/:id',homeController.noticiaDetail)
+    router.get('/home6',homeController.home6)
     /**Service*/
     router.get('/service',homeController.service);
     router.get('/service/conciliacion',homeController.serviceConciliacion);
@@ -49,9 +51,12 @@ module.exports = function () {
         AdminHomeController.homeAdmin
     );
     /**Blog*/
-    router.get('/admin/blogRegister',
+    router.get('/admin/blog/blogRegister',
         authController.usuarioAutenticado,
         AdminHomeController.blogRegister);
+    router.get('/admin/blog',
+        authController.usuarioAutenticado,
+        AdminHomeController.blogHome);
     
     /**Mantenimiento Usuarios */
     router.get('/admin/mantenimientoUsu',
@@ -64,6 +69,12 @@ module.exports = function () {
         AdminHomeController.register
     );
 
+    /**NOTICIA Lista**/
+    router.get('/admin/noticiaList',
+    authController.usuarioAutenticado,
+    // AdminHomeController.noticiaList
+    );
+
     /**NOTICIA**/
      router.get('/admin/noticias/register',
      authController.usuarioAutenticado,
@@ -73,6 +84,17 @@ module.exports = function () {
      authController.usuarioAutenticado,
      AdminHomeController.Noticias
      );
+    /**EVENTOS**/
+     router.get('/admin/eventos/register',
+     authController.usuarioAutenticado,
+     AdminHomeController.eventoRegister
+     );
+     router.get('/admin/eventos',
+     authController.usuarioAutenticado,
+     AdminHomeController.Eventos
+     );
+
+
 
     //**-----------------------Cliente------------------**/
     /**HOME*/

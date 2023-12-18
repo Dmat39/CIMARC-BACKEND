@@ -1,36 +1,72 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/assets/css/barra.css">
+</head>
+<body>
+  <div class="content">
+  
+              <% if (successMessage) { %>
+                  <div class="d-flex justify-content-center mt-3">
+                      <div class="alert alert-success text-center" role="alert">
+                  <%= successMessage %>
+              </div>
+          </div>
+              <% } %>
+   
+  
+      <div class="seccion-botones">
+          <br>
+          <a href="/admin/noticias/register" class="boton-derecha">Registrar Noticias</a>
+      </div>
+      <br>
+      <h1>Listado de Noticias</h1>
+          <div class="lista-usuarios">
+              <table>
+                  <thead>
+                      <tr>
+                          <th>titulo</th>
+                          <th>descripcion</th>
+                          <th>fecha</th>
+                          <th>categoria</th>
+                          <th>imagen</th>
+                          <th>acciones</th>
+                      </tr>
+                  </thead>
+                    <tbody>
+                        <% noticias.forEach(noticia => { %>
+                            <tr>
+                                <td><%= noticia.titulo %></td>
+                                <td><%= noticia.descripcion %></td>
+                                <td><%= noticia.fecha %></td>
+                                <td><%= noticia.categoria %></td>
+                                <td><% if(noticia.imagen) {%>
+                                    <img  width="200px"    src="/uploads/noticias/<%= noticia.imagen %>">
+                                <% } %>
+                                </td>
+                                <td class="acciones">
+                                    <button  type="submit">
+                                        <a href="/noticias/<%= noticia.id %>">Ver</a>
+                                        </button>
+                                    <button onclick="">Editar</button>
+                                    <button onclick="">Eliminar</button>
+                                </td>                          
+                            </tr>
+                        <% }); %>
+                    </tbody>
+              </table>
+          </div>
+  </div>
+</body>
+</html>
 
-<div class="content">
 
-            <% if (successMessage) { %>
-                <div class="d-flex justify-content-center mt-3">
-                    <div class="alert alert-success text-center" role="alert">
-                <%= successMessage %>
-            </div>
-        </div>
-            <% } %>
- 
 
-    <div class="seccion-botones">
-        <br>
-        <a href="/admin/noticias/register" class="boton-derecha">Registrar Noticias</a>
-    </div>
-    <br>
-    <h1>Listado de Noticias</h1>
-        <div class="lista-usuarios">
-            <table>
-                <thead>
-                    <tr>
-                        <th>titulo</th>
-                        <th>descripcion</th>
-                        <th>fecha</th>
-                        <th>categoria</th>
-                        <th>imagen</th>
-                    </tr>
-                </thead>
-                <tbody>
-                 
-                </tbody>
-            </table>
-        </div>
-</div>
+
+
+
+
+

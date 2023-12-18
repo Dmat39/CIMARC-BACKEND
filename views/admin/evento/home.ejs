@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/css/barra.css">
+
+<div class="content">
+
+            <% if (successMessage) { %>
+                <div class="d-flex justify-content-center mt-3">
+                    <div class="alert alert-success text-center" role="alert">
+                <%= successMessage %>
+            </div>
+        </div>
+            <% } %>
+ 
+
+    <div class="seccion-botones">
+        <br>
+        <a href="/admin/eventos/register" class="boton-derecha">Registrar Eventos</a>
+    </div>
+    <br>
+    <h1>Listado de Eventos</h1>
+        <div class="lista-eventos">
+            <table>
+                <thead>
+                    <tr>
+                        <th>titulo</th>
+                        <th>descripcion</th>
+                        <th>ponentes</th>
+                        <th>fecha</th>
+                        <th>categoria</th>
+                        <th>documentos</th>
+                        <th>imagen</th>
+                        <th>calle</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% eventos.forEach(evento => { %>
+                        <tr>
+                            <td><%= evento.titulo %></td>
+                            <td><%= evento.descripcion %></td>
+                            <td><%= evento.ponentes %></td>
+                            <td><%= evento.fecha %></td>
+                            <td><%= evento.categoria %></td>
+                            <td><%= evento.documentos %></td>
+                            <td><%= evento.imagen %></td>
+                            <td><%= evento.calle %></td>
+                            <td class="acciones">
+                                <a href="/eventos/<%= evento.id %>" class="btn-link">Ver</a>
+                                <a href="/eventos/editar/<%= evento.id %>" class="btn-link">Editar</a>
+                                <a href="/eventos/eliminar/<%= evento.id %>" class="btn-link">Eliminar</a>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+</div>
