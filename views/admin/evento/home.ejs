@@ -45,9 +45,9 @@
                             <td><%= evento.imagen %></td>
                             <td><%= evento.calle %></td>
                             <td class="acciones">
-                                <a href="/eventos/eliminar/%= evento.id %>" class="btn-link">Ver</a>
-                                <a href="/eventos/editar/%= evento.id %>" class="btn-link">Editar</a>
-                                <a href="/eventos/eliminar/%= evento.id %>" class="btn-link">Eliminar</a>
+                                <a href="/eventos/<%= evento.id %>" class="btn-link">Ver</a>
+                                <a href="/eventos/editar/<%= evento.id %>" class="btn-link">Editar</a>
+                                <a href="/eventos/eliminar/<%= evento.id %>" class="btn-link">Eliminar</a>
                             </td>
                         </tr>
                     <% }); %>
