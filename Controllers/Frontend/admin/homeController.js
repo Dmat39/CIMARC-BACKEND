@@ -1,6 +1,7 @@
 const Usuario = require('../../../Models/Usuario'); // Importa tu modelo de usuario si lo tienes
 const Evento=require('../../../Models/Eventos'); 
-
+const Noticias=require('../../../Models/Noticias'); 
+const blog=require('../../../Models/Blogs');
 exports.homeAdmin = (req,res) =>{
     res.render('admin/home',{
         isHome: false,
@@ -28,7 +29,7 @@ exports.register = (req,res) =>{
 }
 
 exports.blogRegister = (req,res) =>{
-    res.render('admin/blogRegister',{
+    res.render('admin/blog/blogRegister',{
         isHome: false,
         isCliente: false,
         isJobs: false,
@@ -37,11 +38,21 @@ exports.blogRegister = (req,res) =>{
 });
 }
 
+exports.blogHome = async (req,res) =>{
+    const blogs = await blog.findAll() //Obtener todo los usuarios en la tabla
+    res.render('admin/blog/home',{
+        isHome: false,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: true,
+        isFooter: false,
+        blogs
+});
+}
 
-
-exports.Noticias = (req,res) =>{
+exports.Noticias = async (req,res) =>{
     const successMessage = req.session.successMessage;
-
+    const noticias = await Noticias.findAll() //Obtener todo los usuarios en la tabla
     // Limpiar el mensaje para que no se muestre más de una vez
     delete req.session.successMessage;
     res.render('admin/noticias/home',{
@@ -49,11 +60,28 @@ exports.Noticias = (req,res) =>{
         isCliente: false,
         isJobs: false,
         isAdmin: true,
+        noticias,
         successMessage,
         isFooter: false
 
 });
 }
+exports.NoticiasEditar = async (req,res) =>{
+    const noticiaId = req.params.idNoticias;
+    const noticia = await Noticias.findByPk(noticiaId, {
+        include: usuarios,
+      });    // Limpiar el mensaje para que no se muestre más de una vez
+    res.render('admin/noticias/noticiaEditar',{
+        isHome: false,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: true,
+        noticia,
+        isFooter: false
+
+});
+}
+
 
 exports.noticiaRegister = (req,res) =>{
     const successMessage = req.session.successMessage;
@@ -97,7 +125,7 @@ delete req.session.successMessage;
 }
 
 exports.eventoRegister = (req,res) =>{
-    const successMessage = req.session.successMessage;
+
 
     // Limpiar el mensaje para que no se muestre más de una vez
     delete req.session.successMessage;
@@ -106,7 +134,6 @@ exports.eventoRegister = (req,res) =>{
         isCliente: false,
         isJobs: false,
         isAdmin: true,
-        successMessage,
         isFooter: false
 
 });
