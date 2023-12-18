@@ -1,5 +1,6 @@
 const Usuario = require('../../../Models/Usuario'); // Importa tu modelo de usuario si lo tienes
 const Evento=require('../../../Models/Eventos'); 
+const Noticias=require('../../../Models/Noticias'); 
 
 exports.homeAdmin = (req,res) =>{
     res.render('admin/home',{
@@ -39,9 +40,9 @@ exports.blogRegister = (req,res) =>{
 
 
 
-exports.Noticias = (req,res) =>{
+exports.Noticias = async (req,res) =>{
     const successMessage = req.session.successMessage;
-
+    const noticias = await Noticias.findAll() //Obtener todo los usuarios en la tabla
     // Limpiar el mensaje para que no se muestre más de una vez
     delete req.session.successMessage;
     res.render('admin/noticias/home',{
@@ -49,6 +50,7 @@ exports.Noticias = (req,res) =>{
         isCliente: false,
         isJobs: false,
         isAdmin: true,
+        noticias,
         successMessage,
         isFooter: false
 

@@ -65,7 +65,7 @@ exports.crearNoticias = async (req, res, next) => {
         }
         //almacenar un registro
         await noticias.save();
-        res.json({mensaje: 'Se agrego un nuevo Noticias'});
+        res.redirect('/admin/noticias');
     } catch (error) {
         //si hay un error
         res.send(error);

@@ -68,7 +68,7 @@ exports.nuevoEvento = async(req,res,next) =>{
         }
         //almacenar un registro
         await evento.save();
-        res.json({mensaje: 'Se agrego un nuevo evento'});
+        res.redirect('/admin/eventos');
     }catch(error){
         //si hay un error
         res.send(error);

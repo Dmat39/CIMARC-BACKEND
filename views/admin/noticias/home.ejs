@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,11 +33,30 @@
                           <th>fecha</th>
                           <th>categoria</th>
                           <th>imagen</th>
+                          <th>acciones</th>
                       </tr>
                   </thead>
-                  <tbody>
-                   
-                  </tbody>
+                    <tbody>
+                        <% noticias.forEach(noticia => { %>
+                            <tr>
+                                <td><%= noticia.titulo %></td>
+                                <td><%= noticia.descripcion %></td>
+                                <td><%= noticia.fecha %></td>
+                                <td><%= noticia.categoria %></td>
+                                <td><% if(noticia.imagen) {%>
+                                    <img  width="200px"    src="/uploads/noticias/<%= noticia.imagen %>">
+                                <% } %>
+                                </td>
+                                <td class="acciones">
+                                    <button  type="submit">
+                                        <a href="/noticias/<%= noticia.id %>">Ver</a>
+                                        </button>
+                                    <button onclick="">Editar</button>
+                                    <button onclick="">Eliminar</button>
+                                </td>                          
+                            </tr>
+                        <% }); %>
+                    </tbody>
               </table>
           </div>
   </div>
