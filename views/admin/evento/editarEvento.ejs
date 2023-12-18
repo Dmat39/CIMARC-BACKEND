@@ -12,59 +12,63 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css">
 </head>
 <body>
-
     <div class="content">
         <div class="seccion-botones">
-            <!-- Contenido principal de la página -->
             <a href="/admin/eventoRegister" class="boton-derecha">Regresar</a>
         </div>
         <br> <br> <br>
         <div class="seccion-formulario">
             <h1>Registro de Eventos</h1>
-            <form action="/eventos" method="POST">
-
+            <form action="/eventos/editar/:id" method="POST">
                 <!-- Otros campos de formulario -->
+
                 <label for="titulo">Título:</label>
-                <input type="text" class="form-control" id="titulo" name="titulo" required>
+                <input type="text" class="form-control" id="titulo" name="titulo" value="<%= datos.titulo ? datos.titulo : '' %>" required>
+
 
                 <label for="ponentes">Ponentes:</label>
-                <input type="text" class="form-control" id="ponentes" name="ponentes" required>
+                <input type="text" class="form-control" id="ponentes" name="ponentes" value="<%= datos.ponentes ? datos.ponentes : '' %>" required>
 
                 <label for="fecha">Fecha:</label>
-                <input type="date" class="form-control" id="fecha" name="fecha" required>
+                <input type="date" class="form-control" id="fecha" name="fecha" value="<%= datos.fecha ? datos.fecha : '' %>" required>
 
                 <label for="categoria">Categoría:</label>
-                <input type="text" class="form-control" id="categoria" name="categoria" required>
+                <input type="text" class="form-control" id="categoria" name="categoria" value="<%= datos.categoria ? datos.categoria : '' %>" required>
 
                 <label for="descripcion">Descripción:</label>
-                <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+                <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required><%= datos.descripcion ? datos.descripcion : '' %></textarea>
 
                 <label for="archivos">Archivos:</label>
                 <input type="file" name="documentos" accept="application/pdf, application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                <% if (datos.documentos) { %>
+                    <p>Documento actual: <%= datos.documentos %></p>
+                    <input type="checkbox" name="eliminarDocumentos"> Eliminar documento actual
+                <% } %>
 
                 <label for="imagen">Imagen:</label>
                 <input type="file" name="imagen" accept="image/jpeg, image/png">
-
+                <% if (datos.imagen) { %>
+                    <p>Imagen actual: <%= datos.imagen %></p>
+                    <input type="checkbox" name="eliminarImagen"> Eliminar imagen actual
+                <% } %>
                 <!-- Contenedor donde se mostrará el mapa con un tamaño fijo -->
-
                 <div>
                     <h3>Ubicacion</h3>
                     <p>Ubica la propiedad en el mapa</p>
-
+                
                     <div id="mapa" style="height: 300px; width: 100%; max-width: 600px; border: 1px solid #ddd; margin-bottom: 10px;"></div>
-
+                
                     <div>
-                    <p class="calle">{{datos.calle ? datos.calle : ''}}</p>
+                        <p class="calle">Calle actual: <%= datos.calle ? datos.calle : '' %></p>
                     </div>
-
-                    <input type="hidden" name="calle" id="calle" value="{{ datos.calle ? datos.calle : '' }}">
-                    <input type="hidden" name="lat" id="lat" value="{{ datos.lat ? datos.lat : '' }}">
-                    <input type="hidden" name="lng" id="lng" value="{{ datos.lng ? datos.lng : '' }}">
+                
+                    <input type="hidden" name="calle" id="calle" value="<%= datos.calle ? datos.calle : '' %>">
+                    <input type="hidden" name="lat" id="lat" value="<%= datos.lat ? datos.lat : '' %>">
+                    <input type="hidden" name="lng" id="lng" value="<%= datos.lng ? datos.lng : '' %>">
                 </div>
 
                 <!-- Botón para registrar -->
                 <button type="submit" class="btn btn-primary">Registrar</button>
-
             </form>
         </div>
     </div>
