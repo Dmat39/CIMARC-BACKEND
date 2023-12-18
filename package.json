@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "BACKEND",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
-    "start": "nodemon ./index"
+    "start": "nodemon ./index",
+    "js":"webpack --config webpack.config.js --watch"
   },
   "author": "CIMARC",
   "license": "ISC",
@@ -34,5 +36,9 @@
     "sqlite3": "^5.1.6",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
   }
 }

@@ -81,6 +81,17 @@ module.exports = function () {
      authController.usuarioAutenticado,
      AdminHomeController.Noticias
      );
+    /**EVENTOS**/
+     router.get('/admin/eventos/register',
+     authController.usuarioAutenticado,
+     AdminHomeController.eventoRegister
+     );
+     router.get('/admin/eventos',
+     authController.usuarioAutenticado,
+     AdminHomeController.Eventos
+     );
+
+
 
     //**-----------------------Cliente------------------**/
     /**HOME*/
