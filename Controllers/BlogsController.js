@@ -57,7 +57,7 @@ exports.subirArchivoBlog = (req, res, next) => {
 // Agregar Blogs
 exports.nuevoBlog = async(req,res,next) =>{
     const blog = new Blogs(req.body);
-
+    blog.userid = req.user.id;
     try{
          // Verificar si se ha subido un documento
         if( req.file && req.file.filename){
@@ -65,7 +65,7 @@ exports.nuevoBlog = async(req,res,next) =>{
         }
         //almacenar un registro
         await blog.save();
-        res.json({mensaje: 'Se agrego un nuevo Blog'});
+        res.redirect('/admin/blog');
     }catch(error){
         //si hay un error
         res.send(error);

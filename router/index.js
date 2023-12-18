@@ -51,9 +51,12 @@ module.exports = function () {
         AdminHomeController.homeAdmin
     );
     /**Blog*/
-    router.get('/admin/blogRegister',
+    router.get('/admin/blog/blogRegister',
         authController.usuarioAutenticado,
         AdminHomeController.blogRegister);
+    router.get('/admin/blog',
+        authController.usuarioAutenticado,
+        AdminHomeController.blogHome);
     
     /**Mantenimiento Usuarios */
     router.get('/admin/mantenimientoUsu',
@@ -77,10 +80,25 @@ module.exports = function () {
      authController.usuarioAutenticado,
      AdminHomeController.noticiaRegister
      );
+     router.get('/admin/noticias/editar/:idNoticias',
+     authController.usuarioAutenticado,
+     AdminHomeController.NoticiasEditar
+     );
      router.get('/admin/noticias',
      authController.usuarioAutenticado,
      AdminHomeController.Noticias
      );
+    /**EVENTOS**/
+     router.get('/admin/eventos/register',
+     authController.usuarioAutenticado,
+     AdminHomeController.eventoRegister
+     );
+     router.get('/admin/eventos',
+     authController.usuarioAutenticado,
+     AdminHomeController.Eventos
+     );
+
+
 
     //**-----------------------Cliente------------------**/
     /**HOME*/
@@ -188,7 +206,7 @@ module.exports = function () {
         NoticiasController.actualizarNoticias
     );
     //Eliminar Noticias
-    router.delete('/noticias/:idNoticias',
+    router.get('/deletenoticias/:idNoticias',
 
         NoticiasController.eliminarNoticias
     )

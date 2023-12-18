@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/assets/css/barra.css">
+</head>
+<body>
+  <div class="content">
+  
+
+   
+  
+      <div class="seccion-botones">
+          <br>
+          <a href="/admin/blog/blogRegister" class="boton-derecha">Registrar Blog</a>
+      </div>
+      <br>
+      <h1>Listado de Blog</h1>
+          <div class="lista-usuarios">
+              <table>
+                  <thead>
+                      <tr>
+                          <th>titulo</th>
+                          <th>descripcion</th>
+                          <th>fecha</th>
+                          <th>categoria</th>
+                          <th>imagen</th>
+                          <th>acciones</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <% blogs.forEach(blog => { %>
+                        <tr>
+                            <td><%= blog.titulo %></td>
+                            <td><%= blog.descripcion %></td>
+                            <td><%= blog.fecha %></td>
+                            <td><%= blog.categoria %></td>
+                            <td><% if(blog.imagen) {%>
+                                <img  width="200px"    src="/uploads/blogs/<%= blog.imagen %>">
+                            <% } %>
+                            </td>
+                            <td class="acciones">
+                                <button  type="submit">
+                                    <a href="">Ver</a>
+                                    </button>
+                                <button onclick="">Editar</button>
+                                <button onclick="">Eliminar</button>
+                            </td>                          
+                        </tr>
+                    <% }); %>
+                </tbody>
+              </table>
+          </div>
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
