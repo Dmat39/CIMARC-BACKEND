@@ -57,9 +57,7 @@ exports.subirArchivoEvento = (req, res, next) => {
 
 // Agregar Casos
 exports.nuevoEvento = async(req,res,next) =>{
-
     const evento = new Eventos(req.body);
-    evento.userid=req.user.id;
 
     try{
          // Verificar si se ha subido un documento
@@ -68,7 +66,7 @@ exports.nuevoEvento = async(req,res,next) =>{
         }
         //almacenar un registro
         await evento.save();
-        res.redirect('/admin/eventos');
+        res.json({mensaje: 'Se agrego un nuevo evento'});
     }catch(error){
         //si hay un error
         res.send(error);
@@ -139,40 +137,47 @@ exports.editar = async (req, res) => {
 }
 
  // Actualizar un Evento via id 
- exports.actualizarEventos = async (req, res, next) => {
+exports.actualizarEventos = async (req, res, next) => {
     try {
-        const { idEventos } = req.params;
-        const nuevoEvento = req.body;
-
-        // Obtener el evento anterior
-        const eventoAnterior = await Eventos.findByPk(idEventos);
+        // Construir un nuevo caso
+        let nuevoEvento = req.body;
 
         // Verificar si hay un archivo nuevo
         if (req.file && req.file.filename) {
             nuevoEvento.documentos = req.file.filename;
 
-            // Borrar el archivo antiguo
-            if (eventoAnterior.documentos) {
-                const rutaArchivoAntiguo = path.join(__dirname, `../uploads/eventos/${eventoAnterior.documentos}`);
+            // Obtener el caso anterior para borrar el archivo antiguo
+            let eventonterior = await Eventos.findByPk(req.params.idEventos);
+            if ( eventonterior.documentos) {
+                // Construir la ruta completa al archivo antiguo
+                const rutaArchivoAntiguo = path.join(__dirname, `../uploads/eventos/${eventonterior.documentos}`);
+
+                // Borrar el archivo antiguo
                 await fs.unlink(rutaArchivoAntiguo);
             }
         } else {
-            // Mantener el nombre del documento si no hay un archivo nuevo
-            nuevoEvento.documentos = eventoAnterior.documentos;
+            // Obtener el caso anterior para mantener el nombre del documento
+            let eventonterior = await Eventos.findByPk(req.params.idEventos);
+            nuevoEvento.documentos = eventonterior.documentos;
         }
 
-        // Actualizar el evento en la base de datos
+        // Actualizar el caso en la base de datos y obtener el número de filas afectadas
         const [numFilasActualizadas] = await Eventos.update(nuevoEvento, {
-            where: { id: idEventos },
+            where: { id: req.params.idEventos },
         });
 
-        // Verificar y responder según el resultado de la actualización
+        // Verificar si se actualizó con éxito
         if (numFilasActualizadas > 0) {
-            const eventoActualizado = await Eventos.findByPk(idEventos);
+            // Obtener el caso actualizado después de la actualización
+            const eventoActualizado = await Eventos.findByPk(req.params.idEventos);
+
+            // Enviar la respuesta JSON con el caso actualizado
             res.json(eventoActualizado);
+            
         } else {
+            // Si numFilasActualizadas es 0, significa que el caso no fue encontrado o no se actualizó correctamente
             console.log('No se actualizaron filas.');
-            return res.status(404).json({ mensaje: 'Evento no encontrado o no se actualizó correctamente' });
+            return res.status(404).json({ mensaje: 'Caso no encontrado' });
         }
     } catch (error) {
         console.log(error);
