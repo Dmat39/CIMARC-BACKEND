@@ -1,7 +1,7 @@
 const Usuario = require('../../../Models/Usuario'); // Importa tu modelo de usuario si lo tienes
 const Evento=require('../../../Models/Eventos'); 
 const Noticias=require('../../../Models/Noticias'); 
-
+const blog=require('../../../Models/Blogs');
 exports.homeAdmin = (req,res) =>{
     res.render('admin/home',{
         isHome: false,
@@ -29,7 +29,7 @@ exports.register = (req,res) =>{
 }
 
 exports.blogRegister = (req,res) =>{
-    res.render('admin/blogRegister',{
+    res.render('admin/blog/blogRegister',{
         isHome: false,
         isCliente: false,
         isJobs: false,
@@ -38,7 +38,17 @@ exports.blogRegister = (req,res) =>{
 });
 }
 
-
+exports.blogHome = async (req,res) =>{
+    const blogs = await blog.findAll() //Obtener todo los usuarios en la tabla
+    res.render('admin/blog/home',{
+        isHome: false,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: true,
+        isFooter: false,
+        blogs
+});
+}
 
 exports.Noticias = async (req,res) =>{
     const successMessage = req.session.successMessage;

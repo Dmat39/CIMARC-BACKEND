@@ -51,9 +51,12 @@ module.exports = function () {
         AdminHomeController.homeAdmin
     );
     /**Blog*/
-    router.get('/admin/blogRegister',
+    router.get('/admin/blog/blogRegister',
         authController.usuarioAutenticado,
         AdminHomeController.blogRegister);
+    router.get('/admin/blog',
+        authController.usuarioAutenticado,
+        AdminHomeController.blogHome);
     
     /**Mantenimiento Usuarios */
     router.get('/admin/mantenimientoUsu',
