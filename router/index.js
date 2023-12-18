@@ -80,6 +80,10 @@ module.exports = function () {
      authController.usuarioAutenticado,
      AdminHomeController.noticiaRegister
      );
+     router.get('/admin/noticias/editar/:idNoticias',
+     authController.usuarioAutenticado,
+     AdminHomeController.NoticiasEditar
+     );
      router.get('/admin/noticias',
      authController.usuarioAutenticado,
      AdminHomeController.Noticias
@@ -202,7 +206,7 @@ module.exports = function () {
         NoticiasController.actualizarNoticias
     );
     //Eliminar Noticias
-    router.delete('/noticias/:idNoticias',
+    router.get('/deletenoticias/:idNoticias',
 
         NoticiasController.eliminarNoticias
     )

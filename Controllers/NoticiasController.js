@@ -156,7 +156,7 @@ exports.eliminarNoticias = async (req, res, next) => {
         }
         // Eliminar el pago de la base de datos
         await noticias.destroy();
-        res.json({ mensaje: 'Pago eliminado exitosamente' });
+        res.redirect('/admin/noticias');
     } catch (error) {
         console.error(error);
         next(error);

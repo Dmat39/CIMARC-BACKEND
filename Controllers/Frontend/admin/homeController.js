@@ -66,6 +66,22 @@ exports.Noticias = async (req,res) =>{
 
 });
 }
+exports.NoticiasEditar = async (req,res) =>{
+    const noticiaId = req.params.idNoticias;
+    const noticia = await Noticias.findByPk(noticiaId, {
+        include: usuarios,
+      });    // Limpiar el mensaje para que no se muestre más de una vez
+    res.render('admin/noticias/noticiaEditar',{
+        isHome: false,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: true,
+        noticia,
+        isFooter: false
+
+});
+}
+
 
 exports.noticiaRegister = (req,res) =>{
     const successMessage = req.session.successMessage;
