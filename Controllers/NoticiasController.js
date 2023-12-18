@@ -57,6 +57,7 @@ exports.subirImagen = (req, res, next) => {
 
 exports.crearNoticias = async (req, res, next) => {
     const noticias = new Noticias(req.body);
+    noticias.userid=req.user.id;
     try {
         // Verificar si se ha subido un documento
         if( req.file && req.file.filename){

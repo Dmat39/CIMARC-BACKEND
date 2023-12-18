@@ -57,7 +57,9 @@ exports.subirArchivoEvento = (req, res, next) => {
 
 // Agregar Casos
 exports.nuevoEvento = async(req,res,next) =>{
+
     const evento = new Eventos(req.body);
+    evento.userid=req.user.id;
 
     try{
          // Verificar si se ha subido un documento

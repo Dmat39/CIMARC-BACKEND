@@ -97,7 +97,7 @@ delete req.session.successMessage;
 }
 
 exports.eventoRegister = (req,res) =>{
-    const successMessage = req.session.successMessage;
+
 
     // Limpiar el mensaje para que no se muestre más de una vez
     delete req.session.successMessage;
@@ -106,7 +106,6 @@ exports.eventoRegister = (req,res) =>{
         isCliente: false,
         isJobs: false,
         isAdmin: true,
-        successMessage,
         isFooter: false
 
 });
