@@ -36,17 +36,24 @@ const Eventos =  db.define('Eventos',{
             }
         }
     },
-    categoria:{
+    categoria: {
         type: DataTypes.TEXT,
-        allowNull : false,
+        allowNull: false,
+        get() {
+            // Parsea la cadena JSON almacenada en la base de datos
+            return JSON.parse(this.getDataValue('categoria'));
+        },
+        set(value) {
+            // Convierte el valor a cadena JSON antes de almacenarlo
+            this.setDataValue('categoria', JSON.stringify(value));
+        }
     },
     documentos:{
         type: DataTypes.STRING,
-        allowNull : true,
+        
     },
     imagen:{
-        type: DataTypes.STRING,
-        allowNull : true,
+        type: DataTypes.STRING(100)
     },
 
     calle: {
