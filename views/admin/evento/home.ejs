@@ -41,14 +41,27 @@
                             <td><%= evento.ponentes %></td>
                             <td><%= evento.fecha %></td>
                             <td><%= evento.categoria %></td>
-                            <td><%= evento.documentos %></td>
-                            <td><%= evento.imagen %></td>
+                            <td>
+                                <% if (evento.documentos) { %>
+                                    <a href="/uploads/eventos/documentos/<%= evento.documentos %>" target="_blank">Enlace al documento</a>
+                                <% } %>
+                            </td>
+                            <td><% if(evento.imagen) {%>
+                                <img  width="200px"    src="/uploads/eventos/imagenes/<%= evento.imagen %>">
+                            <% } %>
+                            </td>
                             <td><%= evento.calle %></td>
                             <td class="acciones">
-                                <a href="/eventos/<%= evento.id %>" class="btn-link">Ver</a>
-                                <a href="/eventos/editar/<%= evento.id %>" class="btn-link">Editar</a>
-                                <a href="/eventos/eliminar/<%= evento.id %>" class="btn-link">Eliminar</a>
-                            </td>
+                                <button  type="submit">
+                                    <a href="/eventos/<%= evento.id %>">Ver</a>
+                                </button>
+                                <button>
+                                    <a href="/admin/eventos/editar/<%= evento.id %>">editar</a>
+                                </button>
+                                <button>
+                                    <a href="/deleteeventos/<%= evento.id %>" class="btn btn-rojo">Eliminar</a>
+                                </button>
+                            </td>  
                         </tr>
                     <% }); %>
                 </tbody>

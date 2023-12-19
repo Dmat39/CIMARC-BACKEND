@@ -7,7 +7,7 @@ const path = require('path'); // Importar el módulo path
 const { nuevoCaso } = require('./CasosController');
 
 const configuracionMulter = {
-    limits: { fileSize: 100000 },  // límite de tamaño en bytes
+    limits: { fileSize: 50000000 },  // límite de tamaño en bytes
     storage: multer.diskStorage({
         destination: (req, file, next) => {
             next(null, __dirname + '../../uploads/noticias'); // Change the destination folder to 'uploads/noticias'
