@@ -139,6 +139,18 @@ exports.eventoRegister = (req,res) =>{
 });
 }
 
+exports.editarEvento = (req,res) =>{
+    
+    res.render('admin/evento/editarEvento',{
+        isHome: false,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: true,
+        isFooter: false
+
+});
+}
+
 exports.formMantenimientoUsu = async (req,res) =>{
     try {
         // Obtener usuarios desde la base de datos

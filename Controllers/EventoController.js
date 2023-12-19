@@ -57,9 +57,7 @@ exports.subirArchivoEvento = (req, res, next) => {
 
 // Agregar Casos
 exports.nuevoEvento = async(req,res,next) =>{
-
     const evento = new Eventos(req.body);
-    evento.userid=req.user.id;
 
     try{
          // Verificar si se ha subido un documento
@@ -68,7 +66,7 @@ exports.nuevoEvento = async(req,res,next) =>{
         }
         //almacenar un registro
         await evento.save();
-        res.redirect('/admin/eventos');
+        res.json({mensaje: 'Se agrego un nuevo evento'});
     }catch(error){
         //si hay un error
         res.send(error);
@@ -89,6 +87,8 @@ exports.mostrarEventos = async(req,res,next) =>{
     }
 
 }
+
+
     // Mostrar Evento por ID
 exports.mostrarEventosID = async (req, res, next) => {
     try {
@@ -100,12 +100,41 @@ exports.mostrarEventosID = async (req, res, next) => {
         }
 
         // Mostrar el Evento
-        res.json(eventos);
+        res.render('admin/evento/eventoRegister.ejs', {
+            datos: eventos,
+            isHome: false,
+            isCliente: false,
+            isJobs: false,
+            isAdmin: true,
+            isFooter: false
+        })
+
     } catch (error) {
         console.error(error);
         next(error);
     }
 };
+
+exports.editar = async (req, res) => {
+
+    const { id } = req.params
+
+    // Validar que la propiedad exista
+    const eventos = await Eventos.findByPk(id)
+
+    if (!eventos) {
+        return res.redirect('/admin/eventos/editar')
+    }
+
+    res.render('admin/evento/editarEvento.ejs', {
+        datos: eventos,
+        isHome: false,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: true,
+        isFooter: false
+    })
+}
 
  // Actualizar un Evento via id 
 exports.actualizarEventos = async (req, res, next) => {
@@ -144,6 +173,7 @@ exports.actualizarEventos = async (req, res, next) => {
 
             // Enviar la respuesta JSON con el caso actualizado
             res.json(eventoActualizado);
+            
         } else {
             // Si numFilasActualizadas es 0, significa que el caso no fue encontrado o no se actualizó correctamente
             console.log('No se actualizaron filas.');
