@@ -88,8 +88,8 @@ exports.home6 = (req,res) =>{
         isFooter: true
     })
 }
-exports.Documentacion = (req,res) =>{
-    res.render('public/Documentacion',{
+exports.documentacion = (req,res) =>{
+    res.render('public/documentacion',{
         isHome: true,
         isCliente: false,
         isJobs: false,
