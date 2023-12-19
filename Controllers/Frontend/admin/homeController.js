@@ -69,8 +69,8 @@ exports.Noticias = async (req,res) =>{
 exports.NoticiasEditar = async (req,res) =>{
     const noticiaId = req.params.idNoticias;
     const noticia = await Noticias.findByPk(noticiaId, {
-        include: usuarios,
-      });    // Limpiar el mensaje para que no se muestre más de una vez
+        include: Usuario,
+    });    // Limpiar el mensaje para que no se muestre más de una vez
     res.render('admin/noticias/noticiaEditar',{
         isHome: false,
         isCliente: false,
@@ -130,6 +130,18 @@ exports.eventoRegister = (req,res) =>{
     // Limpiar el mensaje para que no se muestre más de una vez
     delete req.session.successMessage;
     res.render('admin/evento/eventoRegister',{
+        isHome: false,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: true,
+        isFooter: false
+
+});
+}
+
+exports.editarEvento = (req,res) =>{
+    
+    res.render('admin/evento/editarEvento',{
         isHome: false,
         isCliente: false,
         isJobs: false,

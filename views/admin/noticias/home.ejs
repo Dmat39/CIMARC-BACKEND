@@ -50,10 +50,13 @@
                                 <td class="acciones">
                                     <button  type="submit">
                                         <a href="/noticias/<%= noticia.id %>">Ver</a>
-                                        </button>
-                                    <button><a href="/noticias/editar/<%= noticia.id %>">editar</a>
                                     </button>
-                                    <button><a href="/deletenoticias/<%= noticia.id %>" class="btn btn-rojo">Eliminar</a></button>
+                                    <button>
+                                        <a href="/admin/noticias/editar/<%= noticia.id %>">editar</a>
+                                    </button>
+                                    <button>
+                                        <a href="/deletenoticias/<%= noticia.id %>" class="btn btn-rojo">Eliminar</a>
+                                    </button>
                                 </td>                          
                             </tr>
                         <% }); %>

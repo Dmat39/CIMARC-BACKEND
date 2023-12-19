@@ -93,6 +93,10 @@ module.exports = function () {
      authController.usuarioAutenticado,
      AdminHomeController.eventoRegister
      );
+     router.get('/admin/eventos/editar',
+     authController.usuarioAutenticado,
+     AdminHomeController.eventoRegister
+     );
      router.get('/admin/eventos',
      authController.usuarioAutenticado,
      AdminHomeController.Eventos
@@ -201,7 +205,7 @@ module.exports = function () {
         NoticiasController.mostrarNoticiasID
     );
     //Actualizar Noticias
-    router.put('/noticias/:idNoticias',
+    router.post('/updatenoticias/:idNoticias',
         NoticiasController.subirImagen,
         NoticiasController.actualizarNoticias
     );
@@ -311,7 +315,7 @@ module.exports = function () {
     )
     
     /** DOCUMENTO CLIENTE  */
-//<<<<<<< Diego
+
 
     // Mostrar Documento
     router.get('/documento',
@@ -374,6 +378,8 @@ module.exports = function () {
         EventosController.mostrarEventos
     );
 
+ 
+
      //Agregar Eventos
      router.post('/eventos',
 
@@ -386,10 +392,18 @@ module.exports = function () {
      );
 
      // Actualizar Eventos
-     router.put('/eventos/:idEventos',
-        EventosController.subirArchivoEvento,
-        EventosController.actualizarEventos
+     router.get('/eventos/editar/:id',
+        EventosController.editar
     );
+
+    router.post('/eventos/editar/:id',
+    EventosController.subirArchivoEvento,
+    EventosController.actualizarEventos
+    );
+
+
+
+
 
      //Mostrar Eventos por Userid
      router.get('/trabajador-eventos/user/:userid',
