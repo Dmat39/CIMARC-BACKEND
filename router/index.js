@@ -205,7 +205,7 @@ module.exports = function () {
         NoticiasController.mostrarNoticiasID
     );
     //Actualizar Noticias
-    router.put('/noticias/:idNoticias',
+    router.post('/updatenoticias/:idNoticias',
         NoticiasController.subirImagen,
         NoticiasController.actualizarNoticias
     );
