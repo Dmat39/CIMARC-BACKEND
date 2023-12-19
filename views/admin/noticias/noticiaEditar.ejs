@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Editar Noticia</title>
     <link rel="stylesheet" href="/assets/css/barra.css">
 </head>
 <body>
@@ -15,8 +15,8 @@
   </div>
   <br> <br> <br>
   <div class="seccion-formulario">
-    <h1>Registro de Noticias</h1>
-    <form enctype="multipart/form-data" action="/updatenoticias/<%= noticia.id %>" method="POST">
+    <h1>Editar Noticia</h1>
+    <form enctype="multipart/form-data" action="/updatenoticias/<%= noticia.id %>" method="post">
 
         <label for="titulo">Título:</label>
         <input type="text" class="form-control" id="titulo" name="titulo" value="<%= noticia.titulo %>" required>
@@ -25,7 +25,12 @@
         <input type="date" class="form-control" id="fecha" name="fecha" value="<%= noticia.fecha %>" required>
 
         <label for="categoria">Categoría:</label>
-        <input type="text" class="form-control" id="categoria" name="categoria" value="<%= noticia.categoria %>" required>
+        <select class="form-control" id="categoria" name="categoria" multiple required>
+            <!-- Opciones de categorías -->
+            <option value="categoria1" <%= noticia.categoria.includes('categoria1') ? 'selected' : '' %>>Categoría 1</option>
+            <option value="categoria2" <%= noticia.categoria.includes('categoria2') ? 'selected' : '' %>>Categoría 2</option>
+            <!-- Agrega más opciones según sea necesario -->
+        </select>
 
         <label for="descripcion">Descripción:</label>
         <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required><%= noticia.descripcion %></textarea>
