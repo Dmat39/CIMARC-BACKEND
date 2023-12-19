@@ -128,7 +128,7 @@ exports.actualizarNoticias = async (req, res, next) => {
             const NoticiaActualizada = await Noticias.findByPk(req.params.idNoticias);
             
             // Enviar la respueta JSON con la noticia actualizado
-            res.json(NoticiaActualizada);
+            res.redirect('/admin/noticias');
         }else{
             // Si numFilasActualizadas es 0, significa que el noticia no fue encontrado
             console.log('No se actualizaron filas.');

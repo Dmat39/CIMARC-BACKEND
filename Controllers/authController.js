@@ -40,11 +40,16 @@ exports.usuarioAutenticado = async (req, res, next) => {
 
         // Definir las rutas permitidas para cada rol
         const rutasPermitidas = {
-            'admin': ['/admin/home', '/admin/register','/admin/blog','/admin/blog/blogRegister','/admin/mantenimientoUsu','/admin/noticiaRegister','/admin/noticias','/admin/noticias/register','/admin/eventoRegister','/admin/eventos','/admin/eventos/register','/cerrar-sesion'],
+            'admin': ['/admin/home', '/admin/register','/admin/blog','/admin/blog/blogRegister','/admin/mantenimientoUsu','/admin/noticiaRegister','/admin/noticias/editar/','/admin/noticias','/admin/noticias/register','/admin/eventoRegister','/admin/eventos','/admin/eventos/register','/cerrar-sesion'],
             'trabajador': ['/trabajador/home','/trabajador/pagoRegister','/cerrar-sesion'],
             'cliente': ['/cliente/home','/cerrar-sesion','/cliente/AddDocument']
         };
+        const rutaActual = req.path;
+        const rutaBaseEditarNoticias = '/admin/noticias/editar/';
 
+        if (rolUsuario === 'admin' && rutaActual.startsWith(rutaBaseEditarNoticias)) {
+            return next();
+        }
         // Verificar si la ruta actual está permitida para el rol del usuario
         if (rutasPermitidas[rolUsuario] && rutasPermitidas[rolUsuario].includes(req.path)) {
             return next();

@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,38 +11,36 @@
 <div class="content">
   <div class="seccion-botones">
       <!-- Contenido principal de la página -->
-      <a href="/admin/noticiaRegister" class="boton-derecha">Regresar</a>
+      <a href="/admin/noticias" class="boton-derecha">Regresar</a>
   </div>
   <br> <br> <br>
   <div class="seccion-formulario">
     <h1>Registro de Noticias</h1>
-    <form enctype="multipart/form-data" action="/noticias" method="POST">
+    <form enctype="multipart/form-data" action="/updatenoticias/<%= noticia.id %>" method="POST">
 
         <label for="titulo">Título:</label>
-        <input type="text" class="form-control" id="titulo" name="titulo" required>
+        <input type="text" class="form-control" id="titulo" name="titulo" value="<%= noticia.titulo %>" required>
 
         <label for="fecha">Fecha:</label>
-        <input type="date" class="form-control" id="fecha" name="fecha" required>
+        <input type="date" class="form-control" id="fecha" name="fecha" value="<%= noticia.fecha %>" required>
 
         <label for="categoria">Categoría:</label>
-        <input type="text" class="form-control" id="categoria" name="categoria" required>
+        <input type="text" class="form-control" id="categoria" name="categoria" value="<%= noticia.categoria %>" required>
 
         <label for="descripcion">Descripción:</label>
-        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required><%= noticia.descripcion %></textarea>
 
         <label for="imagen">Imagen:</label>
-        <input type="file" class="form-control-file" id="imagen" name="imagen" accept="imagen" >
+        <!-- Muestra la imagen actual si existe -->
+        <% if (noticia.imagen) { %>
+            <img src="/uploads/noticias/<%= noticia.imagen %>" alt="Imagen actual" style="max-width: 200px; max-height: 200px;">
+        <% } %>
+        <input type="file" class="form-control-file" id="imagen" name="imagen" accept="image/*" >
 
-        <button type="submit" class="btn btn-primary">Registrar</button>
+        <button type="submit" class="btn btn-primary">Actualizar</button>
 
-      </form>
+    </form>
   </div>
 </div>
 </body>
 </html>
-
-
-
-
-
-
