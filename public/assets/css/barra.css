@@ -240,3 +240,24 @@ textarea#descripcion {
         flex: 0 0 calc( 20% - 1rem);
     }
 }
+@media (max-width: 767px) {
+    .sidebar {
+        width: 100%;
+        position: static;
+        /* Change the position to static so the sidebar doesn't overlap with the content */
+    }
+
+    .content {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .sidebar {
+        width: 50%; /* Adjust the width as needed for medium-sized screens */
+    }
+
+    .content {
+        margin-left: 50%; /* Make room for the sidebar */
+    }
+}
