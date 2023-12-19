@@ -70,6 +70,15 @@ exports.About = (req,res) =>{
         isFooter: true
     })
 }
+exports.Blogs = (req,res) =>{
+    res.render('public/blogs',{
+        isHome: true,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: false,
+        isFooter: true
+    })
+}
 exports.home6 = (req,res) =>{
     res.render('public/home6',{
         isHome: false,

@@ -41,17 +41,23 @@ exports.usuarioAutenticado = async (req, res, next) => {
         // Definir las rutas permitidas para cada rol
         const rutasPermitidas = {
 
-            //'admin': ['/admin/home', '/admin/register','/admin/blogRegister','/admin/mantenimientoUsu','/admin/noticiaRegister','/admin/noticias','/admin/noticias/register','/admin/eventoRegister','/admin/eventos','/admin/eventos/register','/admin/eventos/editar','/cerrar-sesion'],
-
             'admin': ['/admin/home', '/admin/register','/admin/blog','/admin/blog/blogRegister','/admin/mantenimientoUsu','/admin/noticiaRegister','/admin/noticias/editar/','/admin/noticias','/admin/noticias/register','/admin/eventoRegister','/admin/eventos','/admin/eventos/register','/admin/eventos/editar','/cerrar-sesion'],
             'trabajador': ['/trabajador/home','/trabajador/pagoRegister','/cerrar-sesion'],
             'cliente': ['/cliente/home','/cerrar-sesion','/cliente/AddDocument']
         };
         const rutaActual = req.path;
         const rutaBaseEditarNoticias = '/admin/noticias/editar/';
+
         const rutaBaseEditarEvento = '/admin/eventos/editar';
         
-        if (rolUsuario === 'admin' && (rutaActual.startsWith(rutaBaseEditarNoticias) || rutaActual.startsWith(rutaBaseEditarEvento))) {
+        if (rolUsuario === 'admin' && rutaActual.startsWith(rutaBaseEditarEvento)) {
+
+        const rutaBaseEditarBlog = '/admin/blog/editar/';
+        if (rolUsuario === 'admin' && rutaActual.startsWith(rutaBaseEditarBlog)) {
+            return next();
+        }
+        if (rolUsuario === 'admin' && rutaActual.startsWith(rutaBaseEditarNoticias)) {
+
             return next();
         }
         // Verificar si la ruta actual está permitida para el rol del usuario
