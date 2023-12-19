@@ -38,6 +38,21 @@ exports.blogRegister = (req,res) =>{
 });
 }
 
+exports.BlogEditar = async (req,res) =>{
+    const Blogs = req.params.idBlogs;
+    const blog = await Noticias.findByPk(Blogs, {
+        include: Usuario,
+    });    // Limpiar el mensaje para que no se muestre más de una vez
+    res.render('admin/blog/blogEditar',{
+        isHome: false,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: true,
+        blog,
+        isFooter: false
+
+});
+}
 exports.blogHome = async (req,res) =>{
     const blogs = await blog.findAll() //Obtener todo los usuarios en la tabla
     res.render('admin/blog/home',{
