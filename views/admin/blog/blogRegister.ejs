@@ -5,37 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/assets/css/barra.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
+    <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
 </head>
 <body>
     
 <div class="content">
   <div class="seccion-botones">
       <!-- Contenido principal de la página -->
-      <a href="/admin/blogRegister" class="boton-derecha">Regresar</a>
+      <a href="/admin/blog" class="boton-derecha">Regresar</a>
   </div>
   <br> <br> <br>
   <div class="seccion-formulario">
     <h1>Registro de Blog</h1>
-    <form action="/blogs" method="POST">
-     
-        <label for="titulo">Título:</label>
-        <input type="text" class="form-control" id="titulo" name="titulo" required>
-     
-        <label for="fecha">Fecha:</label>
-        <input type="date" class="form-control" id="fecha" name="fecha" required>
-      
-        <label for="categoria">Categoría:</label>
-        <input type="text" class="form-control" id="categoria" name="categoria" required>
-    
-        <label for="descripcion">Descripción:</label>
-        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
-      
-        <label for="foto">Foto:</label>
-        <input type="file" class="form-control-file" id="imagen" name="imagen" accept="imagen" onchange="previewImage()">
+    <form enctype="multipart/form-data" action="/blogs" method="POST">
 
-        <button type="submit" class="btn btn-primary">Registrar</button>
+      <label for="titulo">Título:</label>
+      <input type="text" class="form-control" id="titulo" name="titulo" required>
 
-      </form>
+      <label for="fecha">Fecha:</label>
+      <input type="date" class="form-control" id="fecha" name="fecha" required>
+
+      <label for="categoria">Categoría:</label>
+      <!-- Cambiado a un campo de selección múltiple -->
+      <select class="form-control" id="categoria" name="categoria" multiple required>
+          <!-- Opciones de categorías -->
+          <option value="categoria1">Categoría 1</option>
+          <option value="categoria2">Categoría 2</option>
+          <!-- Agrega más opciones según sea necesario -->
+      </select>
+
+      <label for="descripcion">Descripción:</label>
+      <div class="form-control">
+        <input type="hidden" id="x" name="descripcion">
+        <trix-editor input="x"></trix-editor>
+      </div>
+      <!-- <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea> -->
+
+      <label for="imagen">Imagen:</label>
+      <input type="file" class="form-control-file" id="imagen" name="imagen" accept="image/*" required>
+
+      <button type="submit" class="btn btn-primary">Registrar</button>
+    </form>
   </div>
 </div>
 </body>
