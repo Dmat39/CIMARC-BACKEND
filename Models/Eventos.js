@@ -2,7 +2,6 @@ const { DataTypes } = require('sequelize');
 const db = require('../config/db.js');
 const Usuario = require('./Usuario.js');
 
-
 const Eventos = db.define('Eventos', {
     id: {
         type: DataTypes.UUID,
@@ -50,11 +49,11 @@ const Eventos = db.define('Eventos', {
         }
     },
     documentos: {
-        type: DataTypes.JSON, // Change to JSON type to store an array of documents
+        type: DataTypes.JSON, // Cambiado a JSON type para almacenar un array de documentos
         allowNull: true
     },
     imagen: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.JSON, // Cambiado a JSON type para almacenar un array de imágenes
         allowNull: true
     },
     calle: {
@@ -76,4 +75,3 @@ Usuario.hasMany(Eventos, { foreignKey: 'userid' });
 Eventos.belongsTo(Usuario, { foreignKey: 'userid' });
 
 module.exports = Eventos;
-
