@@ -10,7 +10,7 @@ const configuracionMulter = {
     limits: { fileSize: 50000000 },  // límite de tamaño en bytes
     storage: multer.diskStorage({
         destination: (req, file, next) => {
-            next(null, path.join(__dirname, '../../uploads/eventos/documentos'));
+            next(null, path.join(__dirname, '../../uploads/eventos'));
             
         },
         filename: (req, file, next) => {
@@ -35,7 +35,7 @@ const configuracionMulter2 = {
     limits: { fileSize: 50000000 },  // límite de tamaño en bytes
     storage: multer.diskStorage({
         destination: (req, file, next) => {
-            next(null, path.join(__dirname, '../../uploads/eventos/imagenes'));
+            next(null, path.join(__dirname, '../../uploads/eventos'));
             
         },
         filename: (req, file, next) => {
@@ -112,8 +112,6 @@ exports.nuevoEvento = async(req,res,next) =>{
          // Verificar si se ha subido un documento
         if( req.file && req.file.filename){
             evento.documentos = req.file.filename;
-        }
-        if( req.file && req.file.filename){
             evento.imagen = req.file.filename;
         }
         //almacenar un registro

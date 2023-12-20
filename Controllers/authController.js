@@ -47,7 +47,6 @@ exports.usuarioAutenticado = async (req, res, next) => {
         };
         const rutaActual = req.path;
         const rutaBaseEditarNoticias = '/admin/noticias/editar/';
-
         const rutaBaseEditarBlog = '/admin/blog/editar/';
                     
         
