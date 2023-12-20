@@ -36,25 +36,24 @@
                 <label for="categoria">Categoría:</label>
                 <!-- Cambiado a un campo de selección múltiple -->
                 <select class="form-control" id="categoria" name="categoria" multiple required>
-                <!-- Opciones de categorías -->
-                <option value="categoria1">Categoría 1</option>
-                <option value="categoria2">Categoría 2</option>
-                <option value="categoria3">Categoría 3</option>
-                <!-- Agrega más opciones según sea necesario -->
+                    <!-- Opciones de categorías -->
+                    <option value="categoria1">Categoría 1</option>
+                    <option value="categoria2">Categoría 2</option>
+                    <!-- Agrega más opciones según sea necesario -->
                 </select>
 
                 <label for="descripcion">Descripción:</label>
                 <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
 
-                <label for="documento">Documento:</label>
-                <input type="file" class="form-control-file" id="documento" name="documento" accept=".pdf, .doc, .docx" required>
+                 <label for="documentos">Documento:</label>
+                <input type="file" class="form-control-file" name="documentos" id="documentos"> 
 
                 <label for="imagen">Imagen:</label>
                 <input type="file" class="form-control-file" id="imagen" name="imagen" accept="image/*" required>
 
                 <!-- Contenedor donde se mostrará el mapa con un tamaño fijo -->
 
-                <div>
+                 <div>
                     <h3>Ubicacion</h3>
                     <p>Ubica la propiedad en el mapa</p>
 
@@ -67,7 +66,7 @@
                     <input type="hidden" name="calle" id="calle" value="{{ datos.calle ? datos.calle : '' }}">
                     <input type="hidden" name="lat" id="lat" value="{{ datos.lat ? datos.lat : '' }}">
                     <input type="hidden" name="lng" id="lng" value="{{ datos.lng ? datos.lng : '' }}">
-                </div>
+                </div> 
 
                 <!-- Botón para registrar -->
                 <button type="submit" class="btn btn-primary">Registrar</button>
@@ -77,12 +76,12 @@
     </div>
 
     <!-- Incluir las bibliotecas Leaflet y Esri -->
-    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"></script>
+     <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"></script>
     <script src="https://unpkg.com/esri-leaflet@3.0.8/dist/esri-leaflet.js"></script>
     <script src="https://unpkg.com/esri-leaflet-geocoder@2.2.13/dist/esri-leaflet-geocoder.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geosearch/2.7.0/bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geosearch/2.7.0/bundle.min.js"></script> 
     <!-- Tu script Leaflet -->
-    <script src="/js/mapa.js"></script>
+     <script src="/js/mapa.js"></script> 
 
 </body>
 </html>

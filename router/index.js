@@ -381,8 +381,8 @@ module.exports = function () {
      //Agregar Eventos
      router.post('/eventos',
 
-        EventosController.subirArchivoEvento,
-        EventosController.subirImagenEvento,
+        EventosController.subirArchivo,
+        //EventosController.subirImagen,
         EventosController.nuevoEvento
      )
 
@@ -409,7 +409,8 @@ module.exports = function () {
 
     //Actualizar Eventos ByUserId and EventosId
      router.put('/trabajador-eventos/:userid/eventos/:idEventos',
-        EventosController.subirArchivoEvento,
+        EventosController.subirArchivo,
+        //EventosController.subirImagen,
         EventosController.actualizarEventoIdByUser
     );
 
@@ -420,8 +421,8 @@ module.exports = function () {
 
      // Actualizar Eventos
      router.put('/trabajador-eventos/:idEventos',
-        EventosController.subirArchivoEvento,
-        EventosController.subirImagenEvento,
+        EventosController.subirArchivo,
+        //EventosController.subirImagen,
         EventosController.actualizarEventos
     );
 
