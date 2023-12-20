@@ -6223,48 +6223,48 @@ tarjeta secretaria general
   margin-bottom: 20px;
   margin-right: 20px; /* Espacio entre cada container en el lado derecho */
 }
-.our-team-block .container .list-member .col-12 .member-container {
+.our-team-block .container .list-service .col-12 .member-container {
   display: flex;
   width: 100%;
 }
 
-.our-team-block .container .list-member .col-12 .bg-img {
+.our-team-block .container .list-service .col-12 .col-md-6 .bg-img {
   width: 50%; /* Ancho de la imagen del miembro */
   overflow: hidden;
   border-radius: 15px 0 0 15px; /* Esquina redondeada en la esquina superior izquierda y esquina inferior izquierda */
 }
 
-.our-team-block .container .list-member .col-12 .bg-img img {
+.our-team-block .container .list-service .col-12 .col-md-6 .bg-img img {
   transition: all ease 0.5s;
     width: 100%;
     height: 100%;
     object-fit: cover; /* Ajustamos la imagen para cubrir todo el contenedor */
 }
-.our-team-block .container .list-member .col-12 .infor {
+.our-team-block .container .list-member .col-12 .col-md-6 .infor {
   width: 50%; /* Ancho de la información del miembro */
   padding: 20px;
   box-sizing: border-box;
 }
 
-.our-team-block .container .list-member .col-12 .name {
+.our-team-block .container .list-member .col-12 .col-md-6 .name {
   font-size: 24px; /* Tamaño de fuente del nombre */
   text-transform: uppercase; /* Convertir el nombre a mayúsculas */
 }
 
-.our-team-block .container .list-member .col-12 .position {
+.our-team-block .container .list-member .col-12 .col-md-6 .position {
   background-color: #007bff; /* Fondo azul */
   color: #ffffff; /* Texto blanco */
   padding: 10px;
   border-radius: 5px; /* Esquinas redondeadas */
 }
 
-.our-team-block .container .list-member .col-12 .description {
+.our-team-block .container .list-member .col-12 .col-md-6 .description {
   color: #333; /* Color de texto para la descripción */
 }
-.our-team-block .container .list-service .col-12 .bg-img {
+.our-team-block .container .list-service .col-12 .col-md-6 .bg-img {
   position: relative; /* Añade esta línea */
 }
-.our-team-block .container .list-service .col-12 .bg-img .list-social {
+.our-team-block .container .list-service .col-12 .col-md-6 .bg-img .list-social {
   display: flex;
   flex-direction: column;
   row-gap: 8px;
@@ -6277,10 +6277,10 @@ tarjeta secretaria general
   opacity: 0; /* Añade esta línea */
   transition: opacity 0.5s ease; /* Añade esta línea */
 }
-.our-team-block .container .list-service .col-12 .bg-img:hover .list-social {
+.our-team-block .container .list-service .col-12 .col-md-6 .bg-img:hover .list-social {
   opacity: 1; /* Añade esta línea */
 }
-.our-team-block .container .list-service .col-12 .bg-img .list-social a {
+.our-team-block .container .list-service .col-12 .col-md-6 .bg-img .list-social a {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6288,19 +6288,19 @@ tarjeta secretaria general
   width: 30px;
   height: 30px;
 }
-.our-team-block .container .list-service .col-12 .bg-img .list-social a i {
+.our-team-block .container .list-service .col-12 .col-md-6 .bg-img .list-social a i {
   margin-left: 2px;
 }
-.our-team-block .container .list-service .col-12 .bg-img .list-social a i::before {
+.our-team-block .container .list-service .col-12 .col-md-6 .bg-img .list-social a i::before {
   color: var(--on-surface);
 }
-.our-team-block .container .list-service .col-12 .bg-img .list-social a:hover {
+.our-team-block .container .list-service .col-12 .col-md-6 .bg-img .list-social a:hover {
   background-color: var(--blue);
 }
-.our-team-block .container .list-service .col-12 .bg-img .list-social a:hover i::before {
+.our-team-block .container .list-service .col-12 .col-md-6 .bg-img .list-social a:hover i::before {
   color: var(--white);
 }
-.our-team-block .container .list-service .col-12 .infor .name {
+.our-team-block .container .list-service .col-12 .col-md-6 .infor .name {
   transition: all ease-in-out 0.3s;
 }
 .our-team-block .container .list-service .col-12:hover {

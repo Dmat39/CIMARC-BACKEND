@@ -28,6 +28,8 @@ module.exports = function () {
     router.get('/noticias',homeController.NoticiasVista)
     router.get('/noticias/:id',homeController.noticiaDetail)
     router.get('/home6',homeController.home6)
+    //**Blogs */
+    router.get('/blogs',homeController.Blogs);
     /**Service*/
     router.get('/service',homeController.service);
     router.get('/service/conciliacion',homeController.serviceConciliacion);
@@ -50,14 +52,7 @@ module.exports = function () {
         authController.usuarioAutenticado,
         AdminHomeController.homeAdmin
     );
-    /**Blog*/
-    router.get('/admin/blog/blogRegister',
-        authController.usuarioAutenticado,
-        AdminHomeController.blogRegister);
-    router.get('/admin/blog',
-        authController.usuarioAutenticado,
-        AdminHomeController.blogHome);
-    
+
     /**Mantenimiento Usuarios */
     router.get('/admin/mantenimientoUsu',
         authController.usuarioAutenticado,
@@ -88,6 +83,17 @@ module.exports = function () {
      authController.usuarioAutenticado,
      AdminHomeController.Noticias
      );
+    /**Blogs */
+     router.get('/admin/blog/blogRegister',
+        authController.usuarioAutenticado,
+        AdminHomeController.blogRegister);
+     router.get('/admin/blog/editar/:idBlogs',
+        authController.usuarioAutenticado,
+        AdminHomeController.BlogEditar);
+     router.get('/admin/blog',
+        authController.usuarioAutenticado,
+        AdminHomeController.blogHome);
+    
     /**EVENTOS**/
      router.get('/admin/eventos/register',
      authController.usuarioAutenticado,
@@ -455,7 +461,7 @@ module.exports = function () {
         BlogsController.actualizarBlog,
      );
      // Eliminar Blogs
-      router.delete('/blogs/:idBlogs',
+      router.get('/deleteblogs/:idBlogs',
         BlogsController.eliminarBlog
     );
      // Mostrar Blogs por ByUserId
