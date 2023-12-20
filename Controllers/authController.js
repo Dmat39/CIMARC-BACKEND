@@ -47,10 +47,12 @@ exports.usuarioAutenticado = async (req, res, next) => {
         };
         const rutaActual = req.path;
         const rutaBaseEditarNoticias = '/admin/noticias/editar/';
+
         const rutaBaseEditarEvento = '/admin/eventos/editar';
         const rutaBaseEditarBlog = '/admin/blog/editar/';
         
         if (rolUsuario === 'admin' && rutaActual.startsWith(rutaBaseEditarEvento)) {
+
 
             return next();
         }
@@ -69,16 +71,12 @@ exports.usuarioAutenticado = async (req, res, next) => {
             return res.redirect(obtenerRutaPorRol(rolUsuario));
         }
 
-
-
-
-
-    }
-
+    
+    };
     // Si no está autenticado, redirigir a la página de inicio de sesión
     return res.redirect('/iniciar-sesion');
-};
 
+}
 // Función auxiliar para obtener la ruta correspondiente a un rol
 function obtenerRutaPorRol(rol) {
     const rutasPorRol = {
