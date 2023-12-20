@@ -57,7 +57,13 @@ module.exports = function () {
     router.get('/admin/blog',
         authController.usuarioAutenticado,
         AdminHomeController.blogHome);
+
+        router.get('/admin/blog/editar/:idBlog',
+        authController.usuarioAutenticado,
+        AdminHomeController.BlogsEditar);
     
+
+
     /**Mantenimiento Usuarios */
     router.get('/admin/mantenimientoUsu',
         authController.usuarioAutenticado,
@@ -444,12 +450,12 @@ module.exports = function () {
         BlogsController.mostrarBlogID
      );   
      // Actualizar Blogs
-      router.put('/blogs/:idBlogs',
+      router.post('/updateblogs/:idBlogs',
         BlogsController.subirArchivoBlog,
         BlogsController.actualizarBlog,
      );
      // Eliminar Blogs
-      router.delete('/blogs/:idBlogs',
+      router.get('/deleteblogs/:idBlogs',
         BlogsController.eliminarBlog
     );
      // Mostrar Blogs por ByUserId

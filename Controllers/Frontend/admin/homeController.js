@@ -49,6 +49,21 @@ exports.blogHome = async (req,res) =>{
         blogs
 });
 }
+exports.BlogsEditar = async (req,res) =>{
+    const blogId = req.params.idBlog;
+    const blogUsuario = await blog.findByPk(blogId, {
+        include: Usuario,
+    });    // Limpiar el mensaje para que no se muestre más de una vez
+    res.render('admin/blog/blogEditar',{
+        isHome: false,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: true,
+        blogUsuario,
+        isFooter: false
+
+});
+}
 
 exports.Noticias = async (req,res) =>{
     const successMessage = req.session.successMessage;
