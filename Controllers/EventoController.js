@@ -161,42 +161,35 @@ exports.actualizarEventos = async (req, res, next) => {
         // Construir un nuevo caso
         let nuevoEvento = req.body;
 
-        // Verificar si hay un archivo nuevo
+        // Obtener el caso anterior para obtener nombres de archivos antiguos
+        let eventonterior = await Eventos.findByPk(req.params.idEventos);
+
+        // Verificar si hay un archivo nuevo (documentos)
         if (req.file && req.file.filename) {
             nuevoEvento.documentos = req.file.filename;
 
-            // Obtener el caso anterior para borrar el archivo antiguo
-            let eventonterior = await Eventos.findByPk(req.params.idEventos);
-            if ( eventonterior.documentos) {
-                // Construir la ruta completa al archivo antiguo
-                const rutaArchivoAntiguo = path.join(__dirname, `../uploads/eventos/documentos${eventonterior.documentos}`);
-
-                // Borrar el archivo antiguo
-                await fs.unlink(rutaArchivoAntiguo);
-            }
+        // Borrar el archivo antiguo (documentos)
+        if (eventonterior.documentos) {
+            const rutaArchivoAntiguo = path.join(__dirname, `../uploads/eventos/documentos/${eventonterior.documentos}`);
+            await fs.unlink(rutaArchivoAntiguo);
+    }
         } else {
-            // Obtener el caso anterior para mantener el nombre del documento
-            let eventonterior = await Eventos.findByPk(req.params.idEventos);
-            nuevoEvento.documentos = eventonterior.documentos;
+        // Mantener el nombre del documento anterior
+        nuevoEvento.documentos = eventonterior.documentos;
         }
 
-         // Verificar si hay una imagen nueva
-         if (req.file && req.file.filename) {
+        // Verificar si hay una imagen nueva
+        if (req.file && req.file.filename) {
             nuevoEvento.imagen = req.file.filename;
 
-            // Obtener el caso anterior para borrar el archivo antiguo
-            let eventonterior = await Eventos.findByPk(req.params.idEventos);
-            if ( eventonterior.imagen) {
-                // Construir la ruta completa al archivo antiguo
-                const rutaArchivoAntiguo = path.join(__dirname, `../uploads/eventos/imagenes${eventonterior.imagen}`);
-
-                // Borrar el archivo antiguo
-                await fs.unlink(rutaArchivoAntiguo);
-            }
+        // Borrar el archivo antiguo (imagen)
+        if (eventonterior.imagen) {
+        const rutaArchivoAntiguo = path.join(__dirname, `../uploads/eventos/imagen/${eventonterior.imagen}`);
+        await fs.unlink(rutaArchivoAntiguo);
+        }
         } else {
-            // Obtener el caso anterior para mantener el nombre del documento
-            let eventonterior = await Eventos.findByPk(req.params.idEventos);
-            nuevoEvento.imagen = eventonterior.imagen;
+        // Mantener el nombre de la imagen anterior
+        nuevoEvento.imagen = eventonterior.imagen;
         }
 
         // Actualizar el caso en la base de datos y obtener el número de filas afectadas
@@ -210,7 +203,8 @@ exports.actualizarEventos = async (req, res, next) => {
             const eventoActualizado = await Eventos.findByPk(req.params.idEventos);
 
             // Enviar la respuesta JSON con el caso actualizado
-            res.json(eventoActualizado);
+            //res.json(eventoActualizado);
+            res.redirect('/admin/eventos');
             
         } else {
             // Si numFilasActualizadas es 0, significa que el caso no fue encontrado o no se actualizó correctamente
@@ -389,7 +383,7 @@ exports.eliminarEventos = async (req, res, next) => {
         }
 
         if (eventoAEliminar.imagen) {
-            const rutaArchivo = path.join(__dirname, `../uploads/eventos/imagenes/${eventoAEliminar.imagen}` );
+            const rutaArchivo = path.join(__dirname, `../uploads/eventos/imagen/${eventoAEliminar.imagen}` );
             await fs.unlink(rutaArchivo);
         }
 
@@ -397,7 +391,8 @@ exports.eliminarEventos = async (req, res, next) => {
         await eventoAEliminar.destroy();
 
         //console.log('Ruta del archivo a eliminar:', rutaArchivo); verificar la ruta
-        res.json({ mensaje: 'Caso eliminado exitosamente' });
+        //res.json({ mensaje: 'Caso eliminado exitosamente' });
+        res.redirect('/admin/eventos');
     } catch (error) {
         console.log(error);
         next(error);

@@ -18,7 +18,7 @@
     </div>
     <br>
     <h1>Listado de Eventos</h1>
-        <div class="lista-eventos">
+        <div class="lista-conocimientos">
             <table>
                 <thead>
                     <tr>
@@ -53,15 +53,15 @@
                             <td><%= evento.calle %></td>
                             <td class="acciones">
                                 <button  type="submit">
-                                    <a href="/eventos/<%= evento.id %>">Ver</a>
+                                    <a href="/eventos/<%= evento.id %>" class="btn btn-rojo">Ver</a>
                                 </button>
                                 <button>
-                                    <a href="/admin/eventos/editar/<%= evento.id %>">editar</a>
+                                    <a href="/admin/eventos/editar/<%= evento.id %>" class="btn btn-rojo">editar</a>
                                 </button>
                                 <button>
                                     <a href="/deleteeventos/<%= evento.id %>" class="btn btn-rojo">Eliminar</a>
                                 </button>
-                            </td>  
+                            </td>   
                         </tr>
                     <% }); %>
                 </tbody>

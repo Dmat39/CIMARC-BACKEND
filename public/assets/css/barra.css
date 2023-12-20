@@ -130,7 +130,7 @@ table {
 }
 
 th, td {
-    border: 1px solid #ddd;
+    border: 7px solid #ddd; /* Ajusta el grosor del borde según tus preferencias */
     padding: 8px;
     text-align: left;
 }
@@ -144,6 +144,7 @@ button {
     padding: 5px 10px;
     margin-right: 5px;
     cursor: pointer;
+    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño total del botón */
 }
 
 .seccion-formulario {
