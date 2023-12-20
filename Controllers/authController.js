@@ -50,9 +50,7 @@ exports.usuarioAutenticado = async (req, res, next) => {
 
         const rutaBaseEditarBlog = '/admin/blog/editar/';
                     
-        if (rolUsuario === 'admin' && rutaActual.startsWith(rutaBaseEditarBlog)) {
-            return next();
-        }
+        
         if (rolUsuario === 'admin' && rutaActual.startsWith(rutaBaseEditarBlog)) {
 
             return next();
