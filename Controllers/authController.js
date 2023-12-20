@@ -51,7 +51,11 @@ exports.usuarioAutenticado = async (req, res, next) => {
         const rutaBaseEditarNoticias = '/admin/noticias/editar/';
         const rutaBaseEditarEvento = '/admin/eventos/editar';
         
-        if (rolUsuario === 'admin' && (rutaActual.startsWith(rutaBaseEditarNoticias) || rutaActual.startsWith(rutaBaseEditarEvento))) {
+        if (rolUsuario === 'admin' && rutaActual.startsWith(rutaBaseEditarEvento)) {
+            return next();
+        }
+        if (rolUsuario === 'admin' && rutaActual.startsWith(rutaBaseEditarNoticias)) {
+          
             return next();
         }
         // Verificar si la ruta actual está permitida para el rol del usuario
