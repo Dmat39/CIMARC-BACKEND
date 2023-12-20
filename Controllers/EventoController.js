@@ -7,11 +7,21 @@ const path = require('path'); // Importar el módulo path
 
 
 const configuracionMulter = {
-    limits: { fileSize: 50000000 },  // límite de tamaño en bytes
+    limits: { fileSize: 100000 },  // límite de tamaño en bytes
     storage: multer.diskStorage({
         destination: (req, file, next) => {
-            next(null, path.join(__dirname, '../../uploads/eventos'));
-            
+            let destinationFolder;
+
+            // Decide la carpeta de destino en función del tipo de archivo
+            if (file.fieldname === 'documentos') {
+                destinationFolder = __dirname + '../../uploads/eventos/documentos';
+            } else if (file.fieldname === 'imagen') {
+                destinationFolder = __dirname + '../../uploads/eventos/imagen';
+            } else {
+                return next(new Error('Tipo de archivo no válido'));
+            }
+
+            next(null, destinationFolder);
         },
         filename: (req, file, next) => {
             const extension = file.originalname.split('.').pop();  // obtener la extensión del archivo original
@@ -19,7 +29,16 @@ const configuracionMulter = {
         }
     }),
     fileFilter: (req, file, next) => {
-        const allowedFileTypes = ['application/pdf','application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+        let allowedFileTypes;
+
+        // Define los tipos de archivo permitidos según el campo del formulario
+        if (file.fieldname === 'documentos') {
+            allowedFileTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+        } else if (file.fieldname === 'imagen') {
+            allowedFileTypes = ['image/jpeg', 'image/png'];
+        } else {
+            return next(new Error('Tipo de archivo no válido'));
+        }
 
         if (allowedFileTypes.includes(file.mimetype)) {
             // el formato es válido
@@ -30,37 +49,12 @@ const configuracionMulter = {
         }
     }
 };
-
-const configuracionMulter2 = {
-    limits: { fileSize: 50000000 },  // límite de tamaño en bytes
-    storage: multer.diskStorage({
-        destination: (req, file, next) => {
-            next(null, path.join(__dirname, '../../uploads/eventos'));
-            
-        },
-        filename: (req, file, next) => {
-            const extension = file.originalname.split('.').pop();  // obtener la extensión del archivo original
-            next(null, `${shortid.generate()}.${extension}`);
-        }
-    }),
-    fileFilter: (req, file, next) => {
-        const allowedFileTypes = ['image/jpeg', 'image/png'];
-
-        if (allowedFileTypes.includes(file.mimetype)) {
-            // el formato es válido
-            next(null, true);
-        } else {
-            // el formato no es válido
-            next(new Error('Formato no válido'), false);
-        }
-    }
-};
-
-const upload = multer(configuracionMulter).single('documento');
-const upload2 = multer(configuracionMulter2).single('imagen'); // Cambiado a 'documentos' en lugar de 'imagen'
-
+const upload = multer(configuracionMulter).fields([
+    { name: 'documentos', maxCount: 1 },
+    { name: 'imagen', maxCount: 1 }
+]);
 // sube archivo en el servidor
-exports.subirArchivoEvento = (req, res, next) => {
+exports.subirArchivo = (req, res, next) => {
     upload(req, res, function (error) {
         if (error) {
             if (error instanceof multer.MulterError) {
@@ -81,49 +75,31 @@ exports.subirArchivoEvento = (req, res, next) => {
     });
 };
 
-exports.subirImagenEvento = (req, res, next) => {
-    upload2(req, res, function (error) {
-        if (error) {
-            if (error instanceof multer.MulterError) {
-                if (error.code === 'LIMIT_FILE_SIZE') {
-                    req.flash('error', 'La imagen es muy grande');
-                } else {
-                    req.flash('error', error.message);
-                }
-            } else if (error.hasOwnProperty('message')) {
-                req.flash('error', error.message);
-            }
-            res.redirect('back');
-            return;
-            // TODO: Manejar errores
-        } else {
-            next();
-        }
-    });
-};
-
-
-// Agregar Casos
-exports.nuevoEvento = async(req,res,next) =>{
+// Agregar Evento
+exports.nuevoEvento = async (req, res, next) => {
     const evento = new Eventos(req.body);
-    evento.userid=req.user.id;
+    evento.userid = req.user.id;
 
-    try{
-         // Verificar si se ha subido un documento
-        if( req.file && req.file.filename){
-            evento.documentos = req.file.filename;
-            evento.imagen = req.file.filename;
+    try {
+        // Verificar si se ha subido un documento
+        if (req.files && req.files['documentos'] && req.files['documentos'][0].filename) {
+            evento.documentos = req.files['documentos'][0].filename;
         }
-        //almacenar un registro
+
+        // Verificar si se ha subido una imagen
+        if (req.files && req.files['imagen'] && req.files['imagen'][0].filename) {
+            evento.imagen = req.files['imagen'][0].filename;
+        }
+
+        // Almacenar un registro
         await evento.save();
         res.redirect('/admin/eventos');
-    }catch(error){
-        //si hay un error
+    } catch (error) {
+        // Si hay un error
         res.send(error);
         next();
     }
-
-}
+};
 // Mostrar Eventos
 exports.mostrarEventos = async(req,res,next) =>{
     

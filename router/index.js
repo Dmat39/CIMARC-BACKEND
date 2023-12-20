@@ -52,6 +52,19 @@ module.exports = function () {
         authController.usuarioAutenticado,
         AdminHomeController.homeAdmin
     );
+    /**Blog*/
+    router.get('/admin/blog/blogRegister',
+        authController.usuarioAutenticado,
+        AdminHomeController.blogRegister);
+    router.get('/admin/blog',
+        authController.usuarioAutenticado,
+        AdminHomeController.blogHome);
+
+        router.get('/admin/blog/editar/:idBlog',
+        authController.usuarioAutenticado,
+        AdminHomeController.BlogsEditar);
+    
+
 
     /**Mantenimiento Usuarios */
     router.get('/admin/mantenimientoUsu',
@@ -381,8 +394,8 @@ module.exports = function () {
      //Agregar Eventos
      router.post('/eventos',
 
-        EventosController.subirArchivoEvento,
-        EventosController.subirImagenEvento,
+        EventosController.subirArchivo,
+        //EventosController.subirImagen,
         EventosController.nuevoEvento
      )
 
@@ -409,7 +422,8 @@ module.exports = function () {
 
     //Actualizar Eventos ByUserId and EventosId
      router.put('/trabajador-eventos/:userid/eventos/:idEventos',
-        EventosController.subirArchivoEvento,
+        EventosController.subirArchivo,
+        //EventosController.subirImagen,
         EventosController.actualizarEventoIdByUser
     );
 
@@ -420,8 +434,8 @@ module.exports = function () {
 
      // Actualizar Eventos
      router.put('/trabajador-eventos/:idEventos',
-        EventosController.subirArchivoEvento,
-        EventosController.subirImagenEvento,
+        EventosController.subirArchivo,
+        //EventosController.subirImagen,
         EventosController.actualizarEventos
     );
 
@@ -456,7 +470,7 @@ module.exports = function () {
         BlogsController.mostrarBlogID
      );   
      // Actualizar Blogs
-      router.put('/blogs/:idBlogs',
+      router.post('/updateblogs/:idBlogs',
         BlogsController.subirArchivoBlog,
         BlogsController.actualizarBlog,
      );
