@@ -68,10 +68,10 @@ exports.usuarioAutenticado = async (req, res, next) => {
         }
 
     
-
+    };
     // Si no está autenticado, redirigir a la página de inicio de sesión
     return res.redirect('/iniciar-sesion');
-    };
+
 }
 // Función auxiliar para obtener la ruta correspondiente a un rol
 function obtenerRutaPorRol(rol) {
