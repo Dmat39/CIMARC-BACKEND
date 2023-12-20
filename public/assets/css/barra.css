@@ -68,7 +68,7 @@ body {
     float: right;
     margin-right: 20px;
     padding: 10px;
-    background-color: #4CAF50; /* Color de fondo */
+    background-color: #3b4243; /* Color de fondo */
     color: white; /* Color del texto */
     border: none;
     border-radius: 5px;
@@ -77,7 +77,7 @@ body {
 }
 
 .boton-derecha:hover {
-    background-color: #45a049; /* Cambio de color al pasar el ratón */
+    background-color: hsl(183, 63%, 47%); /* Cambio de color al pasar el ratón */
 }
 
 /* Estilos para el formulario de inicio de sesión */

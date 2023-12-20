@@ -52,6 +52,19 @@ module.exports = function () {
         authController.usuarioAutenticado,
         AdminHomeController.homeAdmin
     );
+    /**Blog*/
+    router.get('/admin/blog/blogRegister',
+        authController.usuarioAutenticado,
+        AdminHomeController.blogRegister);
+    router.get('/admin/blog',
+        authController.usuarioAutenticado,
+        AdminHomeController.blogHome);
+
+        router.get('/admin/blog/editar/:idBlog',
+        authController.usuarioAutenticado,
+        AdminHomeController.BlogsEditar);
+    
+
 
     /**Mantenimiento Usuarios */
     router.get('/admin/mantenimientoUsu',
@@ -457,7 +470,7 @@ module.exports = function () {
         BlogsController.mostrarBlogID
      );   
      // Actualizar Blogs
-      router.put('/blogs/:idBlogs',
+      router.post('/updateblogs/:idBlogs',
         BlogsController.subirArchivoBlog,
         BlogsController.actualizarBlog,
      );

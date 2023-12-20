@@ -140,11 +140,12 @@ exports.actualizarBlog = async (req, res, next) => {
             const blogActualizado = await Blogs.findByPk(req.params.idBlogs);
 
             // Enviar la respuesta JSON con el caso actualizado
-            res.json(blogActualizado);
+            res.redirect('/admin/blog');
         } else {
             // Si numFilasActualizadas es 0, significa que el caso no fue encontrado o no se actualizó correctamente
             console.log('No se actualizaron filas.');
             return res.status(404).json({ mensaje: 'Blog no encontrado' });
+            res.redirect('/admin/blog');
         }
     } catch (error) {
         console.log(error);
@@ -271,13 +272,13 @@ exports.actualizarBlogIdByUser = async (req, res, next) => {
         const blogActualizado = await Blogs.findByPk(req.params.idBlogs);
 
         // Enviar la respuesta JSON con el caso actualizado
-        res.json(blogActualizado);
     } else {
         // Si numFilasActualizadas es 0, significa que el caso no fue encontrado o no se actualizó correctamente
         console.log('No se actualizaron filas.');
         return res.status(404).json({ mensaje: 'blog no encontrado' });
     }
-    
+    res.redirect('/admin/blog');
+
     } catch (error) {
         console.log(error);
         next(error);
