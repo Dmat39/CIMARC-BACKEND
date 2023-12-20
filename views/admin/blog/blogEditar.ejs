@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar blog</title>
+    <link rel="stylesheet" href="/assets/css/barra.css">
+</head>
+<body>
+    
+<div class="content">
+  <div class="seccion-botones">
+      <!-- Contenido principal de la página -->
+      <a href="/admin/blog" class="boton-derecha">Regresar</a>
+  </div>
+  <br> <br> <br>
+  <div class="seccion-formulario">
+    <h1>Editar Blog</h1>
+    <form enctype="multipart/form-data" action="/updateblogs/<%= blogUsuario.id %>" method="POST">
+
+        <label for="titulo">Título:</label>
+        <input type="text" class="form-control" id="titulo" name="titulo" value="<%= blogUsuario.titulo %>" required>
+
+        <label for="fecha">Fecha:</label>
+        <input type="date" class="form-control" id="fecha" name="fecha" value="<%= blogUsuario.fecha %>" required>
+
+        <label for="categoria">Categoría:</label>
+        <!-- Cambiado a un campo de selección múltiple -->
+        <input type="text" class="form-control" id="categoria" name="categoria" value="<%= blogUsuario.categoria %>" required>
+
+
+        <label for="descripcion">Descripción:</label>
+        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" value="<%= blogUsuario.descripcion %>" required></textarea>
+
+
+        <!-- Muestra la imagen actual si existe -->
+        <% if (blogUsuario.imagen) { %>
+            <img width="200px"    src="/uploads/blogs/<%= blogUsuario.imagen %>"  alt="Imagen actual" >
+        <% } %>
+        <input type="file" class="form-control-file" id="imagen" name="imagen" accept="image/*" >
+
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+
+    </form>
+  </div>
+</div>
+</body>
+</html>
