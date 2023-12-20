@@ -24,12 +24,12 @@
         </div>
       <br>
       <h1>Listado de Noticias</h1>
-          <div class="lista-usuarios">
+          <div class="lista-conocimientos">
               <table>
                   <thead>
                       <tr>
                           <th>titulo</th>
-                          <th>descripcion</th>
+                          <!-- <th>descripcion</th> -->
                           <th>fecha</th>
                           <th>categoria</th>
                           <th>imagen</th>
@@ -40,7 +40,7 @@
                         <% noticias.forEach(noticia => { %>
                             <tr>
                                 <td><%= noticia.titulo %></td>
-                                <td><%= noticia.descripcion %></td>
+                                <!-- <td><%= noticia.descripcion %></td> -->
                                 <td><%= noticia.fecha %></td>
                                 <td><%= noticia.categoria %></td>
                                 <td><% if(noticia.imagen) {%>

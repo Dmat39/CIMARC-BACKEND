@@ -171,7 +171,8 @@ exports.eliminarBlog = async (req, res, next) => {
         await blogAEliminar.destroy();
 
         //console.log('Ruta del archivo a eliminar:', rutaArchivo); verificar la ruta
-        res.redirect('/admin/blog');    
+        // res.json({ mensaje: 'blog eliminado exitosamente' });
+        res.redirect('/admin/blog');
     } catch (error) {
         console.log(error);
         next(error);

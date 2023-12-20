@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Noticia</title>
     <link rel="stylesheet" href="/assets/css/barra.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
+    <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
 </head>
 <body>
     
@@ -33,7 +35,11 @@
         </select>
 
         <label for="descripcion">Descripción:</label>
-        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required><%= noticia.descripcion %></textarea>
+        <div class="form-control">
+            <input type="hidden" id="x" name="descripcion" value="<%= noticia.descripcion %>">
+            <trix-editor input="x"></trix-editor>
+        </div>
+        <!-- <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required><%= noticia.descripcion %></textarea> -->
 
         <label for="imagen">Imagen:</label>
         <!-- Muestra la imagen actual si existe -->
