@@ -38,6 +38,21 @@ exports.blogRegister = (req,res) =>{
 });
 }
 
+exports.BlogEditar = async (req,res) =>{
+    const Blogs = req.params.idBlogs;
+    const blog = await Noticias.findByPk(Blogs, {
+        include: Usuario,
+    });    // Limpiar el mensaje para que no se muestre más de una vez
+    res.render('admin/blog/blogEditar',{
+        isHome: false,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: true,
+        blog,
+        isFooter: false
+
+});
+}
 exports.blogHome = async (req,res) =>{
     const blogs = await blog.findAll() //Obtener todo los usuarios en la tabla
     res.render('admin/blog/home',{
@@ -101,32 +116,29 @@ exports.noticiaRegister = (req,res) =>{
 
 exports.Eventos = async (req,res) =>{
 
-try {
+    const successMessage = req.session.successMessage;
     // Obtener usuarios desde la base de datos
     const eventos = await Evento.findAll() //Obtener todo los usuarios en la tabla
 // Obtener el mensaje de la sesión si existe
-const successMessage = req.session.successMessage;
+   
 
 // Limpiar el mensaje para que no se muestre más de una vez
-delete req.session.successMessage;
+    delete req.session.successMessage;
     res.render('admin/evento/home', {
         isHome: false,
         isCliente: false,
         isJobs: false,
         isAdmin: true,
-        isFooter: false,
-        eventos: eventos,
-        successMessage// Pasar la lista de usuarios a la vista
+        eventos,
+        successMessage,
+        isFooter: false// Pasar la lista de usuarios a la vista
     });
-} catch (error) {
-    // Manejar el error apropiadamente
-    res.status(500).send('Error obteniendo usuarios');
-}
+
 }
 
 exports.eventoRegister = (req,res) =>{
 
-
+    const successMessage = req.session.successMessage;
     // Limpiar el mensaje para que no se muestre más de una vez
     delete req.session.successMessage;
     res.render('admin/evento/eventoRegister',{
@@ -134,18 +146,23 @@ exports.eventoRegister = (req,res) =>{
         isCliente: false,
         isJobs: false,
         isAdmin: true,
+        successMessage,
         isFooter: false
 
 });
 }
 
-exports.editarEvento = (req,res) =>{
+exports.editarEvento = async(req,res) =>{
+    const eventoId= req.params.idEvento;
+    const evento= await Evento.findByPk(eventoId, { 
+        include:Usuario,})
     
     res.render('admin/evento/editarEvento',{
         isHome: false,
         isCliente: false,
         isJobs: false,
         isAdmin: true,
+        evento,
         isFooter: false
 
 });

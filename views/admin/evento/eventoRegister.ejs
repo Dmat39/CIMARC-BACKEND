@@ -16,12 +16,12 @@
     <div class="content">
         <div class="seccion-botones">
             <!-- Contenido principal de la página -->
-            <a href="/admin/eventoRegister" class="boton-derecha">Regresar</a>
+            <a href="/admin/eventos" class="boton-derecha">Regresar</a>
         </div>
         <br> <br> <br>
         <div class="seccion-formulario">
             <h1>Registro de Eventos</h1>
-            <form action="/eventos" method="POST">
+            <form enctype="multipart/form-data" action="/eventos" method="POST">
 
                 <!-- Otros campos de formulario -->
                 <label for="titulo">Título:</label>
@@ -34,16 +34,23 @@
                 <input type="date" class="form-control" id="fecha" name="fecha" required>
 
                 <label for="categoria">Categoría:</label>
-                <input type="text" class="form-control" id="categoria" name="categoria" required>
+                <!-- Cambiado a un campo de selección múltiple -->
+                <select class="form-control" id="categoria" name="categoria" multiple required>
+                <!-- Opciones de categorías -->
+                <option value="categoria1">Categoría 1</option>
+                <option value="categoria2">Categoría 2</option>
+                <option value="categoria3">Categoría 3</option>
+                <!-- Agrega más opciones según sea necesario -->
+                </select>
 
                 <label for="descripcion">Descripción:</label>
                 <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
 
-                <label for="archivos">Archivos:</label>
-                <input type="file" name="documentos" accept="application/pdf, application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                <label for="documento">Documento:</label>
+                <input type="file" class="form-control-file" id="documento" name="documento" accept=".pdf, .doc, .docx" required>
 
                 <label for="imagen">Imagen:</label>
-                <input type="file" name="imagen" accept="image/jpeg, image/png">
+                <input type="file" class="form-control-file" id="imagen" name="imagen" accept="image/*" required>
 
                 <!-- Contenedor donde se mostrará el mapa con un tamaño fijo -->
 
