@@ -7,7 +7,7 @@ const path = require('path'); // Importar el módulo path
 
 
 const configuracionMulter = {
-    limits: { fileSize: 100000 },  // límite de tamaño en bytes
+    limits: { fileSize: 5000000 },  // límite de tamaño en bytes
     storage: multer.diskStorage({
         destination: (req, file, next) => {
             let destinationFolder;
