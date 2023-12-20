@@ -49,6 +49,7 @@ const configuracionMulter = {
         }
     }
 };
+
 const upload = multer(configuracionMulter).fields([
     { name: 'documentos', maxCount: 1 },
     { name: 'imagen', maxCount: 1 }
@@ -75,7 +76,7 @@ exports.subirArchivo = (req, res, next) => {
     });
 };
 
-// Agregar Evento
+// Agregar Eventos
 exports.nuevoEvento = async (req, res, next) => {
     const evento = new Eventos(req.body);
     evento.userid = req.user.id;
