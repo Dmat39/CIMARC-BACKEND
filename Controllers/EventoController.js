@@ -157,7 +157,7 @@ exports.mostrarEventosID = async (req, res, next) => {
 
 
  // Actualizar un Evento via id 
- exports.actualizarEventos = async (req, res, next) => {
+ exports.actualizarEvento= async (req, res, next) => {
     try {
         // Construir un nuevo caso
         let nuevoEvento = req.body;
