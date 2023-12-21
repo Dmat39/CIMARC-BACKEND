@@ -439,7 +439,7 @@ module.exports = function () {
      // Actualizar Eventos
      router.post('/trabajador-eventos/:idEventos',
         EventosController.subirArchivo,
-        EventosController.actualizarEventos
+        EventosController.actualizarEvento
     );
 
 

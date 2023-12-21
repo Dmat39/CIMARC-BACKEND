@@ -1,9 +1,9 @@
 (function() {
         
     // Coordenadas iniciales del mapa
-    const lat = -7.1571614;
-    const lng = -78.5206756;
-
+    const lat = document.querySelector('#lat').value || -7.1571614;
+    const lng = document.querySelector('#lng').value || -78.5206756;
+ 
     // Crear un objeto de mapa Leaflet y establecer la vista inicial
     const mapa = L.map('mapa').setView([lat, lng], 25);
 
