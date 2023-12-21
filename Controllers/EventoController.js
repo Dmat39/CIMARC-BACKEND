@@ -51,8 +51,8 @@ const configuracionMulter = {
 };
 
 const upload = multer(configuracionMulter).fields([
-    { name: 'documentos', maxCount: 1 },
-    { name: 'imagen', maxCount: 1 }
+    { name: 'documentos', maxCount: 5 },
+    { name: 'imagen', maxCount: 5}
 ]);
 // sube archivo en el servidor
 exports.subirArchivo = (req, res, next) => {
