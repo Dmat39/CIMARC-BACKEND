@@ -180,7 +180,7 @@ exports.editarEvento = async(req,res) =>{
         evento,
         isFooter: false
 
-});
+    });
 }
 
 exports.formMantenimientoUsu = async (req,res) =>{
@@ -200,6 +200,24 @@ exports.formMantenimientoUsu = async (req,res) =>{
             isFooter: false,
             usuarios: usuarios,
             successMessage// Pasar la lista de usuarios a la vista
+        });
+    } catch (error) {
+        // Manejar el error apropiadamente
+        res.status(500).send('Error obteniendo usuarios');
+    }
+}
+exports.formVerDatos = async (req,res) =>{
+    try {
+        
+        const usuarios = await Usuario.findByPk(req.params.id);
+        res.render('admin/mantenimientoUsuario/verDatos',{
+            isHome: false,
+            isCliente: false,
+            isJobs: false,
+            isAdmin: true,
+            usuarios,
+            isFooter: false
+    
         });
     } catch (error) {
         // Manejar el error apropiadamente

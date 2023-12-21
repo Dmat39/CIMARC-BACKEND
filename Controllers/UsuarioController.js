@@ -94,7 +94,7 @@ exports.eliminarUsuario = async (req, res) => {
         await Usuario.destroy({
             where: { id: req.params.idUsu }
         });
-        res.send({ message: 'Usuario eliminado' });
+        res.redirect('/admin/mantenimientoUsu');
     } catch (error) {
         res.status(500).send('Hubo un error');
     }
