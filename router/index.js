@@ -52,10 +52,6 @@ module.exports = function () {
         authController.usuarioAutenticado,
         AdminHomeController.homeAdmin
     );
-    router.get('/admin/ver/datos/:id',
-
-        AdminHomeController.formVerDatos
-    )
     /**Blog*/
     router.get('/admin/blog/blogRegister',
         authController.usuarioAutenticado,
@@ -75,12 +71,15 @@ module.exports = function () {
         authController.usuarioAutenticado,
         AdminHomeController.formMantenimientoUsu
     )
-    /** Register**/
+    
     router.get('/admin/register',
         authController.usuarioAutenticado,
         AdminHomeController.register
     );
-
+    router.get('/admin/ver/datos/:id',
+        authController.usuarioAutenticado,
+        AdminHomeController.formVerDatos
+    )
     /**NOTICIA Lista**/
     router.get('/admin/noticiaList',
     authController.usuarioAutenticado,
