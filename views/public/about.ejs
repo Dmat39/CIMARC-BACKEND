@@ -111,18 +111,30 @@
       <div class="heading2 text-center">Secretaria General</div>
     </div>
   </div>
+
   <div class="list-service row mt-40 row-gap-32" style="justify-content: center;">
     <div class="tarjeta">
       <img src="/assets/images/member/ana.jpg" alt="Imagen de Ana Rivasplata" class="imagen">
       <div class="contenido">
         <div class="nombre">Ana Rivasplata</div> 
-        <div class="cargo">
-          <div class="rectangulo">Secretaria General</div>
-        </div><br>
-        <div class="body3 text-secondary mt-4">Facilitamos soluciones justas y efectivas. Promovemos la resolución pacífica de conflictos, construyendo confianza y entendimiento para un mejor mañana.</div>
-      </div>
+        <div>
+        <button id="miBoton" class="rectangulo">Secretaria General</button>
+          <div id="miModal" class="modal">
+            <div class="list-service row mt-40 row-gap-32" style="justify-content: center;">
+              <div class="tarjeta-flotante">
+                <div class="titulo-flotante text-center">Preparación Académica</div>
+                <div class="texto-flotante">
+                  <p>Abogada por la Pontificia Universidad Católica del Perú, con estudios en Arbitraje, Contrataciones con el Estado y Derecho Administrativo. Conciliadora extrajudicial especializada en familia, acreditada por el Ministerio de Justicia.</p>
+                </div>
+              </div>
+            </div>      
+          </div>
+        </div>
+     </div>
     </div>
   </div>
+  
+
   <div class="our-team-block pt-100 bg-white">
     <div class="container"> 
       <div class="heading-block">
@@ -172,3 +184,27 @@
   </div>
   <a class="scroll-to-top-btn" href="#header"><i class="ph-bold ph-caret-up"></i></a>
 </div>
+
+<!-- Aquí está el JavaScript que maneja la apertura y cierre del modal. -->
+<script>
+  window.onload = function() {
+  var modal = document.getElementById("miModal");
+  var btn = document.getElementById("miBoton");
+
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+  // Detén la propagación del evento de clic en los elementos dentro de la ventana flotante
+  var elementosDentroDelModal = document.querySelectorAll('#miModal *');
+  elementosDentroDelModal.forEach(function(elemento) {
+    elemento.onclick = function(event) {
+      event.stopPropagation();
+    }
+  });
+}
+</script>
