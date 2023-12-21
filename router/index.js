@@ -74,12 +74,15 @@ module.exports = function () {
         authController.usuarioAutenticado,
         AdminHomeController.formMantenimientoUsu
     )
-    /** Register**/
+    
     router.get('/admin/register',
         authController.usuarioAutenticado,
         AdminHomeController.register
     );
-
+    router.get('/admin/ver/datos/:id',
+        authController.usuarioAutenticado,
+        AdminHomeController.formVerDatos
+    )
     /**NOTICIA Lista**/
     router.get('/admin/noticiaList',
     authController.usuarioAutenticado,
@@ -277,7 +280,7 @@ module.exports = function () {
     
         UsuarioController.actualizarUsuario
     )
-    router.delete('/user-roles/:idUsu',
+    router.get('/user-roles/delete/:idUsu',
     
         UsuarioController.eliminarUsuario
     )
