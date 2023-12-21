@@ -155,8 +155,9 @@ exports.mostrarEventosID = async (req, res, next) => {
     })
 }*/
 
+
  // Actualizar un Evento via id 
-exports.actualizarEventos = async (req, res, next) => {
+ exports.actualizarEventos = async (req, res, next) => {
     try {
         // Construir un nuevo caso
         let nuevoEvento = req.body;
@@ -166,30 +167,25 @@ exports.actualizarEventos = async (req, res, next) => {
 
         // Verificar si hay un archivo nuevo (documentos)
         if (req.file && req.file.filename) {
+            // Si hay un nuevo archivo, asignar el nombre del archivo al nuevoEvento
             nuevoEvento.documentos = req.file.filename;
-
-        // Borrar el archivo antiguo (documentos)
-        if (eventonterior.documentos) {
-            const rutaArchivoAntiguo = path.join(__dirname, `../uploads/eventos/documentos/${eventonterior.documentos}`);
-            await fs.unlink(rutaArchivoAntiguo);
-    }
-        } else {
-        // Mantener el nombre del documento anterior
-        nuevoEvento.documentos = eventonterior.documentos;
-        }
-
-        // Verificar si hay una imagen nueva
-        if (req.file && req.file.filename) {
             nuevoEvento.imagen = req.file.filename;
-
-        // Borrar el archivo antiguo (imagen)
-        if (eventonterior.imagen) {
-        const rutaArchivoAntiguo = path.join(__dirname, `../uploads/eventos/imagen/${eventonterior.imagen}`);
-        await fs.unlink(rutaArchivoAntiguo);
-        }
+        
+            // Borrar el archivo antiguo (documentos)
+            if (eventonterior.documentos) {
+                const rutaArchivoAntiguoDocumentos = path.join(__dirname, `../uploads/eventos/documentos/${eventonterior.documentos}`);
+                await fs.unlink(rutaArchivoAntiguoDocumentos);
+            }
+        
+            // Borrar el archivo antiguo (imagen)
+            if (eventonterior.imagen) {
+                const rutaArchivoAntiguoImagen = path.join(__dirname, `../uploads/eventos/imagen/${eventonterior.imagen}`);
+                await fs.unlink(rutaArchivoAntiguoImagen);
+            }
         } else {
-        // Mantener el nombre de la imagen anterior
-        nuevoEvento.imagen = eventonterior.imagen;
+            // Si no hay un nuevo archivo, mantener los nombres de los archivos antiguos
+            nuevoEvento.documentos = eventonterior.documentos;
+            nuevoEvento.imagen = eventonterior.imagen;
         }
 
         // Actualizar el caso en la base de datos y obtener el número de filas afectadas

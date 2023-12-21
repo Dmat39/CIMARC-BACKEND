@@ -4,17 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Register</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/barra.css">
-    
-   
-
     <!-- Incluir la hoja de estilos de Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css">
 </head>
 <body>
     <div class="content">
         <div class="seccion-botones">
-            <a href="/admin/eventoRegister" class="boton-derecha">Regresar</a>
+            <a href="/admin/eventos" class="boton-derecha">Regresar</a>
         </div>
         <br> <br> <br>
         <div class="seccion-formulario">
@@ -37,7 +35,7 @@
                     <!-- Opciones de categorías -->
                     <option value="categoria1" <%= evento.categoria.includes('categoria1') ? 'selected' : '' %>>Categoría 1</option>
                     <option value="categoria2" <%= evento.categoria.includes('categoria2') ? 'selected' : '' %>>Categoría 2</option>
-                    <option value="categoria3" <%= evento.categoria.includes('categoria2') ? 'selected' : '' %>>Categoría 3</option>
+
                     <!-- Agrega más opciones según sea necesario -->
                 </select>
 
@@ -57,14 +55,14 @@
                 <label for="imagen">Imagen:</label>
                 <!-- Muestra la imagen actual si existe -->
                 <% if (evento.imagen) { %>
-                <img src="/uploads/eventos/imagenes/<%= evento.imagen %>" alt="Imagen actual" style="max-width: 200px; max-height: 200px;">
+                <img src="/uploads/eventos/imagen/<%= evento.imagen %>" alt="Imagen actual" style="max-width: 200px; max-height: 200px;">
                 <% } %>
                 <input type="file" class="form-control-file" id="imagen" name="imagen" accept="image/*" >
 
                 <!-- Contenedor donde se mostrará el mapa con un tamaño fijo -->
                 <div>
                     <h3>Ubicacion</h3>
-                    <p>Ubica la propiedad en el mapa</p>
+                    <p>Ubica el evento en el mapa</p>
                 
                     <div id="mapa" style="height: 300px; width: 100%; max-width: 600px; border: 1px solid #ddd; margin-bottom: 10px;"></div>
                 
