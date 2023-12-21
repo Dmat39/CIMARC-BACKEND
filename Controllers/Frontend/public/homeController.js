@@ -1,4 +1,5 @@
 const Noticias = require('../../../Models/Noticias');
+const Eventos= require('../../../Models/Eventos');
 const usuarios = require('../../../Models/Usuario');
 exports.home = (req,res) =>{
     res.render('public/home',{
@@ -77,6 +78,17 @@ exports.Blogs = (req,res) =>{
         isJobs: false,
         isAdmin: false,
         isFooter: true
+    })
+}
+exports.Eventos = async (req,res) =>{
+    const eventos=await Eventos.findAll({ include: usuarios })
+    res.render('public/eventos',{
+        isHome: true,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: false,
+        isFooter: true,
+        eventos:eventos,
     })
 }
 exports.home6 = (req,res) =>{

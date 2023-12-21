@@ -41,8 +41,8 @@ exports.usuarioAutenticado = async (req, res, next) => {
         // Definir las rutas permitidas para cada rol
         const rutasPermitidas = {
 
-            'admin': ['/admin/home', '/admin/register','/admin/blog','/admin/blog/blogRegister','/admin/mantenimientoUsu','/admin/noticiaRegister','/admin/noticias/editar/','/admin/noticias','/admin/noticias/register','/admin/eventoRegister','/admin/eventos','/admin/eventos/register','/admin/eventos/editar','/cerrar-sesion'],
-            'admin': ['/admin/home', '/admin/register','/admin/blog','/admin/blog/editar/','/admin/blog/blogRegister','/admin/mantenimientoUsu','/admin/noticiaRegister','/admin/noticias/editar/','/admin/noticias','/admin/noticias/register','/admin/eventoRegister','/admin/eventos','/admin/eventos/register','/cerrar-sesion'],
+            //'admin': ['/admin/home', '/admin/register','/admin/blog','/admin/blog/blogRegister','/admin/mantenimientoUsu','/admin/noticiaRegister','/admin/noticias/editar/','/admin/noticias','/admin/noticias/register','/admin/eventoRegister','/admin/eventos','/admin/eventos/register','/admin/eventos/editar','/cerrar-sesion'],
+            'admin': ['/admin/home', '/admin/register','/admin/blog','/admin/blog/editar/','/admin/blog/blogRegister','/admin/mantenimientoUsu','/admin/noticiaRegister','/admin/noticias/editar/','/admin/noticias','/admin/noticias/register','/admin/eventoRegister','/admin/eventos','/admin/eventos/register','/admin/eventos/editar','/cerrar-sesion'],
             'trabajador': ['/trabajador/home','/trabajador/pagoRegister','/cerrar-sesion'],
             'cliente': ['/cliente/home','/cerrar-sesion','/cliente/AddDocument']
         };

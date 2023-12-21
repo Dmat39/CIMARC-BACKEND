@@ -11,16 +11,15 @@ const configuracionMulter = {
     storage: multer.diskStorage({
         destination: (req, file, next) => {
             let destinationFolder;
-
-            // Decide la carpeta de destino en función del tipo de archivo
+        
             if (file.fieldname === 'documentos') {
-                destinationFolder = __dirname + '../../uploads/eventos/documentos';
+                destinationFolder = path.join(__dirname, '../uploads/eventos/documentos');
             } else if (file.fieldname === 'imagen') {
-                destinationFolder = __dirname + '../../uploads/eventos/imagen';
+                destinationFolder = path.join(__dirname, '../uploads/eventos/imagen');
             } else {
                 return next(new Error('Tipo de archivo no válido'));
             }
-
+        
             next(null, destinationFolder);
         },
         filename: (req, file, next) => {
@@ -157,7 +156,7 @@ exports.mostrarEventosID = async (req, res, next) => {
 
 
  // Actualizar un Evento via id 
- exports.actualizarEvento= async (req, res, next) => {
+ exports.actualizarEvento = async (req, res, next) => {
     try {
         // Construir un nuevo caso
         let nuevoEvento = req.body;
@@ -170,16 +169,16 @@ exports.mostrarEventosID = async (req, res, next) => {
             // Si hay un nuevo archivo, asignar el nombre del archivo al nuevoEvento
             nuevoEvento.documentos = req.file.filename;
             nuevoEvento.imagen = req.file.filename;
-        
+
             // Borrar el archivo antiguo (documentos)
             if (eventonterior.documentos) {
-                const rutaArchivoAntiguoDocumentos = path.join(__dirname, `../uploads/eventos/documentos/${eventonterior.documentos}`);
+                const rutaArchivoAntiguoDocumentos = path.join(__dirname,`../uploads/eventos/documentos${eventonterior.documentos}`);
                 await fs.unlink(rutaArchivoAntiguoDocumentos);
             }
-        
+
             // Borrar el archivo antiguo (imagen)
             if (eventonterior.imagen) {
-                const rutaArchivoAntiguoImagen = path.join(__dirname, `../uploads/eventos/imagen/${eventonterior.imagen}`);
+                const rutaArchivoAntiguoImagen = path.join(__dirname, `../uploads/eventos/imagen${eventonterior.imagen}`);
                 await fs.unlink(rutaArchivoAntiguoImagen);
             }
         } else {
@@ -199,18 +198,19 @@ exports.mostrarEventosID = async (req, res, next) => {
             const eventoActualizado = await Eventos.findByPk(req.params.idEventos);
 
             // Enviar la respuesta JSON con el caso actualizado
-            //res.json(eventoActualizado);
+            // res.json(eventoActualizado);
             res.redirect('/admin/eventos');
-            
+
         } else {
             // Si numFilasActualizadas es 0, significa que el caso no fue encontrado o no se actualizó correctamente
-            console.log('No se actualizaron filas.');
+            console.log('No se actualizaron filas.', error);
             return res.status(404).json({ mensaje: 'Caso no encontrado' });
         }
     } catch (error) {
-        console.log(error);
+        
+        console.log('Error al actualizar:', error);
         next(error);
-    }
+     }
 };
 
 exports.encontrarEventosByUser = async (req, res, next) => {
