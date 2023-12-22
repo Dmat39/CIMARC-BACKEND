@@ -2149,13 +2149,14 @@ Header menu Home6: Start
   padding: 27px 12px;
 }
 .style-home-six .header-menu.style-six .container .header-main .menu-header .menu-nav > li:hover > a {
-  color: var(--orange) !important;
+  color: var(--blue) !important;
 }
 .style-home-six .header-menu.style-six .container .header-main .menu-header .menu-nav > li .sub-nav li:hover > a {
-  color: var(--orange) !important;
+  color: linear-gradient(to left,#29B6F6,#0288D1, #0066FF) !important;
+  
 }
 .style-home-six .header-menu.style-six .container .header-main .menu-header .menu-nav > li .sub-nav li:hover > a::before {
-  background-color: var(--orange) !important;
+  background-color: var(--blue) !important;
 }
 @media (max-width: 1169.99px) {
   .style-home-six .header-menu.style-six .container .header-main .menu-header .menu-nav > li {
