@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="/assets/css/barra.css">
+<div class="content">
+    <div class="seccion-botones">
+        <!-- Contenido principal de la página -->
+        <a href="/admin/mantenimientoUsu" class="boton-derecha">Regresar</a>
+    </div>
+    <br> <br> <br>
+    <div class="seccion-formulario">
+        <h1>Registro de Usuario</h1>
+        <form action="/user-roles/update/<%= usuarios.id %>" method="post">
+            <label for="role">Rol:</label>
+            <select id="role" name="role" required>
+                <option value="cliente" <%= usuarios.role === 'cliente' ? 'selected' : '' %>>Cliente</option>
+                <option value="trabajador" <%= usuarios.role === 'trabajador' ? 'selected' : '' %>>Trabajador</option>
+                <option value="admin" <%= usuarios.role === 'admin' ? 'selected' : '' %>>Admin</option>
+            </select>
+
+            <label for="userid">Usuario: </label>
+            <input type="text" id="userid" name ="userid" value="<%= usuarios.userid %>" readonly>
+
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" name="email" value="<%= usuarios.email %>" readonly>
+
+            <label for="name">Nombre y Apellido: </label>
+            <input type="text" id="name" name="name" value="<%= usuarios.name %>" required>
+
+            <label for="Identity">DNI / RUC: </label>
+            <input type="number" id="Identity" name="Identity" value="<%= usuarios.Identity %>" required min="0">
+
+            <label for="telf">Teléfono: </label>
+            <input type="text" id="telf" name="telf" value="<%= usuarios.telf %>" required pattern="[0-9]+">
+        
+            <label for="activo">Activar Usuario: </label>
+            <select id="activo" name="activo" required>
+                <option value="0" <%= usuarios.activo === 0 ? 'selected' : '' %>>Desactivado</option>
+                <option value="1" <%= usuarios.activo === 1 ? 'selected' : '' %>>Activado</option>
+            </select>
+
+            <button type="submit">Registrar</button>
+        </form>
+    </div>
+</div>

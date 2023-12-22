@@ -224,3 +224,21 @@ exports.formVerDatos = async (req,res) =>{
         res.status(500).send('Error obteniendo usuarios');
     }
 }
+exports.formEditarUser = async (req,res) =>{
+    try {
+        
+        const usuarios = await Usuario.findByPk(req.params.idUsu);
+        res.render('admin/mantenimientoUsuario/editarUsu',{
+            isHome: false,
+            isCliente: false,
+            isJobs: false,
+            isAdmin: true,
+            usuarios,
+            isFooter: false
+    
+        });
+    } catch (error) {
+        // Manejar el error apropiadamente
+        res.status(500).send('Error obteniendo usuarios');
+    }
+}

@@ -83,6 +83,10 @@ module.exports = function () {
         authController.usuarioAutenticado,
         AdminHomeController.formVerDatos
     )
+    router.get('/admin/editar/datos/:idUsu',
+
+        AdminHomeController.formEditarUser
+    );
     /**NOTICIA Lista**/
     router.get('/admin/noticiaList',
     authController.usuarioAutenticado,
@@ -276,7 +280,7 @@ module.exports = function () {
     
         UsuarioController.mostrarUsuarioID
     )
-    router.put('/user-roles/:idUsu',
+    router.post('/user-roles/update/:idUsu',
     
         UsuarioController.actualizarUsuario
     )
