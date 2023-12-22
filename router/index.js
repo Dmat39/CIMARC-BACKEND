@@ -35,6 +35,9 @@ module.exports = function () {
     router.get('/service',homeController.service);
     router.get('/service/conciliacion',homeController.serviceConciliacion);
     router.get('/service/arbitraje',homeController.ServiceArbitraje);
+    /**eventos */
+    router.get('/eventos',homeController.Eventos);
+    
 
     /**Olvide contraseña */
     router.get('/contrasena',(req,res) => {
@@ -53,18 +56,34 @@ module.exports = function () {
         authController.usuarioAutenticado,
         AdminHomeController.homeAdmin
     );
+    /**Blog*/
+    router.get('/admin/blog/blogRegister',
+        authController.usuarioAutenticado,
+        AdminHomeController.blogRegister);
+    router.get('/admin/blog',
+        authController.usuarioAutenticado,
+        AdminHomeController.blogHome);
+
+        router.get('/admin/blog/editar/:idBlog',
+        authController.usuarioAutenticado,
+        AdminHomeController.BlogsEditar);
+    
+
 
     /**Mantenimiento Usuarios */
     router.get('/admin/mantenimientoUsu',
         authController.usuarioAutenticado,
         AdminHomeController.formMantenimientoUsu
     )
-    /** Register**/
+    
     router.get('/admin/register',
         authController.usuarioAutenticado,
         AdminHomeController.register
     );
-
+    router.get('/admin/ver/datos/:id',
+        authController.usuarioAutenticado,
+        AdminHomeController.formVerDatos
+    )
     /**NOTICIA Lista**/
     router.get('/admin/noticiaList',
     authController.usuarioAutenticado,
@@ -262,7 +281,7 @@ module.exports = function () {
     
         UsuarioController.actualizarUsuario
     )
-    router.delete('/user-roles/:idUsu',
+    router.get('/user-roles/delete/:idUsu',
     
         UsuarioController.eliminarUsuario
     )
@@ -382,8 +401,8 @@ module.exports = function () {
      //Agregar Eventos
      router.post('/eventos',
 
-        EventosController.subirArchivoEvento,
-        EventosController.subirImagenEvento,
+        EventosController.subirArchivo,
+        //EventosController.subirImagen,
         EventosController.nuevoEvento
      )
 
@@ -410,7 +429,8 @@ module.exports = function () {
 
     //Actualizar Eventos ByUserId and EventosId
      router.put('/trabajador-eventos/:userid/eventos/:idEventos',
-        EventosController.subirArchivoEvento,
+        EventosController.subirArchivo,
+        //EventosController.subirImagen,
         EventosController.actualizarEventoIdByUser
     );
 
@@ -420,10 +440,9 @@ module.exports = function () {
     );
 
      // Actualizar Eventos
-     router.put('/trabajador-eventos/:idEventos',
-        EventosController.subirArchivoEvento,
-        EventosController.subirImagenEvento,
-        EventosController.actualizarEventos
+     router.post('/trabajador-eventos/:idEventos',
+        EventosController.subirArchivo,
+        EventosController.actualizarEvento
     );
 
 
@@ -457,7 +476,7 @@ module.exports = function () {
         BlogsController.mostrarBlogID
      );   
      // Actualizar Blogs
-      router.put('/blogs/:idBlogs',
+      router.post('/updateblogs/:idBlogs',
         BlogsController.subirArchivoBlog,
         BlogsController.actualizarBlog,
      );

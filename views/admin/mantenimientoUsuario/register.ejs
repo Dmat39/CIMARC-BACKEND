@@ -15,19 +15,37 @@
     <div class="seccion-formulario">
         <h1>Registro de Usuario</h1>
         <form action="/user-roles" method="POST">
-            <label for="rol">Rol:</label>
-            <select id="rol" name="rol" required>
+            <label for="role">Rol:</label>
+            <select id="role" name="role" required>
                 <option value="cliente">Cliente</option>
                 <option value="trabajador">Trabajador</option>
                 <option value="admin">Admin</option>
             </select>
 
+            <label for="userid">Usuario: </label>
+            <input type="text" id="userid" name ="userid" required>
+
             <label for="email">Correo electrónico:</label>
             <input type="email" id="email" name="email" required>
 
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" required>
+            <label for="name">Nombre y Apellido: </label>
+            <input type="text" id="name" name="name" required>
 
+            <label for="Identity">DNI / RUC: </label>
+            <input type="number" id="Identity" name="Identity" required min="0">
+
+            <label for="telf">Teléfono: </label>
+            <input type="text" id="telf" name="telf" required pattern="[0-9]+">
+
+            <label for="password">Contraseña:</label>   
+            <input type="password" id="password" name="password" required>
+        
+            <label for="activo">Activar Usuario: </label>
+                <select id="activo" name="activo" required>
+                    <option value="0">Desactivado</option>
+                    <option value="1">Activado</option>
+                </select>
+            <br><br>
             <button type="submit">Registrar</button>
         </form>
     </div>

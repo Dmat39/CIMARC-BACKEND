@@ -7,11 +7,20 @@ const path = require('path'); // Importar el módulo path
 
 
 const configuracionMulter = {
-    limits: { fileSize: 50000000 },  // límite de tamaño en bytes
+    limits: { fileSize: 5000000 },  // límite de tamaño en bytes
     storage: multer.diskStorage({
         destination: (req, file, next) => {
-            next(null, path.join(__dirname, '../../uploads/eventos'));
-            
+            let destinationFolder;
+        
+            if (file.fieldname === 'documentos') {
+                destinationFolder = path.join(__dirname, '../uploads/eventos/documentos');
+            } else if (file.fieldname === 'imagen') {
+                destinationFolder = path.join(__dirname, '../uploads/eventos/imagen');
+            } else {
+                return next(new Error('Tipo de archivo no válido'));
+            }
+        
+            next(null, destinationFolder);
         },
         filename: (req, file, next) => {
             const extension = file.originalname.split('.').pop();  // obtener la extensión del archivo original
@@ -19,7 +28,16 @@ const configuracionMulter = {
         }
     }),
     fileFilter: (req, file, next) => {
-        const allowedFileTypes = ['application/pdf','application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+        let allowedFileTypes;
+
+        // Define los tipos de archivo permitidos según el campo del formulario
+        if (file.fieldname === 'documentos') {
+            allowedFileTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+        } else if (file.fieldname === 'imagen') {
+            allowedFileTypes = ['image/jpeg', 'image/png'];
+        } else {
+            return next(new Error('Tipo de archivo no válido'));
+        }
 
         if (allowedFileTypes.includes(file.mimetype)) {
             // el formato es válido
@@ -31,36 +49,12 @@ const configuracionMulter = {
     }
 };
 
-const configuracionMulter2 = {
-    limits: { fileSize: 50000000 },  // límite de tamaño en bytes
-    storage: multer.diskStorage({
-        destination: (req, file, next) => {
-            next(null, path.join(__dirname, '../../uploads/eventos'));
-            
-        },
-        filename: (req, file, next) => {
-            const extension = file.originalname.split('.').pop();  // obtener la extensión del archivo original
-            next(null, `${shortid.generate()}.${extension}`);
-        }
-    }),
-    fileFilter: (req, file, next) => {
-        const allowedFileTypes = ['image/jpeg', 'image/png'];
-
-        if (allowedFileTypes.includes(file.mimetype)) {
-            // el formato es válido
-            next(null, true);
-        } else {
-            // el formato no es válido
-            next(new Error('Formato no válido'), false);
-        }
-    }
-};
-
-const upload = multer(configuracionMulter).single('documento');
-const upload2 = multer(configuracionMulter2).single('imagen'); // Cambiado a 'documentos' en lugar de 'imagen'
-
+const upload = multer(configuracionMulter).fields([
+    { name: 'documentos', maxCount: 5 },
+    { name: 'imagen', maxCount: 5}
+]);
 // sube archivo en el servidor
-exports.subirArchivoEvento = (req, res, next) => {
+exports.subirArchivo = (req, res, next) => {
     upload(req, res, function (error) {
         if (error) {
             if (error instanceof multer.MulterError) {
@@ -81,49 +75,31 @@ exports.subirArchivoEvento = (req, res, next) => {
     });
 };
 
-exports.subirImagenEvento = (req, res, next) => {
-    upload2(req, res, function (error) {
-        if (error) {
-            if (error instanceof multer.MulterError) {
-                if (error.code === 'LIMIT_FILE_SIZE') {
-                    req.flash('error', 'La imagen es muy grande');
-                } else {
-                    req.flash('error', error.message);
-                }
-            } else if (error.hasOwnProperty('message')) {
-                req.flash('error', error.message);
-            }
-            res.redirect('back');
-            return;
-            // TODO: Manejar errores
-        } else {
-            next();
-        }
-    });
-};
-
-
-// Agregar Casos
-exports.nuevoEvento = async(req,res,next) =>{
+// Agregar Eventos
+exports.nuevoEvento = async (req, res, next) => {
     const evento = new Eventos(req.body);
-    evento.userid=req.user.id;
+    evento.userid = req.user.id;
 
-    try{
-         // Verificar si se ha subido un documento
-        if( req.file && req.file.filename){
-            evento.documentos = req.file.filename;
-            evento.imagen = req.file.filename;
+    try {
+        // Verificar si se ha subido un documento
+        if (req.files && req.files['documentos'] && req.files['documentos'][0].filename) {
+            evento.documentos = req.files['documentos'][0].filename;
         }
-        //almacenar un registro
+
+        // Verificar si se ha subido una imagen
+        if (req.files && req.files['imagen'] && req.files['imagen'][0].filename) {
+            evento.imagen = req.files['imagen'][0].filename;
+        }
+
+        // Almacenar un registro
         await evento.save();
         res.redirect('/admin/eventos');
-    }catch(error){
-        //si hay un error
+    } catch (error) {
+        // Si hay un error
         res.send(error);
         next();
     }
-
-}
+};
 // Mostrar Eventos
 exports.mostrarEventos = async(req,res,next) =>{
     
@@ -178,47 +154,36 @@ exports.mostrarEventosID = async (req, res, next) => {
     })
 }*/
 
+
  // Actualizar un Evento via id 
-exports.actualizarEventos = async (req, res, next) => {
+ exports.actualizarEvento = async (req, res, next) => {
     try {
         // Construir un nuevo caso
         let nuevoEvento = req.body;
 
-        // Verificar si hay un archivo nuevo
+        // Obtener el caso anterior para obtener nombres de archivos antiguos
+        let eventonterior = await Eventos.findByPk(req.params.idEventos);
+
+        // Verificar si hay un archivo nuevo (documentos)
         if (req.file && req.file.filename) {
+            // Si hay un nuevo archivo, asignar el nombre del archivo al nuevoEvento
             nuevoEvento.documentos = req.file.filename;
-
-            // Obtener el caso anterior para borrar el archivo antiguo
-            let eventonterior = await Eventos.findByPk(req.params.idEventos);
-            if ( eventonterior.documentos) {
-                // Construir la ruta completa al archivo antiguo
-                const rutaArchivoAntiguo = path.join(__dirname, `../uploads/eventos/documentos${eventonterior.documentos}`);
-
-                // Borrar el archivo antiguo
-                await fs.unlink(rutaArchivoAntiguo);
-            }
-        } else {
-            // Obtener el caso anterior para mantener el nombre del documento
-            let eventonterior = await Eventos.findByPk(req.params.idEventos);
-            nuevoEvento.documentos = eventonterior.documentos;
-        }
-
-         // Verificar si hay una imagen nueva
-         if (req.file && req.file.filename) {
             nuevoEvento.imagen = req.file.filename;
 
-            // Obtener el caso anterior para borrar el archivo antiguo
-            let eventonterior = await Eventos.findByPk(req.params.idEventos);
-            if ( eventonterior.imagen) {
-                // Construir la ruta completa al archivo antiguo
-                const rutaArchivoAntiguo = path.join(__dirname, `../uploads/eventos/imagenes${eventonterior.imagen}`);
+            // Borrar el archivo antiguo (documentos)
+            if (eventonterior.documentos) {
+                const rutaArchivoAntiguoDocumentos = path.join(__dirname,`../uploads/eventos/documentos${eventonterior.documentos}`);
+                await fs.unlink(rutaArchivoAntiguoDocumentos);
+            }
 
-                // Borrar el archivo antiguo
-                await fs.unlink(rutaArchivoAntiguo);
+            // Borrar el archivo antiguo (imagen)
+            if (eventonterior.imagen) {
+                const rutaArchivoAntiguoImagen = path.join(__dirname, `../uploads/eventos/imagen${eventonterior.imagen}`);
+                await fs.unlink(rutaArchivoAntiguoImagen);
             }
         } else {
-            // Obtener el caso anterior para mantener el nombre del documento
-            let eventonterior = await Eventos.findByPk(req.params.idEventos);
+            // Si no hay un nuevo archivo, mantener los nombres de los archivos antiguos
+            nuevoEvento.documentos = eventonterior.documentos;
             nuevoEvento.imagen = eventonterior.imagen;
         }
 
@@ -233,17 +198,19 @@ exports.actualizarEventos = async (req, res, next) => {
             const eventoActualizado = await Eventos.findByPk(req.params.idEventos);
 
             // Enviar la respuesta JSON con el caso actualizado
-            res.json(eventoActualizado);
-            
+            // res.json(eventoActualizado);
+            res.redirect('/admin/eventos');
+
         } else {
             // Si numFilasActualizadas es 0, significa que el caso no fue encontrado o no se actualizó correctamente
-            console.log('No se actualizaron filas.');
+            console.log('No se actualizaron filas.', error);
             return res.status(404).json({ mensaje: 'Caso no encontrado' });
         }
     } catch (error) {
-        console.log(error);
+        
+        console.log('Error al actualizar:', error);
         next(error);
-    }
+     }
 };
 
 exports.encontrarEventosByUser = async (req, res, next) => {
@@ -412,7 +379,7 @@ exports.eliminarEventos = async (req, res, next) => {
         }
 
         if (eventoAEliminar.imagen) {
-            const rutaArchivo = path.join(__dirname, `../uploads/eventos/imagenes/${eventoAEliminar.imagen}` );
+            const rutaArchivo = path.join(__dirname, `../uploads/eventos/imagen/${eventoAEliminar.imagen}` );
             await fs.unlink(rutaArchivo);
         }
 
@@ -420,7 +387,8 @@ exports.eliminarEventos = async (req, res, next) => {
         await eventoAEliminar.destroy();
 
         //console.log('Ruta del archivo a eliminar:', rutaArchivo); verificar la ruta
-        res.json({ mensaje: 'Caso eliminado exitosamente' });
+        //res.json({ mensaje: 'Caso eliminado exitosamente' });
+        res.redirect('/admin/eventos');
     } catch (error) {
         console.log(error);
         next(error);

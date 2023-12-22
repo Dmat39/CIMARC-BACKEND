@@ -3,12 +3,12 @@ const LocalStrategy =  require('passport-local').Strategy;
 const Usuarios = require('../Models/Usuario');
 
 passport.use(new LocalStrategy({
-    usernameField :'email',
+    usernameField :'userid',
     passwordField :'password'
     },
-    async(email,password,next) =>{
+    async(userid,password,next) =>{
         // codigo se ejecuta al llenar el formulario
-        const usuario = await Usuarios.findOne({ where: {email, activo: 1}});
+        const usuario = await Usuarios.findOne({ where: {userid, activo: 1}});
 
         // revisars si existe o no
         if(!usuario) return next(null,false,{

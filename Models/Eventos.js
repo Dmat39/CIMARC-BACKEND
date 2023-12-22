@@ -2,36 +2,35 @@ const { DataTypes } = require('sequelize');
 const db = require('../config/db.js');
 const Usuario = require('./Usuario.js');
 
-
-const Eventos =  db.define('Eventos',{
-    id:{
+const Eventos = db.define('Eventos', {
+    id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
         primaryKey: true
     },
-    titulo:{
+    titulo: {
         type: DataTypes.STRING(100),
         allowNull: false,
         validate: {
-            notEmpty : {
+            notEmpty: {
                 msg: 'Agregar un Titulo'
             }
         }
     },
-    descripcion:{
+    descripcion: {
         type: DataTypes.TEXT,
         allowNull: false
     },
-    ponentes:{
+    ponentes: {
         type: DataTypes.TEXT,
         allowNull: false
     },
-    fecha:{
+    fecha: {
         type: DataTypes.DATEONLY,
-        allowNull : false,
+        allowNull: false,
         validate: {
-            notEmpty :{
+            notEmpty: {
                 msg: 'Agrega una fecha para el evento '
             }
         }
@@ -40,22 +39,23 @@ const Eventos =  db.define('Eventos',{
         type: DataTypes.TEXT,
         allowNull: false,
         get() {
-            // Parsea la cadena JSON almacenada en la base de datos
-            return JSON.parse(this.getDataValue('categoria'));
+            const categoriaValue = this.getDataValue('categoria');
+            // Parse la cadena JSON solo si tiene un valor
+            return categoriaValue ? JSON.parse(categoriaValue) : null;
         },
         set(value) {
             // Convierte el valor a cadena JSON antes de almacenarlo
             this.setDataValue('categoria', JSON.stringify(value));
         }
     },
-    documentos:{
-        type: DataTypes.STRING,
-        
+    documentos: {
+        type: DataTypes.JSON, // Cambiado a JSON type para almacenar un array de documentos
+        allowNull: true
     },
-    imagen:{
-        type: DataTypes.STRING(100)
+    imagen: {
+        type: DataTypes.JSON, // Cambiado a JSON type para almacenar un array de imágenes
+        allowNull: true
     },
-
     calle: {
         type: DataTypes.STRING(60),
         allowNull: false
@@ -70,9 +70,8 @@ const Eventos =  db.define('Eventos',{
     }
 });
 
-// // Definir la relación entre Usuario y Eventos
+// Definir la relación entre Usuario y Eventos
 Usuario.hasMany(Eventos, { foreignKey: 'userid' });
 Eventos.belongsTo(Usuario, { foreignKey: 'userid' });
 
 module.exports = Eventos;
-
