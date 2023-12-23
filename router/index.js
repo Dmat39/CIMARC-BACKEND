@@ -96,12 +96,12 @@ module.exports = function () {
 
     /**NOTICIA**/
      router.get('/admin/noticias/register',
-     authController.usuarioAutenticado,
-     AdminHomeController.noticiaRegister
+        authController.usuarioAutenticado,
+        AdminHomeController.noticiaRegister
      );
      router.get('/admin/noticias/editar/:idNoticias',
-     authController.usuarioAutenticado,
-     AdminHomeController.NoticiasEditar
+        authController.usuarioAutenticado,
+        AdminHomeController.NoticiasEditar
      );
      router.get('/admin/noticias',
      authController.usuarioAutenticado,
@@ -444,7 +444,7 @@ module.exports = function () {
     );
 
      // Actualizar Eventos
-     router.post('/trabajador-eventos/:idEventos',
+     router.post('/trabajador-eventos/update/:idEventos',
         EventosController.subirArchivo,
         EventosController.actualizarEvento
     );

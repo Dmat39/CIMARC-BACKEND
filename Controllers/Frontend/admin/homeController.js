@@ -15,16 +15,18 @@ exports.homeAdmin = (req,res) =>{
 
 exports.register = (req,res) =>{
     const successMessage = req.session.successMessage;
-
+    const errorMessage = req.session.errorMessage;
     // Limpiar el mensaje para que no se muestre más de una vez
     delete req.session.successMessage;
+    delete req.session.errorMessage;
     res.render('admin/mantenimientoUsuario/register',{
         isHome: false,
         isCliente: false,
         isJobs: false,
         isAdmin: true,
         isFooter: false,
-        successMessage
+        successMessage,
+        errorMessage,
 });
 }
 

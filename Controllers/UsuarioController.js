@@ -20,12 +20,21 @@ exports.crearUsuario = async (req, res, next) => {
 
         res.redirect('/admin/mantenimientoUsu');
     } catch (error) {
-        //si hay un error
-        res.send(error);
-        next();
+        // Almacenar mensaje de error en la sesión
+        req.session.errorMessage = obtenerMensajesError(error);
+        
+        // Redirigir a la vista de registro
+        res.redirect('/admin/register');
     }
 };
 
+function obtenerMensajesError(error) {
+    if (error.errors) {
+        return error.errors.map(err => err.message);
+    } else {
+        return [error.message];
+    }
+}
 
 exports.obtenerUsuarios = async (req, res) => {
     try {
