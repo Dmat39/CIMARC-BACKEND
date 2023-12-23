@@ -6,7 +6,7 @@
     </div>
     <br> <br> <br>
     <div class="seccion-formulario">
-        <h1>Registro de Usuario</h1>
+        <h1>Editar de Usuario</h1>
         <form action="/user-roles/update/<%= usuarios.id %>" method="post">
             <label for="role">Rol:</label>
             <select id="role" name="role" required>
@@ -24,9 +24,9 @@
             <label for="name">Nombre y Apellido: </label>
             <input type="text" id="name" name="name" value="<%= usuarios.name %>" required>
 
-            <label for="Identity">DNI / RUC: </label>
-            <input type="number" id="Identity" name="Identity" value="<%= usuarios.Identity %>" required min="0">
-
+            <label for="Identity">DNI / RUC / PASAPORTE: </label>
+            <input type="text" id="Identity" name="Identity" value="<%= usuarios.Identity %>"  required maxlength="15">
+        
             <label for="telf">Teléfono: </label>
             <input type="text" id="telf" name="telf" value="<%= usuarios.telf %>" required pattern="[0-9]+">
         

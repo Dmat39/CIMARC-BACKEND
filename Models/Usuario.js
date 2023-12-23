@@ -76,15 +76,15 @@ const Usuario = db.define('user', {
         allowNull: false
     },
     Identity: {
-        type: DataTypes.BIGINT,
-        defaultValue: 0,
+        type: DataTypes.STRING,
+        defaultValue: '0',
         validate: {
-            isInt: {
-                msg: 'La identidad debe ser un número entero'
+            isAlphanumeric: {
+                msg: 'La identidad debe contener solo números y/o letras'
             },
-            max: {
-                args: [99999999999], 
-                msg: 'La identidad debe tener como máximo 11 dígitos'
+            len: {
+                args: [1, 15],
+                msg: 'La identidad debe tener entre 1 y 15 caracteres'
             }
         }
     },
