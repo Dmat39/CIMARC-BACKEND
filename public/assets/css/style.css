@@ -4845,7 +4845,7 @@ Section FAQs (Frequently Asked questions) Home1: Start
     font-size: 60px;
   }
 }
-@media (max-width: 1169.99px) {
+@media (max-width: 1160.99px) {
   .faqs-block.style-one > .row {
     height: unset;
     row-gap: 0;
