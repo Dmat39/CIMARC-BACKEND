@@ -71,9 +71,15 @@ const Usuario = db.define('user', {
             }
         }
     },
-    name:{
+    name: {
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notEmpty: {
+                args: true,
+                msg: 'El campo "name" no puede estar vacío.'
+            }
+        }
     },
     Identity: {
         type: DataTypes.STRING,
