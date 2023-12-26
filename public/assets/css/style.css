@@ -4445,6 +4445,42 @@ Lastest Blogs - Home 6: Change color - End
   }
 }
 
+.recent-post-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px; /* Ajusta según sea necesario para la separación deseada */
+}
+
+.item-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px; /* Ajusta según sea necesario */
+  overflow: hidden;
+  margin-right: 16px; /* Ajusta según sea necesario */
+}
+
+.item-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Para que la imagen mantenga su relación de aspecto */
+}
+
+.item-infor {
+  flex: 1;
+}
+
+.item-title {
+  font-size: 16px; /* Ajusta según sea necesario */
+  font-weight: bold;
+}
+
+.item-date {
+  display: flex;
+  align-items: center;
+  color: #888; /* Ajusta según sea necesario */
+  font-size: 14px; /* Ajusta según sea necesario */
+}
+
 /*
 *** Blog Detail - Style 2: End
 */
@@ -6209,7 +6245,19 @@ tarjeta secretaria general
   margin-bottom: 20px; /* Ajusta los márgenes inferiores entre los elementos */
   box-sizing: border-box; /* Ajusta el modelo de caja para incluir los márgenes en el ancho total */
 }
+.col-12 {
+  width: 100%;
+}
 
+.col-lg-8,
+.col-lg-4 {
+  float: left;
+  box-sizing: border-box;
+}
+
+.col-12.col-lg-8 {
+  width: 66.66667%; /* Ajusta el ancho según tu diseño */
+}
 
 
 /* Resto de tus estilos... */

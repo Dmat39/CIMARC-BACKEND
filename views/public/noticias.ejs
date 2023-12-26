@@ -23,7 +23,13 @@
                     <div class="caption2 pt-4 pb-4 pl-12 pr-12 bg-surface bora-40 display-inline-block"><%- noticia.categoria -%></div>
                     <div class="heading6 mt-8"><%- noticia.titulo -%></div>
                     <div class="date flex-item-center gap-16 mt-8">
-                      <div class="author caption2 text-secondary">by <span class="text-on-surface">  <%- noticia.user.email -%></span></div>
+                      <div class="author caption2 text-secondary">by <span class="text-on-surface">
+                        <% if (noticia.user && noticia.user.email) { %>
+                          <%= noticia.user.email %>
+                        <% } else { %>
+                          Usuario no disponible
+                        <% } %>
+                        </span></div>
                       <div class="item-date flex-item-center"><i class="ph-bold ph-calendar-blank"></i><span class="ml-4 caption2"> <%- noticia.fecha-%></span></div>
                     </div>
                   </div></a></div>

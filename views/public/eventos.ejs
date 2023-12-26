@@ -1,49 +1,187 @@
 <div id="content">
-    <div class="slider-sub">
-      <div class="bg-img">
-        <img src="assets/images/banner/evento.png" alt="banner" />
+  <div class="slider-sub">
+    <div class="bg-img">
+      <img src="assets/images/banner/evento.png" alt="banner" />
+    </div>
+    <div class="container">
+      <div class="heading-nav gap-4 mt-32">
+        <a class="hover-underline caption1 text-white" href="index.html"
+          >Home</a
+        ><i class="ph ph-caret-double-right text-white"></i>
+        <div class="caption1 text-white">Eventos</div>
       </div>
-      <div class="container">
-        <div class="heading-nav gap-4 mt-32">
-          <a class="hover-underline caption1 text-white" href="index.html"
-            >Home</a
-          ><i class="ph ph-caret-double-right text-white"></i>
-          <div class="caption1 text-white">Eventos</div>
+      <div class="text-nav">
+        <div class="heading3 text-white">Eventos</div>
+        <div class="sub-heading mt-8 text-white fw-400">
+          Experimenta resoluciones justas y eficientes con nuestro servicio de conciliación y arbitraje. Soluciones rápidas para conflictos comerciales. ¡Transformamos desafíos en acuerdos sólidos!
         </div>
-        <div class="text-nav">
-          <div class="heading3 text-white">Eventos</div>
-          <div class="sub-heading mt-8 text-white fw-400">
-            Experimenta resoluciones justas y eficientes con nuestro servicio de conciliación y arbitraje. Soluciones rápidas para conflictos comerciales. ¡Transformamos desafíos en acuerdos sólidos!
+      </div>
+    </div>
+  </div>
+
+  <div class="blog-list mt-100">
+      <div class="container"> 
+        <div class="col-12 col-lg-8 flex-column row-gap-40">
+          <% eventos.forEach(evento => { %>
+              <a class="row blog-item row-gap-20 item-filter" href="/eventos/<%= evento.id %>" data-name="<%= evento.categoria %>">
+                  <div class="col-12 col-md-6">
+                      <div class="bg-img w-100 overflow-hidden bora-16">
+                          <img class="w-100 h-100 display-block" src="../../uploads/eventos/imagen/<%= evento.imagen %>" alt="<%= evento.titulo %>" />
+                      </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                      <div class="caption2 pt-4 pb-4 pl-12 pr-12 bg-surface bora-40 display-inline-block">
+                          <%- evento.categoria %>
+                      </div>
+                      <div class="heading6 mt-8">
+                          <%- evento.titulo %>
+                      </div>
+                      <div class="date flex-item-center gap-16 mt-8">
+                          <div class="author caption2 text-secondary">
+                              by 
+                              <% if (evento.user && evento.user.email) { %>
+                                  <span class="text-on-surface"><%- evento.user.email %></span>
+                              <% } else { %>
+                                  <span class="text-on-surface">Usuario sin correo</span>
+                              <% } %>
+                          </div>
+                          <div class="item-date flex-item-center">
+                              <i class="ph-bold ph-calendar-blank"></i><span class="ml-4 caption2"> <%- evento.fecha %></span>
+                          </div>
+                      </div>
+                      <!-- Puedes agregar más detalles sobre el evento aquí si es necesario -->
+                      <div class="body3 text-secondary mt-16 pb-16">
+                          <%- evento.descripcion %>
+                      </div>
+                      <div class="read fw-700 text-underline">Leer más</div>
+                  </div>
+              </a>
+              
+          <% }); %>
+      
+          <!-- Navegación Paginada -->
+          <div class="list-nav flex-item-center gap-8">
+              <!-- Puedes generar dinámicamente estos elementos según la cantidad de páginas -->
+              <div class="nav-item bora-4 bg-surface text-button w-40 h-40 flex-center border-line-1px active" data-name="tab-one">1</div>
+              <div class="nav-item bora-4 bg-surface text-button w-40 h-40 flex-center border-line-1px" data-name="tab-two">2</div>
+              <div class="nav-item bora-4 bg-surface text-button w-40 h-40 flex-center border-line-1px" data-name="tab-three">3</div>
+          </div>
+       </div>
+
+       <div class="col-12 col-lg-4 pl-55">
+        <div class="search-block bora-8 bg-surface">
+          <input class="bora-8 bg-surface w-100" type="text" placeholder="Search" />
+          <i class="ph ph-magnifying-glass"></i>
+      </div>
+        <div class="cate-block mt-40">
+          <div class="heading7">Categories</div>
+          <div class="list-nav mt-16">
+            <div
+              class="nav-item bora-8 flex-between p-12 pointer text-button text-secondary active"
+              data-name="tab-one"
+            >
+              Financial Planning<i
+                class="ph-bold ph-caret-right hidden"
+              ></i>
+            </div>
+            <div
+              class="nav-item bora-8 flex-between p-12 pointer text-button text-secondary"
+              data-name="tab-two"
+            >
+              Payment Solution<i
+                class="ph-bold ph-caret-right hidden"
+              ></i>
+            </div>
+            <div
+              class="nav-item bora-8 flex-between p-12 pointer text-button text-secondary"
+              data-name="tab-three"
+            >
+              Cryptocurrency Financial<i
+                class="ph-bold ph-caret-right hidden"
+              ></i>
+            </div>
+            <div
+              class="nav-item bora-8 flex-between p-12 pointer text-button text-secondary"
+              data-name="tab-one"
+            >
+              Blockchain<i class="ph-bold ph-caret-right hidden"></i>
+            </div>
+            <div
+              class="nav-item bora-8 flex-between p-12 pointer text-button text-secondary"
+              data-name="tab-two"
+            >
+              Online Banking<i class="ph-bold ph-caret-right hidden"></i>
+            </div>
+            <div
+              class="nav-item bora-8 flex-between p-12 pointer text-button text-secondary"
+              data-name="tab-three"
+            >
+              Personal Financial<i
+                class="ph-bold ph-caret-right hidden"
+              ></i>
+            </div>
+          </div>
+        </div>
+      
+         <div class="recent-post-block mt-40">
+            <div class="recent-post-heading heading7">Recent Posts</div>
+            <div class="list-recent-post mt-16">
+                <% eventos.forEach((evento, index) => { %>
+                    <div class="recent-post-item<%= index > 1 ? ' mt-8' : '' %>">
+                        <a class="item-img" href="/eventos/<%= evento.id %>">
+                            <img src="../../uploads/eventos/imagen/<%= evento.imagen %>" alt="<%= evento.titulo %>" />
+                        </a>
+                        <div class="item-infor">
+                            <a href="/eventos/<%= evento.id %>">
+                                <div class="item-date flex-item-center">
+                                    <i class="ph-bold ph-calendar-blank"></i>
+                                    <span class="ml-4 caption2"><%= evento.fecha %></span>
+                                </div>
+                                <div class="item-title mt-4">
+                                    <%= evento.titulo %>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+        <div class="tags-popular-block mt-40">
+          <div class="tag-heading heading7">Popular Tags</div>
+          <div class="list-tag mt-16 d-flex flex-wrap gap-12">
+            <a
+              class="caption2 pt-8 pb-8 pl-16 pr-16 bg-surface bora-20 hover-button-black"
+              href="#!"
+              >Featured</a
+            ><a
+              class="caption2 pt-8 pb-8 pl-16 pr-16 bg-surface bora-20 hover-button-black"
+              href="#!"
+              >Experience</a
+            ><a
+              class="caption2 pt-8 pb-8 pl-16 pr-16 bg-surface bora-20 hover-button-black"
+              href="#!"
+              >Interview</a
+            ><a
+              class="caption2 pt-8 pb-8 pl-16 pr-16 bg-surface bora-20 hover-button-black"
+              href="#!"
+              >Skill</a
+            ><a
+              class="caption2 pt-8 pb-8 pl-16 pr-16 bg-surface bora-20 hover-button-black"
+              href="#!"
+              >Business</a
+            ><a
+              class="caption2 pt-8 pb-8 pl-16 pr-16 bg-surface bora-20 hover-button-black"
+              href="#!"
+              >Design</a
+            >
           </div>
         </div>
       </div>
+  
     </div>
-    <div class="blog-list mt-100">
-        <div class="container"> 
-            <div class="row row-gap-32">
-              <% eventos.forEach(evento => { %>
-                          <div class="blog-item col-12 col-xl-4 col-md-6 item-filter" data-name="tab-one"><a class="blog-item-main" href="/eventos/<%= evento.id %>">
-                              <div class="bg-img w-100 overflow-hidden mb-minus-1"><img class="w-100 h-100 display-block" src="../../uploads/eventos/imagen/<%= evento.imagen %>" alt="Starting your traveling blog with Vasco"/></div>
-                              <div class="infor bg-white p-24">
-                                <div class="caption2 pt-4 pb-4 pl-12 pr-12 bg-surface bora-40 display-inline-block"><%- evento.categoria -%></div>
-                                <div class="heading6 mt-8"><%- evento.titulo -%></div>
-                                <div class="date flex-item-center gap-16 mt-8">
-                                  <div class="author caption2 text-secondary">by <span class="text-on-surface">  <%- evento.user.email -%></span></div>
-                                  <div class="item-date flex-item-center"><i class="ph-bold ph-calendar-blank"></i><span class="ml-4 caption2"> <%- evento.fecha-%></span></div>
-                                </div>
-                              </div></a></div>
-                              <% }); %>
-            
-              <div class="list-nav flex-center gap-8 mt-40 col-12">
-                <div class="nav-item bora-4 bg-surface text-button w-40 h-40 flex-center border-line-1px active" data-name="tab-one">1</div>
-                <div class="nav-item bora-4 bg-surface text-button w-40 h-40 flex-center border-line-1px" data-name="tab-two">2</div>
-                <div class="nav-item bora-4 bg-surface text-button w-40 h-40 flex-center border-line-1px" data-name="tab-three">3</div>
-              </div>
-            </div>
-            </div>
-    </div>
-    <a class="scroll-to-top-btn" href="#header"
-      ><i class="ph-bold ph-caret-up"></i
-    ></a>
-    <div class="pb-100"></div>
   </div>
+  <a class="scroll-to-top-btn" href="#header"
+    ><i class="ph-bold ph-caret-up"></i
+  ></a>
+  <div class="pb-100"></div>
+</div>
