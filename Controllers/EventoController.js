@@ -105,8 +105,8 @@ exports.nuevoEvento = async (req, res, next) => {
             
             // Verificar si se encontró la categoría
             if (categoria) {
-                // Asignar la categoría al evento
-                evento.categoria = categoria.nombre;
+                // Asignar la categoría al evento a través de la relación
+                await evento.setCategoria(categoria);
             } else {
                 throw new Error('No se encontró la categoría correspondiente al ID proporcionado.');
             }
@@ -123,6 +123,7 @@ exports.nuevoEvento = async (req, res, next) => {
         next();
     }
 };
+
 // Mostrar Eventos
 exports.mostrarEventos = async(req,res,next) =>{
     
