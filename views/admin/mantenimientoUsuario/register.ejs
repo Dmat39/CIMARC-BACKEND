@@ -1,11 +1,17 @@
 <link rel="stylesheet" href="/assets/css/barra.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <div class="content">
     <div class="d-flex justify-content-center mt-3">
-        <div class="alert alert-success text-center" role="alert">
-            <% if (successMessage) { %>
+        <% if (successMessage) { %>
+            <div class="alert alert-success text-center" role="alert">
                 <%= successMessage %>
-            <% } %>
-        </div>
+            </div>
+        <% } %>
+        <% if (errorMessage) { %>
+            <div class="alert alert-danger text-center" role="alert">
+                <%= errorMessage.join(', ') %>
+            </div>
+        <% } %>
     </div>
     <div class="seccion-botones">
         <!-- Contenido principal de la página -->
@@ -15,19 +21,37 @@
     <div class="seccion-formulario">
         <h1>Registro de Usuario</h1>
         <form action="/user-roles" method="POST">
-            <label for="rol">Rol:</label>
-            <select id="rol" name="rol" required>
+            <label for="role">Rol:</label>
+            <select id="role" name="role" required>
                 <option value="cliente">Cliente</option>
                 <option value="trabajador">Trabajador</option>
                 <option value="admin">Admin</option>
             </select>
 
+            <label for="userid">Usuario: </label>
+            <input type="text" id="userid" name="userid" required>
+
             <label for="email">Correo electrónico:</label>
             <input type="email" id="email" name="email" required>
 
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" required>
+            <label for="name">Nombre y Apellido: </label>
+            <input type="text" id="name" name="name" required>
 
+            <label for="Identity">DNI / RUC / PASAPORTE: </label>
+            <input type="text" id="Identity" name="Identity" required maxlength="15">
+            
+            <label for="telf">Teléfono: </label>
+            <input type="text" id="telf" name="telf" required pattern="[0-9]+">
+
+            <label for="password">Contraseña:</label>   
+            <input type="password" id="password" name="password" required>
+        
+            <label for="activo">Activar Usuario: </label>
+            <select id="activo" name="activo" required>
+                <option value="0">Desactivado</option>
+                <option value="1">Activado</option>
+            </select>
+            <br><br>
             <button type="submit">Registrar</button>
         </form>
     </div>

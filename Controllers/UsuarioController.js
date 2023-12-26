@@ -20,12 +20,21 @@ exports.crearUsuario = async (req, res, next) => {
 
         res.redirect('/admin/mantenimientoUsu');
     } catch (error) {
-        //si hay un error
-        res.send(error);
-        next();
+        // Almacenar mensaje de error en la sesión
+        req.session.errorMessage = obtenerMensajesError(error);
+        
+        // Redirigir a la vista de registro
+        res.redirect('/admin/register');
     }
 };
 
+function obtenerMensajesError(error) {
+    if (error.errors) {
+        return error.errors.map(err => err.message);
+    } else {
+        return [error.message];
+    }
+}
 
 exports.obtenerUsuarios = async (req, res) => {
     try {
@@ -59,9 +68,7 @@ exports.mostrarUsuarioID = async(req,res,next)=>{
         }
 
         // Construir un objeto con los campos a actualizar
-        const updateObj = {
-            email: req.body.email,
-        };
+        const updateObj = {};
 
         // Verificar si la contraseña se proporciona y cifrarla
         if (req.body.password) {
@@ -69,20 +76,30 @@ exports.mostrarUsuarioID = async(req,res,next)=>{
             updateObj.password = hashedPassword;
         }
 
-        // Actualizar el usuario en la base de datos
-        await Usuario.update(updateObj, {
-            where: { id: req.params.idUsu }
-        });
+        // Incluir otros campos que pueden actualizarse
+        updateObj.name = req.body.name;
+        updateObj.Identity = req.body.Identity;
+        updateObj.telf = req.body.telf;
+        updateObj.activo = req.body.activo;
+        updateObj.role = req.body.role;
 
-        // Recuperar el usuario actualizado
-        usuario = await Usuario.findByPk(req.params.idUsu);
+        // Intentar realizar la actualización
+        await usuario.update(updateObj);
 
-        res.send(usuario);
+        // Redireccionar después de la actualización
+        res.redirect('/admin/mantenimientoUsu');
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Hubo un error');
+        // Manejar la excepción de validación
+        if (error.name === 'SequelizeValidationError') {
+            const validationErrors = error.errors.map(err => err.message);
+            res.status(400).send(`Error de validación: ${validationErrors.join(', ')}`);
+        } else {
+            console.error(error);
+            res.status(500).send('Hubo un error');
+        }
     }
 };
+
 
 exports.eliminarUsuario = async (req, res) => {
     try {
@@ -94,7 +111,7 @@ exports.eliminarUsuario = async (req, res) => {
         await Usuario.destroy({
             where: { id: req.params.idUsu }
         });
-        res.send({ message: 'Usuario eliminado' });
+        res.redirect('/admin/mantenimientoUsu');
     } catch (error) {
         res.status(500).send('Hubo un error');
     }

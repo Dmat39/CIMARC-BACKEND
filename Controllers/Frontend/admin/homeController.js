@@ -15,16 +15,18 @@ exports.homeAdmin = (req,res) =>{
 
 exports.register = (req,res) =>{
     const successMessage = req.session.successMessage;
-
+    const errorMessage = req.session.errorMessage;
     // Limpiar el mensaje para que no se muestre más de una vez
     delete req.session.successMessage;
+    delete req.session.errorMessage;
     res.render('admin/mantenimientoUsuario/register',{
         isHome: false,
         isCliente: false,
         isJobs: false,
         isAdmin: true,
         isFooter: false,
-        successMessage
+        successMessage,
+        errorMessage,
 });
 }
 
@@ -180,7 +182,7 @@ exports.editarEvento = async(req,res) =>{
         evento,
         isFooter: false
 
-});
+    });
 }
 
 exports.formMantenimientoUsu = async (req,res) =>{
@@ -200,6 +202,42 @@ exports.formMantenimientoUsu = async (req,res) =>{
             isFooter: false,
             usuarios: usuarios,
             successMessage// Pasar la lista de usuarios a la vista
+        });
+    } catch (error) {
+        // Manejar el error apropiadamente
+        res.status(500).send('Error obteniendo usuarios');
+    }
+}
+exports.formVerDatos = async (req,res) =>{
+    try {
+        
+        const usuarios = await Usuario.findByPk(req.params.id);
+        res.render('admin/mantenimientoUsuario/verDatos',{
+            isHome: false,
+            isCliente: false,
+            isJobs: false,
+            isAdmin: true,
+            usuarios,
+            isFooter: false
+    
+        });
+    } catch (error) {
+        // Manejar el error apropiadamente
+        res.status(500).send('Error obteniendo usuarios');
+    }
+}
+exports.formEditarUser = async (req,res) =>{
+    try {
+        
+        const usuarios = await Usuario.findByPk(req.params.idUsu);
+        res.render('admin/mantenimientoUsuario/editarUsu',{
+            isHome: false,
+            isCliente: false,
+            isJobs: false,
+            isAdmin: true,
+            usuarios,
+            isFooter: false
+    
         });
     } catch (error) {
         // Manejar el error apropiadamente

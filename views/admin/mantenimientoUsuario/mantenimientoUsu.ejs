@@ -42,10 +42,15 @@
                             <td><%= usuario.email %></td>
                             <td><%= usuario.role %></td>
                             <td class="acciones">
-                                <button 
-                                 onclick="">Ver</button>
-                                <button onclick="">Editar</button>
-                                <button onclick="">Eliminar</button>
+                                <button  type="submit">
+                                    <a href="/admin/ver/datos/<%= usuario.id %>">Ver</a>
+                                </button>
+                                <button  type="submit">
+                                    <a href="/admin/editar/datos/<%= usuario.id %>">Editar</a>
+                                </button>
+                                <button type="submit">
+                                    <a href="/user-roles/delete/<%= usuario.id %>">Eliminar</a>
+                                </button>
                             </td>
                         </tr>
                     <% }); %>

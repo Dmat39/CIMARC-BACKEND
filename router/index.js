@@ -28,12 +28,16 @@ module.exports = function () {
     router.get('/noticias',homeController.NoticiasVista)
     router.get('/noticias/:id',homeController.noticiaDetail)
     router.get('/home6',homeController.home6)
+    router.get('/documentacion',homeController.documentacion)
     //**Blogs */
     router.get('/blogs',homeController.Blogs);
     /**Service*/
     router.get('/service',homeController.service);
     router.get('/service/conciliacion',homeController.serviceConciliacion);
     router.get('/service/arbitraje',homeController.ServiceArbitraje);
+    /**eventos */
+    router.get('/eventos',homeController.Eventos);
+    
 
     /**Olvide contraseña */
     router.get('/contrasena',(req,res) => {
@@ -71,12 +75,19 @@ module.exports = function () {
         authController.usuarioAutenticado,
         AdminHomeController.formMantenimientoUsu
     )
-    /** Register**/
+    
     router.get('/admin/register',
         authController.usuarioAutenticado,
         AdminHomeController.register
     );
+    router.get('/admin/ver/datos/:id',
+        authController.usuarioAutenticado,
+        AdminHomeController.formVerDatos
+    )
+    router.get('/admin/editar/datos/:idUsu',
 
+        AdminHomeController.formEditarUser
+    );
     /**NOTICIA Lista**/
     router.get('/admin/noticiaList',
     authController.usuarioAutenticado,
@@ -85,12 +96,12 @@ module.exports = function () {
 
     /**NOTICIA**/
      router.get('/admin/noticias/register',
-     authController.usuarioAutenticado,
-     AdminHomeController.noticiaRegister
+        authController.usuarioAutenticado,
+        AdminHomeController.noticiaRegister
      );
      router.get('/admin/noticias/editar/:idNoticias',
-     authController.usuarioAutenticado,
-     AdminHomeController.NoticiasEditar
+        authController.usuarioAutenticado,
+        AdminHomeController.NoticiasEditar
      );
      router.get('/admin/noticias',
      authController.usuarioAutenticado,
@@ -270,11 +281,11 @@ module.exports = function () {
     
         UsuarioController.mostrarUsuarioID
     )
-    router.put('/user-roles/:idUsu',
+    router.post('/user-roles/update/:idUsu',
     
         UsuarioController.actualizarUsuario
     )
-    router.delete('/user-roles/:idUsu',
+    router.get('/user-roles/delete/:idUsu',
     
         UsuarioController.eliminarUsuario
     )
@@ -433,10 +444,9 @@ module.exports = function () {
     );
 
      // Actualizar Eventos
-     router.put('/trabajador-eventos/:idEventos',
+     router.post('/trabajador-eventos/update/:idEventos',
         EventosController.subirArchivo,
-        //EventosController.subirImagen,
-        EventosController.actualizarEventos
+        EventosController.actualizarEvento
     );
 
 
