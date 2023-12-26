@@ -31,8 +31,15 @@
 
         <label for="descripcion">Descripción:</label>
         <textarea class="form-control" id="descripcion" name="descripcion" rows="3" value="<%= blogUsuario.descripcion %>" required></textarea>
-
-
+        <label for="categoria">Categoría:</label>
+        <!-- Cambiado a un campo de selección múltiple -->
+        <select class="form-control" id="categoria" name="categoria" multiple required>
+            <!-- Opciones de categorías -->
+            <option value="categoria1">Categoría 1</option>
+            <option value="categoria2">Categoría 2</option>
+            <!-- Agrega más opciones según sea necesario -->
+        </select>
+        <br>
         <!-- Muestra la imagen actual si existe -->
         <% if (blogUsuario.imagen) { %>
             <img width="200px"    src="/uploads/blogs/<%= blogUsuario.imagen %>"  alt="Imagen actual" >
