@@ -1,6 +1,7 @@
 const Noticias = require('../../../Models/Noticias');
 const Eventos= require('../../../Models/Eventos');
 const usuarios = require('../../../Models/Usuario');
+const blog=require('../../../Models/Blogs');
 exports.home = (req,res) =>{
     res.render('public/home',{
         isHome: true,
@@ -71,13 +72,15 @@ exports.About = (req,res) =>{
         isFooter: true
     })
 }
-exports.Blogs = (req,res) =>{
+exports.Blogs = async (req,res) =>{
+    const blogs = await blog.findAll({ include: usuarios }); // Asegúrate de incluir la relación con la tabla de usuarios
     res.render('public/blogs',{
         isHome: true,
         isCliente: false,
         isJobs: false,
         isAdmin: false,
-        isFooter: true
+        isFooter: true,
+        blogs : blogs,
     })
 }
 exports.Eventos = async (req,res) =>{
