@@ -40,9 +40,15 @@
                             <td><%= evento.descripcion %></td>
                             <td><%= evento.ponentes %></td>
                             <td><%= evento.fecha %></td>
-                            <td><%= evento.categoria %></td>
                             <td>
-                                <% if (evento.documentos) { %>
+                                <% categorias.forEach(function(categoria) { %>
+                                    <% if (evento.categoriaId && evento.categoriaId == categoria.id) { %>
+                                        <%= categoria.nombre %>
+                                    <% } %>
+                                <% }); %>
+                            </td>
+
+                            <td><% if (evento.documentos) { %>
                                     <a href="/uploads/eventos/documentos/<%= evento.documentos %>" target="_blank">Enlace al documento</a>
                                 <% } %>
                             </td>
@@ -65,6 +71,16 @@
                         </tr>
                     <% }); %>
                 </tbody>
+
             </table>
         </div>
 </div>
+
+<!-- ... (código posterior) ... -->
+
+<script>
+    // Función para encontrar la categoría por su ID
+    function encontrarCategoria(categoriaId) {
+        return categorias.find(categoria => categoria.id === categoriaId) || {};
+    }
+</script>

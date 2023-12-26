@@ -14,6 +14,7 @@ const db = require('./config/db.js');
       require('./Models/DocClientes.js');
       require('./Models/Casos.js');
       require('./Models/Usuario.js');
+      require('./Models/CategoriaEvento.js');
       require('./Models/Eventos.js');
       require('./Models/Blogs.js');
       require('./Models/Noticias.js');

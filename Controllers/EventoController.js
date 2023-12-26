@@ -1,5 +1,6 @@
 const Eventos = require('../Models/Eventos');
 const Usuario = require('../Models/Usuario');
+const EventoCat = require('../Models/CategoriaEvento');
 const multer = require('multer');
 const shortid = require('shortid');
 const fs = require('fs').promises;
@@ -84,7 +85,6 @@ exports.nuevoEvento = async (req, res, next) => {
         if (req.user && req.user.id) {
             evento.userid = req.user.id;
         } else {
-            // Manejar el caso en que req.user o req.user.id no estén definidos
             throw new Error('El usuario no está autenticado o no tiene un ID válido.');
         }
 
@@ -98,15 +98,28 @@ exports.nuevoEvento = async (req, res, next) => {
             evento.imagen = req.files['imagen'][0].filename;
         }
 
+        // Verificar si la categoría está presente en la solicitud
+        if (req.body.categoriaId) {
+            // Obtener la categoría correspondiente al ID enviado
+            const categoria = await EventoCat.findByPk(req.body.categoriaId);
+            
+            // Verificar si se encontró la categoría
+            if (categoria) {
+                // Asignar la categoría al evento
+                evento.categoria = categoria.nombre;
+            } else {
+                throw new Error('No se encontró la categoría correspondiente al ID proporcionado.');
+            }
+        } else {
+            throw new Error('La categoría no está presente en la solicitud.');
+        }
+
         // Almacenar un registro
         await evento.save();
         res.redirect('/admin/eventos');
     } catch (error) {
-        // Si hay un error
         console.error(error);
         res.status(500).json({ mensaje: 'Error interno del servidor' });
-        // Llama a next solo si necesitas pasar el control al siguiente middleware
-        // De lo contrario, puedes omitir next()
         next();
     }
 };

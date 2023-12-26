@@ -34,12 +34,15 @@
                 <input type="date" class="form-control" id="fecha" name="fecha" required>
 
                 <label for="categoria">Categoría:</label>
-                <!-- Cambiado a un campo de selección múltiple -->
                 <select class="form-control" id="categoria" name="categoria" multiple required>
-                    <!-- Opciones de categorías -->
-                    <option value="categoria1">Categoría 1</option>
-                    <option value="categoria2">Categoría 2</option>
-                    <!-- Agrega más opciones según sea necesario -->
+    <!-- Opción por defecto -->
+                <option value="" disabled>- Seleccione -</option>
+    <!-- Iterar sobre las categorías y agregar opciones -->
+                <% categorias.forEach(function(categoria) { %>
+                <option value="<%= categoria.id %>" <% if (categoria && categoria.id == categoria.id) { %>selected<% } %>>
+                <%= categoria.nombre %>
+                </option>
+                <% }); %>
                 </select>
 
                 <label for="descripcion">Descripción:</label>

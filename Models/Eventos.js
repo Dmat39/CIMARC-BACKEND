@@ -35,19 +35,6 @@ const Eventos = db.define('Eventos', {
             }
         }
     },
-    categoria: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-        get() {
-            const categoriaValue = this.getDataValue('categoria');
-            // Parse la cadena JSON solo si tiene un valor
-            return categoriaValue ? JSON.parse(categoriaValue) : null;
-        },
-        set(value) {
-            // Convierte el valor a cadena JSON antes de almacenarlo
-            this.setDataValue('categoria', JSON.stringify(value));
-        }
-    },
     documentos: {
         type: DataTypes.JSON, // Cambiado a JSON type para almacenar un array de documentos
         allowNull: true

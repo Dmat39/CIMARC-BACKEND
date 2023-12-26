@@ -2,6 +2,8 @@ const Usuario = require('../../../Models/Usuario'); // Importa tu modelo de usua
 const Evento=require('../../../Models/Eventos'); 
 const Noticias=require('../../../Models/Noticias'); 
 const blog=require('../../../Models/Blogs');
+const EventoCat= require('../../../Models/CategoriaEvento')
+
 exports.homeAdmin = (req,res) =>{
     res.render('admin/home',{
         isHome: false,
@@ -136,10 +138,12 @@ exports.Eventos = async (req,res) =>{
     const successMessage = req.session.successMessage;
     // Obtener usuarios desde la base de datos
     const eventos = await Evento.findAll() //Obtener todo los usuarios en la tabla
-// Obtener el mensaje de la sesión si existe
-   
+    // Obtener el mensaje de la sesión si existe
+    const[categorias]=await Promise.all([
+        EventoCat.findAll()
+    ])
 
-// Limpiar el mensaje para que no se muestre más de una vez
+ // Limpiar el mensaje para que no se muestre más de una vez
     delete req.session.successMessage;
     res.render('admin/evento/home', {
         isHome: false,
@@ -147,15 +151,19 @@ exports.Eventos = async (req,res) =>{
         isJobs: false,
         isAdmin: true,
         eventos,
+        categorias,
         successMessage,
         isFooter: false// Pasar la lista de usuarios a la vista
     });
 
 }
 
-exports.eventoRegister = (req,res) =>{
+exports.eventoRegister = async(req,res) =>{
 
     const successMessage = req.session.successMessage;
+    const[categorias]=await Promise.all([
+        EventoCat.findAll()
+    ])
     // Limpiar el mensaje para que no se muestre más de una vez
     delete req.session.successMessage;
     res.render('admin/evento/eventoRegister',{
@@ -163,6 +171,7 @@ exports.eventoRegister = (req,res) =>{
         isCliente: false,
         isJobs: false,
         isAdmin: true,
+        categorias,
         successMessage,
         isFooter: false
 
@@ -173,13 +182,16 @@ exports.editarEvento = async(req,res) =>{
     const eventoId= req.params.idEvento;
     const evento= await Evento.findByPk(eventoId, { 
         include:Usuario,})
-    
+    const[categorias]=await Promise.all([
+            EventoCat.findAll()
+    ])
     res.render('admin/evento/editarEvento',{
         isHome: false,
         isCliente: false,
         isJobs: false,
         isAdmin: true,
         evento,
+        categorias,
         isFooter: false
 
     });

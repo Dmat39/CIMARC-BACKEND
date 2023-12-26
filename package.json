@@ -7,7 +7,9 @@
   "scripts": {
     "start": "nodemon ./index",
     "js": "webpack --config webpack.config.js --watch",
-    "eventoC:importar": "node ./seed/seeder.js -i"  
+    "eventoC:importar": "node ./seed/seeder.js -i",
+    "eventoC:eliminar": "node ./seed/seeder.js -e" 
+    
   },
   "author": "CIMARC",
   "license": "ISC",
