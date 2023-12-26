@@ -100,7 +100,15 @@ exports.home6 = (req,res) =>{
         isFooter: true
     })
 }
-
+exports.documentacion = (req,res) =>{
+    res.render('public/documentacion',{
+        isHome: true,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: false,
+        isFooter: true
+    })
+}
 exports.noticiaDetail = async (req, res) => {
     // Obtener el ID de la noticia desde los parámetros de la URL
     const noticiaId = req.params.id;

@@ -158,59 +158,54 @@ exports.mostrarEventosID = async (req, res, next) => {
  // Actualizar un Evento via id 
  exports.actualizarEvento = async (req, res, next) => {
     try {
-        // Construir un nuevo caso
-        let nuevoEvento = req.body;
+        // Construir un nuevo evento con los datos actualizados
+        let eventoActualizado = req.body;
 
-        // Obtener el caso anterior para obtener nombres de archivos antiguos
-        let eventonterior = await Eventos.findByPk(req.params.idEventos);
+        // Obtener el evento anterior para obtener nombres de archivos antiguos
+        const eventoAnterior = await Eventos.findByPk(req.params.idEventos);
 
-        // Verificar si hay un archivo nuevo (documentos)
-        if (req.file && req.file.filename) {
-            // Si hay un nuevo archivo, asignar el nombre del archivo al nuevoEvento
-            nuevoEvento.documentos = req.file.filename;
-            nuevoEvento.imagen = req.file.filename;
+        if (!eventoAnterior) {
+            return res.status(404).json({ mensaje: 'Evento no encontrado' });
+        }
+
+        // Verificar si hay un nuevo archivo (documentos)
+        if (req.files && req.files['documentos'] && req.files['documentos'][0].filename) {
+            // Si hay un nuevo archivo, asignar el nombre del archivo al eventoActualizado
+            eventoActualizado.documentos = req.files['documentos'][0].filename;
 
             // Borrar el archivo antiguo (documentos)
-            if (eventonterior.documentos) {
-                const rutaArchivoAntiguoDocumentos = path.join(__dirname,`../uploads/eventos/documentos${eventonterior.documentos}`);
+            if (eventoAnterior.documentos) {
+                const rutaArchivoAntiguoDocumentos = path.join(__dirname, `../uploads/eventos/documentos/${eventoAnterior.documentos}`);
                 await fs.unlink(rutaArchivoAntiguoDocumentos);
             }
+        } else {
+            // Si no hay un nuevo archivo, mantener el nombre del archivo antiguo
+            eventoActualizado.documentos = eventoAnterior.documentos;
+        }
+
+        // Verificar si hay un nuevo archivo (imagen)
+        if (req.files && req.files['imagen'] && req.files['imagen'][0].filename) {
+            // Si hay un nuevo archivo, asignar el nombre del archivo al eventoActualizado
+            eventoActualizado.imagen = req.files['imagen'][0].filename;
 
             // Borrar el archivo antiguo (imagen)
-            if (eventonterior.imagen) {
-                const rutaArchivoAntiguoImagen = path.join(__dirname, `../uploads/eventos/imagen${eventonterior.imagen}`);
+            if (eventoAnterior.imagen) {
+                const rutaArchivoAntiguoImagen = path.join(__dirname, `../uploads/eventos/imagen/${eventoAnterior.imagen}`);
                 await fs.unlink(rutaArchivoAntiguoImagen);
             }
         } else {
-            // Si no hay un nuevo archivo, mantener los nombres de los archivos antiguos
-            nuevoEvento.documentos = eventonterior.documentos;
-            nuevoEvento.imagen = eventonterior.imagen;
+            // Si no hay un nuevo archivo, mantener el nombre del archivo antiguo
+            eventoActualizado.imagen = eventoAnterior.imagen;
         }
 
-        // Actualizar el caso en la base de datos y obtener el número de filas afectadas
-        const [numFilasActualizadas] = await Eventos.update(nuevoEvento, {
-            where: { id: req.params.idEventos },
-        });
+        // Actualizar el evento en la base de datos
+        await eventoAnterior.update(eventoActualizado);
 
-        // Verificar si se actualizó con éxito
-        if (numFilasActualizadas > 0) {
-            // Obtener el caso actualizado después de la actualización
-            const eventoActualizado = await Eventos.findByPk(req.params.idEventos);
-
-            // Enviar la respuesta JSON con el caso actualizado
-            // res.json(eventoActualizado);
-            res.redirect('/admin/eventos');
-
-        } else {
-            // Si numFilasActualizadas es 0, significa que el caso no fue encontrado o no se actualizó correctamente
-            console.log('No se actualizaron filas.', error);
-            return res.status(404).json({ mensaje: 'Caso no encontrado' });
-        }
+        res.redirect('/admin/eventos');
     } catch (error) {
-        
-        console.log('Error al actualizar:', error);
+        console.log('Error al actualizar:', error);
         next(error);
-     }
+    }
 };
 
 exports.encontrarEventosByUser = async (req, res, next) => {
