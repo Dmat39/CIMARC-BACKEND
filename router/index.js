@@ -131,6 +131,9 @@ module.exports = function () {
      authController.usuarioAutenticado,
      AdminHomeController.Eventos
      );
+     router.get('/eventos/:id',
+     homeController.eventoDetail
+     )
 
 
 

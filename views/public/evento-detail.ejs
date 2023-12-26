@@ -1,0 +1,89 @@
+<!<%- console.log(evento)%>
+    <!-- Incluir la hoja de estilos de Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css">
+<body>
+    <div id="content">
+      <div class="blog-list style-detail mt-100">
+        <div class="container just-center"> 
+          <div class="row flex-center">
+            <div class="col-12 col-lg-8">
+              <div class="blog-paragraph"> 
+                <div class="paragraph-heading" style="margin-bottom: 20px; font-size: 20px;" ><a class="caption2 pt-8 pb-8 pl-16 pr-16 bg-surface bora-20 hover-button-black" href="#!"><%-evento.categoria%></a>
+                  <div class="heading4 mt-16"><%- evento.titulo%></div>
+                  <div class="bg-img"> <img width="500 px"src="../../uploads/eventos/imagen/<%= evento.imagen %>" alt="Starting your traveling blog with Vasco"/></div>
+                  <div class="date flex-item-center gap-16 mt-16">
+                    <div class="author caption2 text-secondary">by <span class="text-on-surface"><%-evento.user.email%> </span></div>
+                    <div class="item-date flex-item-center"><i class="ph-bold ph-calendar-blank"></i><span class="ml-4 caption2"><%- evento.fecha%></span></div>
+                  </div>
+                </div>
+                <div style="margin-bottom: 20px; font-size: 20px;" class="heading6">
+                    <h4>Resumen</h4>
+                    <p style="margin-bottom: 20px; font-size: 18px; text-align: justify;" class="body2 text-secondary mt-16">
+                      <%- evento.descripcion %>
+                    </p>
+
+                </div>
+                </div>
+                <div style="margin-bottom: 20px; font-size: 20px;" class="heading6">
+                    <h5 style="margin-bottom: 20px; font-size: 18px;">Ponentes</h5>
+                    <ul style="list-style-type: none; padding: 0; margin: 0;">
+                      <% evento.ponentes.split('\n').forEach(function(ponente) { %>
+                        <li style="margin-left: 20px; font-size: 20px;"><%- ponente.trim() %></li>
+                      <% }); %>
+                    </ul>
+                  </div>
+                <div >
+                    <h3>Ubicacion</h3>
+                    <p style="margin-bottom: 20px; font-size: 18px;">Ubica el evento en el mapa</p>
+                
+                    <div id="mapa" style="height: 300px; width: 100%; max-width: 900px; border: 1px solid #ddd; margin-bottom: 10px;"></div>
+                
+                    <div>
+                        <p class="calle">Calle actual: <%= evento.calle %></p>
+                    </div>
+                
+                    <input type="hidden" name="calle" id="calle" value="<%= evento.calle %>">
+                    <input type="hidden" name="lat" id="lat" value="<%= evento.lat %>">
+                    <input type="hidden" name="lng" id="lng" value="<%= evento.lng  %>">
+
+
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+              </div>
+              <div class="blog-more-infor mt-32">
+                <div class="infor-above flex-between"> 
+                  <div class="tags-cloud-block flex-item-center gap-12">
+                    <div class="body3">Tag(s):</div>
+                    <div class="list-nav flex-item-center gap-12"><a class="caption2 pt-8 pb-8 pl-16 pr-16 bg-surface bora-20 hover-button-black" href="#!"><%-evento.categoria%></a></div>
+                  </div>
+                  <div class="share-block flex-item-center gap-16">
+                    <div class="caption2 pt-8 pb-8 pl-16 pr-16 bora-8 border-line-1px">Copy the link</div>
+                    <div class="social-media flex-item-center gap-12"><a href="http://facebook.com" target="_blank"> <i class="icon-facebook"></i></a><a href="http://linkedin.com" target="_blank"> <i class="icon-in"></i></a><a href="http://twitter.com" target="_blank"> <i class="icon-twitter fs-14"></i></a><a href="http://instagram.com" target="_blank"> <i class="icon-insta fs-14"></i></a><a href="http://youtube.com" target="_blank"> <i class="icon-youtube fs-12"></i></a></div>
+                  </div>
+                </div>
+                <div class="mt-32 line-x"></div>
+
+                <div class="line-x"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><a class="scroll-to-top-btn" href="#header"><i class="ph-bold ph-caret-up"></i></a>
+      <div class="pb-100">    </div>
+    </div>
+
+        <!-- Incluir las bibliotecas Leaflet y Esri -->
+        <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"></script>
+        <script src="https://unpkg.com/esri-leaflet@3.0.8/dist/esri-leaflet.js"></script>
+        <script src="https://unpkg.com/esri-leaflet-geocoder@2.2.13/dist/esri-leaflet-geocoder.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geosearch/2.7.0/bundle.min.js"></script>
+        <!-- Tu script Leaflet -->
+        <script src="/js/mapa.js"></script>
+
+  </body>

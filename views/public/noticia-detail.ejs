@@ -10,7 +10,13 @@
                   <div class="heading4 mt-16"><%- noticia.titulo%></div>
                   <div class="bg-img"> <img width="800px" src="/uploads/noticias/<%=noticia.imagen%>" alt="banner"/></div>
                   <div class="date flex-item-center gap-16 mt-16">
-                    <div class="author caption2 text-secondary">by <span class="text-on-surface"><%-noticia.user.email%> </span></div>
+                    <div class="author caption2 text-secondary">by <span class="text-on-surface">
+                      <% if (noticia.user && noticia.user.email) { %>
+                        <%= noticia.user.email %>
+                      <% } else { %>
+                        Autor no disponible
+                      <% } %>
+                    </span></div>
                     <div class="item-date flex-item-center"><i class="ph-bold ph-calendar-blank"></i><span class="ml-4 caption2"><%- noticia.fecha%></span></div>
                   </div>
                 </div>

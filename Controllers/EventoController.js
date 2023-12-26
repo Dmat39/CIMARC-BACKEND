@@ -77,10 +77,17 @@ exports.subirArchivo = (req, res, next) => {
 
 // Agregar Eventos
 exports.nuevoEvento = async (req, res, next) => {
-    const evento = new Eventos(req.body);
-    evento.userid = req.user.id;
-
     try {
+        const evento = new Eventos(req.body);
+
+        // Verificar si req.user y req.user.id están definidos
+        if (req.user && req.user.id) {
+            evento.userid = req.user.id;
+        } else {
+            // Manejar el caso en que req.user o req.user.id no estén definidos
+            throw new Error('El usuario no está autenticado o no tiene un ID válido.');
+        }
+
         // Verificar si se ha subido un documento
         if (req.files && req.files['documentos'] && req.files['documentos'][0].filename) {
             evento.documentos = req.files['documentos'][0].filename;
@@ -96,7 +103,10 @@ exports.nuevoEvento = async (req, res, next) => {
         res.redirect('/admin/eventos');
     } catch (error) {
         // Si hay un error
-        res.send(error);
+        console.error(error);
+        res.status(500).json({ mensaje: 'Error interno del servidor' });
+        // Llama a next solo si necesitas pasar el control al siguiente middleware
+        // De lo contrario, puedes omitir next()
         next();
     }
 };
